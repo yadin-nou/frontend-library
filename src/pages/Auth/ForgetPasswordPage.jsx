@@ -1,5 +1,7 @@
 import React from "react";
 
-export default function ForgetPasswordPage() {
+const ForgetPasswordPage = () => {
   return <div>ForgetPasswordPage</div>;
-}
+};
+
+export default ForgetPasswordPage;
