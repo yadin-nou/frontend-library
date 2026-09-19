@@ -1,0 +1,27 @@
+li {
+  list-style: none;
+}
+.sidebar-link {
+  color: #333 !important;
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.6rem 1rem;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.sidebar-link:hover {
+  background-color: #e9ecef;
+  color: green !important;
+}
+
+.sidebar-link.active {
+  background-color: green !important;
+  color: #fff !important;
+}
+
+.sidebar-link.disabled {
+  color: #adb5bd !important;
+  cursor: not-allowed;
+}

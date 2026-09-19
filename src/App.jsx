@@ -7,7 +7,10 @@ import AppRoutes from "./routes/AppRoutes";
 const App = () => {
   return (
     <>
-      <div className="container">
+      <div
+        className="container-m p-5"
+        style={{ background: "#e1e1e1de", height: "100vh", margin: "0 auto" }}
+      >
         <AppRoutes />
       </div>
     </>

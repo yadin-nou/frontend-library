@@ -8,6 +8,11 @@ import {
   SignUpPage,
   ForgetPasswordPage,
   PageNotFound,
+  BookLandingPage,
+  UserPage,
+  BorrowPage,
+  Reviewspage,
+  ProfilePage,
 } from "../pages";
 import { DefaultLayout } from "../components/layout/DefaultLayout";
 import { UserLayout } from "../components/layout/UserLayout";
@@ -24,12 +29,18 @@ const AppRoutes = () => {
             path="/forget-password"
             element={<ForgetPasswordPage />}
           ></Route>
+          <Route path="*" element={<PageNotFound />}></Route>
         </Route>
 
         <Route path="/user" element={<UserLayout />}>
           <Route index element={<DashboardPage />}></Route>
+          <Route path="/user/books" element={<BookLandingPage />}></Route>
+          <Route path="/user/userpage" element={<UserPage />}></Route>
+          <Route path="/user/borrows" element={<BorrowPage />}></Route>
+          <Route path="/user/reviews" element={<Reviewspage />}></Route>
+          <Route path="/user/profiles" element={<ProfilePage />}></Route>
+          <Route path="*" element={<PageNotFound />}></Route>
         </Route>
-        <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
     </>
   );
