@@ -7,6 +7,7 @@ import {
   SignInPage,
   SignUpPage,
   ForgetPasswordPage,
+  PageNotFound,
 } from "../pages";
 import { DefaultLayout } from "../components/layout/DefaultLayout";
 import { UserLayout } from "../components/layout/UserLayout";
@@ -28,6 +29,7 @@ const AppRoutes = () => {
         <Route path="/user" element={<UserLayout />}>
           <Route index element={<DashboardPage />}></Route>
         </Route>
+        <Route path="*" element={<PageNotFound />}></Route>
       </Routes>
     </>
   );
