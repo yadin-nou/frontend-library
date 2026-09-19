@@ -9,7 +9,11 @@ const App = () => {
     <>
       <div
         className="container-m p-5"
-        style={{ background: "#e1e1e1de", height: "100vh", margin: "0 auto" }}
+        style={{
+          background: "#e1e1e1de",
+          maxHeight: "100vh",
+          margin: "0 auto",
+        }}
       >
         <AppRoutes />
       </div>

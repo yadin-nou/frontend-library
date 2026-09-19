@@ -14,7 +14,7 @@ export const UserLayout = () => {
           <Header />
         </Col>
       </Row>
-      <Row>
+      <Row style={{ height: "80vh" }}>
         <Col sm={1}>
           <aside>
             <PageNav />
@@ -28,6 +28,7 @@ export const UserLayout = () => {
       </Row>
       <Row>
         <Col
+          sm={12}
           className="bg-black text-white d-flex justify-content-center align-items-center"
           style={{ minHeight: "10vh" }}
         >
