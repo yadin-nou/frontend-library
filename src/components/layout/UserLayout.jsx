@@ -14,22 +14,22 @@ export const UserLayout = () => {
           <Header />
         </Col>
       </Row>
-      <Row style={{ height: "80vh" }}>
+      <Row style={{ height: "80vh" }} className="border rounded-4 shadow ">
         <Col sm={1}>
           <aside>
             <PageNav />
           </aside>
         </Col>
-        <Col sm={11} className="d-flex justify-content-center">
-          <main className="main">
+        <Col sm={11} className="d-flex justify-content-center pt-3">
+          <main className="main ps-5" style={{ width: "100vw" }}>
             <Outlet />
           </main>
         </Col>
       </Row>
-      <Row>
+      <Row className="mt-2 ">
         <Col
           sm={12}
-          className="bg-black text-white d-flex justify-content-center align-items-center"
+          className="border rounded-4 shadow  bg-black text-white d-flex justify-content-center align-items-center"
           style={{ minHeight: "10vh" }}
         >
           <footer>

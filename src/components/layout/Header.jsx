@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <div>
-      <header className="d-flex justify-content-between align-item-center border">
+      <header className="d-flex justify-content-between align-items-center border rounded-4 shadow ">
         <div>
           <div>
             <img
@@ -23,9 +23,19 @@ const Header = () => {
             <Nav.Item>
               <Nav.Link
                 as={NavLink}
+                to="/"
+                eventKey="/home"
+                className="sidebar-link mb-1"
+              >
+                Home
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                as={NavLink}
                 to="/signup"
                 eventKey="/signup"
-                className="sidebar-link mb-1 "
+                className="sidebar-link mb-1"
               >
                 SignUp
               </Nav.Link>

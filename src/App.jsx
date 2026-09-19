@@ -11,8 +11,9 @@ const App = () => {
         className="container-m p-5"
         style={{
           background: "#e1e1e1de",
-          maxHeight: "100vh",
+          minHeight: "120vh",
           margin: "0 auto",
+          position: "relative",
         }}
       >
         <AppRoutes />
