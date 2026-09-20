@@ -14,15 +14,15 @@ const PageNav = () => {
   return (
     <>
       <Nav className="flex-column p-3" variant="pills">
-        {/* <Nav.Link
+        <Nav.Link
           as={NavLink}
-          to="/dashboard"
+          to=""
           end
-          className="sidebar-link mb-1"
+          className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
         >
-          <Speedometer2 className="me-2" />
+          <Speedometer2 className="me-2" size={40} />
           Dashboard
-        </Nav.Link> */}
+        </Nav.Link>
         <Nav.Link
           as={NavLink}
           to="books"
