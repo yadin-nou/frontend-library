@@ -1,110 +1,8 @@
-import React from "react";
-import { Badge, Table } from "react-bootstrap";
+import React, { useState } from "react";
+import { Badge, Pagination, Table } from "react-bootstrap";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
 
-const BookTable = () => {
-  const bookCollection = [
-    {
-      _id: "64f1a2b3c4d5e6f7a8b9c0d1",
-      title: "The Hobbit",
-      author: "J.R.R. Tolkien",
-      imgURL: "https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg",
-      isbn: "9780547928227",
-      genre: "Fantasy",
-      availability: true,
-      averageRating: 4.7,
-    },
-    {
-      _id: "64f1a2b3c4d5e6f7a8b9c0d2",
-      title: "1984",
-      author: "George Orwell",
-      imgURL: "https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg",
-      isbn: "9780451524935",
-      genre: "Dystopian",
-      availability: false,
-      averageRating: 4.6,
-    },
-    {
-      _id: "64f1a2b3c4d5e6f7a8b9c0d3",
-      title: "To Kill a Mockingbird",
-      author: "Harper Lee",
-      imgURL: "https://covers.openlibrary.org/b/isbn/9780061120084-L.jpg",
-      isbn: "9780061120084",
-      genre: "Classic",
-      availability: true,
-      averageRating: 4.8,
-    },
-    {
-      _id: "64f1a2b3c4d5e6f7a8b9c0d4",
-      title: "Dune",
-      author: "Frank Herbert",
-      imgURL: "https://covers.openlibrary.org/b/isbn/9780441172719-L.jpg",
-      isbn: "9780441172719",
-      genre: "Science Fiction",
-      availability: true,
-      averageRating: 4.5,
-    },
-    {
-      _id: "64f1a2b3c4d5e6f7a8b9c0d5",
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
-      imgURL: "https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg",
-      isbn: "9780743273565",
-      genre: "Classic",
-      availability: false,
-      averageRating: 4.2,
-    },
-    {
-      _id: "64f1a2b3c4d5e6f7a8b9c0d6",
-      title: "Harry Potter and the Sorcerer's Stone",
-      author: "J.K. Rowling",
-      imgURL: "https://covers.openlibrary.org/b/isbn/9780590353427-L.jpg",
-      isbn: "9780590353427",
-      genre: "Fantasy",
-      availability: true,
-      averageRating: 4.9,
-    },
-    {
-      _id: "64f1a2b3c4d5e6f7a8b9c0d7",
-      title: "The Da Vinci Code",
-      author: "Dan Brown",
-      imgURL: "https://covers.openlibrary.org/b/isbn/9780307474278-L.jpg",
-      isbn: "9780307474278",
-      genre: "Thriller",
-      availability: true,
-      averageRating: 3.9,
-    },
-    {
-      _id: "64f1a2b3c4d5e6f7a8b9c0d8",
-      title: "Sapiens: A Brief History of Humankind",
-      author: "Yuval Noah Harari",
-      imgURL: "https://covers.openlibrary.org/b/isbn/9780062316097-L.jpg",
-      isbn: "9780062316097",
-      genre: "Non-Fiction",
-      availability: true,
-      averageRating: 4.6,
-    },
-    {
-      _id: "64f1a2b3c4d5e6f7a8b9c0d9",
-      title: "The Alchemist",
-      author: "Paulo Coelho",
-      imgURL: "https://covers.openlibrary.org/b/isbn/9780062315007-L.jpg",
-      isbn: "9780062315007",
-      genre: "Fiction",
-      availability: false,
-      averageRating: 4.4,
-    },
-    {
-      _id: "64f1a2b3c4d5e6f7a8b9c0da",
-      title: "Atomic Habits",
-      author: "James Clear",
-      imgURL: "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg",
-      isbn: "9780735211292",
-      genre: "Self-Help",
-      availability: true,
-      averageRating: 4.8,
-    },
-  ];
+const BookTable = ({ searchBook, bookCollection }) => {
   return (
     <div className="border rounded-3 overflow-hidden">
       <Table
@@ -127,7 +25,7 @@ const BookTable = () => {
           </tr>
         </thead>
         <tbody>
-          {bookCollection.map((book, key) => (
+          {searchBook.map((book, key) => (
             <tr key={book._id}>
               <td className="d-none d-md-table-cell">{key + 1}</td>
               <td className="text-secondary">{book.title}</td>
@@ -156,6 +54,17 @@ const BookTable = () => {
           ))}
         </tbody>
       </Table>
+      <div className="d-flex justify-content-between align-items-center mt-3">
+        <small className="text-secondary">
+          Showing {searchBook.length} of {bookCollection.length} books
+        </small>
+        <Pagination size="sm" className="mb-0">
+          <Pagination.Prev />
+          <Pagination.Item active>1</Pagination.Item>
+          <Pagination.Item>2</Pagination.Item>
+          <Pagination.Next />
+        </Pagination>
+      </div>
     </div>
   );
 };
