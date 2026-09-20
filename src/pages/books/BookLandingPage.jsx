@@ -117,6 +117,16 @@ const BookLandingPage = () => {
     });
     setSearchBook(filteredBooks);
   };
+  const BookSelected = (search) => {
+    const filteredBooks = bookCollection.filter((book) => {
+      if (search != "All genres") {
+        return book.genre.toLowerCase().includes(search.toLowerCase());
+      } else {
+        return book;
+      }
+    });
+    setSearchBook(filteredBooks);
+  };
   return (
     <div>
       <Row className="align-items-center g-2 flex-wrap pt-2 wi">
@@ -132,13 +142,15 @@ const BookLandingPage = () => {
           </InputGroup>
         </Col>
         <Col xs="auto">
-          <Form.Select>
-            <option>All genres</option>
-            <option>Fantasy</option>
-            <option>Fiction</option>
-            <option>Non-fiction</option>
-            <option>Sci-fi</option>
-            <option>Dystopian</option>
+          <Form.Select onChange={(e) => BookSelected(e.target.value)}>
+            <option value="All genres">All genres</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Non-fiction">Non-fiction</option>
+            <option value="Classic">Classic</option>
+            <option value="Dystopian">Dystopian</option>
+            <option value="Self-Help">Self-Help</option>
+            <option value="Thriller">Thriller</option>
           </Form.Select>
         </Col>
         <Col xs="auto">
