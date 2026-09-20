@@ -1,13 +1,35 @@
 import React from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import BookTable from "./BookTable";
+import { PlusLg, Search } from "react-bootstrap-icons";
 
 const BookLandingPage = () => {
   return (
-    <>
-      <Row className="align-items-center g-2 flex-wrap">
-        <Col xs="auto" className="ms-auto">
-          <Button variant="success">+ Add Book...</Button>
+    <div>
+      <Row className="align-items-center g-2 flex-wrap pt-2 wi">
+        <Col className="ps-md-5">
+          <InputGroup>
+            <InputGroup.Text className="bg-white">
+              <Search />
+            </InputGroup.Text>
+            <Form.Control placeholder="Search by title, author, or ISBN" />
+          </InputGroup>
+        </Col>
+        <Col xs="auto">
+          <Form.Select>
+            <option>All genres</option>
+            <option>Fantasy</option>
+            <option>Fiction</option>
+            <option>Non-fiction</option>
+            <option>Sci-fi</option>
+            <option>Dystopian</option>
+          </Form.Select>
+        </Col>
+        <Col xs="auto">
+          <Button variant="success">
+            <PlusLg className="me-2" />
+            Add book
+          </Button>
         </Col>
       </Row>
       <Row className="align-items-center g-2 flex-wrap pt-2">
@@ -17,7 +39,7 @@ const BookLandingPage = () => {
           </div>
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 

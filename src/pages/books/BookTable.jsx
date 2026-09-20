@@ -8,7 +8,7 @@ const BookTable = () => {
       _id: "64f1a2b3c4d5e6f7a8b9c0d1",
       title: "The Hobbit",
       author: "J.R.R. Tolkien",
-      imgURL: "https://covers.example.com/hobbit.jpg",
+      imgURL: "https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg",
       isbn: "9780547928227",
       genre: "Fantasy",
       availability: true,
@@ -18,7 +18,7 @@ const BookTable = () => {
       _id: "64f1a2b3c4d5e6f7a8b9c0d2",
       title: "1984",
       author: "George Orwell",
-      imgURL: "https://covers.example.com/1984.jpg",
+      imgURL: "https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg",
       isbn: "9780451524935",
       genre: "Dystopian",
       availability: false,
@@ -28,7 +28,7 @@ const BookTable = () => {
       _id: "64f1a2b3c4d5e6f7a8b9c0d3",
       title: "To Kill a Mockingbird",
       author: "Harper Lee",
-      imgURL: "https://covers.example.com/mockingbird.jpg",
+      imgURL: "https://covers.openlibrary.org/b/isbn/9780061120084-L.jpg",
       isbn: "9780061120084",
       genre: "Classic",
       availability: true,
@@ -38,7 +38,7 @@ const BookTable = () => {
       _id: "64f1a2b3c4d5e6f7a8b9c0d4",
       title: "Dune",
       author: "Frank Herbert",
-      imgURL: "https://covers.example.com/dune.jpg",
+      imgURL: "https://covers.openlibrary.org/b/isbn/9780441172719-L.jpg",
       isbn: "9780441172719",
       genre: "Science Fiction",
       availability: true,
@@ -48,7 +48,7 @@ const BookTable = () => {
       _id: "64f1a2b3c4d5e6f7a8b9c0d5",
       title: "The Great Gatsby",
       author: "F. Scott Fitzgerald",
-      imgURL: "https://covers.example.com/gatsby.jpg",
+      imgURL: "https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg",
       isbn: "9780743273565",
       genre: "Classic",
       availability: false,
@@ -58,7 +58,7 @@ const BookTable = () => {
       _id: "64f1a2b3c4d5e6f7a8b9c0d6",
       title: "Harry Potter and the Sorcerer's Stone",
       author: "J.K. Rowling",
-      imgURL: "https://covers.example.com/hp1.jpg",
+      imgURL: "https://covers.openlibrary.org/b/isbn/9780590353427-L.jpg",
       isbn: "9780590353427",
       genre: "Fantasy",
       availability: true,
@@ -68,7 +68,7 @@ const BookTable = () => {
       _id: "64f1a2b3c4d5e6f7a8b9c0d7",
       title: "The Da Vinci Code",
       author: "Dan Brown",
-      imgURL: "https://covers.example.com/davinci.jpg",
+      imgURL: "https://covers.openlibrary.org/b/isbn/9780307474278-L.jpg",
       isbn: "9780307474278",
       genre: "Thriller",
       availability: true,
@@ -78,7 +78,7 @@ const BookTable = () => {
       _id: "64f1a2b3c4d5e6f7a8b9c0d8",
       title: "Sapiens: A Brief History of Humankind",
       author: "Yuval Noah Harari",
-      imgURL: "https://covers.example.com/sapiens.jpg",
+      imgURL: "https://covers.openlibrary.org/b/isbn/9780062316097-L.jpg",
       isbn: "9780062316097",
       genre: "Non-Fiction",
       availability: true,
@@ -88,7 +88,7 @@ const BookTable = () => {
       _id: "64f1a2b3c4d5e6f7a8b9c0d9",
       title: "The Alchemist",
       author: "Paulo Coelho",
-      imgURL: "https://covers.example.com/alchemist.jpg",
+      imgURL: "https://covers.openlibrary.org/b/isbn/9780062315007-L.jpg",
       isbn: "9780062315007",
       genre: "Fiction",
       availability: false,
@@ -98,7 +98,7 @@ const BookTable = () => {
       _id: "64f1a2b3c4d5e6f7a8b9c0da",
       title: "Atomic Habits",
       author: "James Clear",
-      imgURL: "https://covers.example.com/atomichabits.jpg",
+      imgURL: "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg",
       isbn: "9780735211292",
       genre: "Self-Help",
       availability: true,
@@ -127,28 +127,33 @@ const BookTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="d-none d-md-table-cell">1</td>
-            <td className="text-secondary">The Hobbit</td>
-            <td className="d-none d-md-table-cell text-secondary">
-              J.R.R. Tolkien
-            </td>
-            <td className="d-none d-lg-table-cell text-secondary">img</td>
-            <td className="d-none d-md-table-cell text-secondary">Fantasy</td>
-            <td>
-              {/* <Badge bg={book.availability ? "success" : "danger"} pill>
-                {book.availability ? "Available" : "Borrowed"}
-              </Badge> */}
-              <Badge bg="success" pill>
-                Available
-              </Badge>
-            </td>
-            <td className="d-none d-md-table-cell text-secondary">4.7</td>
-            <td>
-              <PencilFill className="me-3 text-secondary" role="button" />
-              <TrashFill className="text-danger" role="button" />
-            </td>
-          </tr>
+          {bookCollection.map((book, key) => (
+            <tr key={book._id}>
+              <td className="d-none d-md-table-cell">{key + 1}</td>
+              <td className="text-secondary">{book.title}</td>
+              <td className="d-none d-md-table-cell text-secondary">
+                {book.author}
+              </td>
+              <td className="d-none d-lg-table-cell text-secondary">
+                <img src={book.imgURL} width={50} height={55} />
+              </td>
+              <td className="d-none d-md-table-cell text-secondary">
+                {book.genre}
+              </td>
+              <td>
+                <Badge bg={book.availability ? "success" : "danger"} pill>
+                  {book.availability ? "Available" : "Borrowed"}
+                </Badge>
+              </td>
+              <td className="d-none d-md-table-cell text-secondary">
+                {book.averageRating}
+              </td>
+              <td>
+                <PencilFill className="me-3 text-secondary" role="button" />
+                <TrashFill className="text-danger" role="button" />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </div>
