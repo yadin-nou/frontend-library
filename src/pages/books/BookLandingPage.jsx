@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import BookTable from "./BookTable";
 import { PlusLg, Search } from "react-bootstrap-icons";
+import AddBook from "./AddBook";
 
 const BookLandingPage = () => {
   const bookCollection = [
@@ -128,6 +129,11 @@ const BookLandingPage = () => {
     });
     setSearchBook(filteredBooks);
   };
+
+  const handleAddBook = (e) => {
+    e.preventDefault();
+    alert("test");
+  };
   return (
     <div>
       <Row className="align-items-center g-2 flex-wrap pt-2 wi">
@@ -155,10 +161,11 @@ const BookLandingPage = () => {
           </Form.Select>
         </Col>
         <Col xs="auto">
-          <Button variant="success">
+          {/* <Button variant="success" onClick={handleAddBook}>
             <PlusLg className="me-2" />
             Add book
-          </Button>
+          </Button> */}
+          <AddBook />
         </Col>
       </Row>
       <Row className="align-items-center g-2 flex-wrap pt-2">
