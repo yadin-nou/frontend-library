@@ -4,63 +4,31 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import FormTemplate from "../../components/FormTemplate";
 
-const AddBook = () => {
+const ImportBook = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const fromTPL = [
     {
-      type: "text",
-      label: "Title",
+      as: "textarea",
+      label: "Please paste JSON data here:",
       required: true,
-      placeholder: "Title",
-      name: "title",
-      //value:
-    },
-
-    {
-      type: "text",
-      label: "Author",
-      required: true,
-      placeholder: "Author",
-      name: "author",
-      //value:
-    },
-    {
-      type: "text",
-      label: "Image URL",
-      required: true,
-      placeholder: "Image URL",
-      name: "image",
-      //value:
-    },
-    {
-      type: "text",
-      label: "ISBN",
-      required: true,
-      placeholder: "BOOK ISBN CODE",
-      name: "isbn",
-      // value: ,
-    },
-    {
-      type: "text",
-      label: "Genre",
-      required: true,
-      placeholder: "Genre of book",
-      name: "genre",
+      placeholder: "JSON data here",
+      name: "importBook",
+      rows: 20,
       // value: ,
     },
   ];
   return (
     <div>
       <Button variant="success" onClick={handleShow}>
-        + Add Book
+        Import
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Adding Book Information </Modal.Title>
+          <Modal.Title>Import Book by JSON Data </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -74,7 +42,7 @@ const AddBook = () => {
             Close
           </Button>
           <Button variant="success" onClick={handleClose}>
-            Save Changes
+            Import
           </Button>
         </Modal.Footer>
       </Modal>
@@ -82,4 +50,4 @@ const AddBook = () => {
   );
 };
 
-export default AddBook;
+export default ImportBook;

@@ -3,6 +3,7 @@ import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import BookTable from "./BookTable";
 import { PlusLg, Search } from "react-bootstrap-icons";
 import AddBook from "./AddBook";
+import ImportBook from "./ImportBook";
 
 const BookLandingPage = () => {
   const bookCollection = [
@@ -130,10 +131,6 @@ const BookLandingPage = () => {
     setSearchBook(filteredBooks);
   };
 
-  const handleAddBook = (e) => {
-    e.preventDefault();
-    alert("test");
-  };
   return (
     <div>
       <Row className="align-items-center g-2 flex-wrap pt-2 wi">
@@ -159,6 +156,9 @@ const BookLandingPage = () => {
             <option value="Self-Help">Self-Help</option>
             <option value="Thriller">Thriller</option>
           </Form.Select>
+        </Col>
+        <Col xs="auto">
+          <ImportBook />
         </Col>
         <Col xs="auto">
           {/* <Button variant="success" onClick={handleAddBook}>
