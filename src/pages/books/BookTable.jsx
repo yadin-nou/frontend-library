@@ -18,6 +18,7 @@ const BookTable = ({ searchBook, bookCollection }) => {
             <th>Title</th>
             <th className="d-none d-md-table-cell">Author</th>
             <th className="d-none d-lg-table-cell">Img</th>
+            <th className="d-none d-lg-table-cell">ISBN</th>
             <th className="d-none d-md-table-cell">Genre</th>
             <th>Status</th>
             <th className="d-none d-md-table-cell">Rating</th>
@@ -34,6 +35,9 @@ const BookTable = ({ searchBook, bookCollection }) => {
               </td>
               <td className="d-none d-lg-table-cell text-secondary">
                 <img src={book.imgURL} width={50} height={55} />
+              </td>
+              <td className="d-none d-lg-table-cell text-secondary">
+                {book.isbn}
               </td>
               <td className="d-none d-md-table-cell text-secondary">
                 {book.genre}
