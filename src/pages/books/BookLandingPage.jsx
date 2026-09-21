@@ -112,7 +112,8 @@ const BookLandingPage = () => {
     const filteredBooks = bookCollection.filter((book) => {
       const matchesSearch =
         book.title.toLowerCase().includes(search.toLowerCase()) ||
-        book.author.toLowerCase().includes(search.toLowerCase());
+        book.author.toLowerCase().includes(search.toLowerCase()) ||
+        book.isbn.toLowerCase().includes(search.toLowerCase());
       return matchesSearch;
     });
     setSearchBook(filteredBooks);
