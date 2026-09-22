@@ -25,9 +25,20 @@ const ImportBook = () => {
   ];
   const handleOnImport = async (e) => {
     e.preventDefault();
-    const conToJson = JSON.parse(formData.importBook);
-    const result = await addBook(conToJson);
-    result?.status === "success" && toast.success(result.message);
+
+    try {
+      const conToJson = JSON.parse(formData.importBook);
+      const result = await addBook(conToJson);
+      if (result?.status === "success") {
+        toast.success(result.message);
+        setShow(false);
+      } else {
+        toast.error(result?.message || "Failed to import book.");
+      }
+    } catch (error) {
+      toast.error("Invalid JSON format!");
+      return;
+    }
   };
   return (
     <div>
@@ -36,24 +47,24 @@ const ImportBook = () => {
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Import Book by JSON Data </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
+        <Form onSubmit={handleOnImport}>
+          <Modal.Header closeButton>
+            <Modal.Title>Import Book by JSON Data </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             {fromTPL.map((frm) => (
               <FormTemplate key={frm.name} {...frm} onChange={handleOnChange} />
             ))}
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="success" onClick={handleOnImport}>
-            Import
-          </Button>
-        </Modal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={handleClose}>
+              Close
+            </Button>
+            <Button type="submit" variant="success">
+              Import
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </div>
   );

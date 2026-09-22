@@ -27,7 +27,6 @@ const processAPI = async ({ method, url, data, headers }) => {
 //adming API
 export const addBook = async (data) => {
   //console.log(data.importBook, " axios");
-  console.log(urlAdmin + "/addbook");
   const book = {
     method: "post",
     url: urlAdmin + "/addbook",
@@ -35,6 +34,15 @@ export const addBook = async (data) => {
     headers: {
       "Content-Type": "application/json",
     },
+  };
+  return processAPI(book);
+};
+
+export const getAllBooks = async () => {
+  //console.log(data.importBook, " axios");
+  const book = {
+    method: "get",
+    url: urlAdmin + "/book",
   };
   return processAPI(book);
 };
