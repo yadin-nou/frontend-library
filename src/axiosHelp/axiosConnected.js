@@ -1,8 +1,8 @@
 import axios from "axios";
 const adminRoute = "/api/v1/admin";
 const userRoute = "/api/v1/users";
-const urlUser = import.meta.env.VITE_ROOT_URL + userRoute;
-const urlAdmin = import.meta.env.VITE_ROOT_URL + adminRoute;
+const urlUser = import.meta.env.VITE_SERVER_URL + userRoute;
+const urlAdmin = import.meta.env.VITE_SERVER_URL + adminRoute;
 
 const processAPI = async ({ method, url, data, headers }) => {
   try {
@@ -26,11 +26,15 @@ const processAPI = async ({ method, url, data, headers }) => {
 
 //adming API
 export const addBook = async (data) => {
-  //  console.log(data, " axios");
+  //console.log(data.importBook, " axios");
+  console.log(urlAdmin + "/addbook");
   const book = {
     method: "post",
     url: urlAdmin + "/addbook",
     data,
+    headers: {
+      "Content-Type": "application/json",
+    },
   };
   return processAPI(book);
 };
