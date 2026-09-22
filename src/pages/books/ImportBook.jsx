@@ -7,7 +7,7 @@ import useFormHook from "../../hooks/useFormHook.js";
 import { addBook } from "../../axiosHelp/axiosConnected.js";
 import { toast } from "react-toastify";
 
-const ImportBook = () => {
+const ImportBook = ({ handelGetAllBook }) => {
   const { formData, setFormData, handleOnChange } = useFormHook({});
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -31,6 +31,7 @@ const ImportBook = () => {
       const result = await addBook(conToJson);
       if (result?.status === "success") {
         toast.success(result.message);
+        handelGetAllBook();
         setShow(false);
       } else {
         toast.error(result?.message || "Failed to import book.");

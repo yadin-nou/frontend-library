@@ -3,10 +3,13 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import FormTemplate from "../../components/FormTemplate";
+import useFormHook from "../../hooks/useFormHook";
+import { addBook } from "../../axiosHelp/axiosConnected";
+import { toast } from "react-toastify";
 
-const AddBook = () => {
+const AddBook = ({ handelGetAllBook }) => {
+  const { formData, setFormData, handleOnChange } = useFormHook([]);
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const fromTPL = [
@@ -32,7 +35,7 @@ const AddBook = () => {
       label: "Image URL",
       required: true,
       placeholder: "Image URL",
-      name: "image",
+      name: "imgURL",
       //value:
     },
     {
@@ -52,6 +55,22 @@ const AddBook = () => {
       // value: ,
     },
   ];
+  const handleSaveBook = async (e) => {
+    e.preventDefault();
+    try {
+      const toJson = JSON.stringify(formData);
+      const result = await addBook(toJson);
+      if (result?.status === "success") {
+        toast.success(result?.message);
+        handelGetAllBook();
+        setShow(false);
+      } else {
+        toast.error(result?.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <div>
       <Button variant="success" onClick={handleShow}>
@@ -59,24 +78,24 @@ const AddBook = () => {
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Adding Book Information </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
+        <Form onSubmit={handleSaveBook}>
+          <Modal.Header closeButton>
+            <Modal.Title>Adding Book Information </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             {fromTPL.map((frm) => (
-              <FormTemplate key={frm.name} {...frm} />
+              <FormTemplate key={frm.name} {...frm} onChange={handleOnChange} />
             ))}
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="success" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={handleClose}>
+              Close
+            </Button>
+            <Button type="submit" variant="success">
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </div>
   );

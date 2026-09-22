@@ -175,14 +175,14 @@ const BookLandingPage = () => {
           </Form.Select>
         </Col>
         <Col xs="auto">
-          <ImportBook />
+          <ImportBook handelGetAllBook={handelGetAllBook} />
         </Col>
         <Col xs="auto">
           {/* <Button variant="success" onClick={handleAddBook}>
             <PlusLg className="me-2" />
             Add book
           </Button> */}
-          <AddBook />
+          <AddBook handelGetAllBook={handelGetAllBook} />
         </Col>
       </Row>
       <Row className="align-items-center g-2 flex-wrap pt-2">
