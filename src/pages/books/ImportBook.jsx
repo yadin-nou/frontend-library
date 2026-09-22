@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import FormTemplate from "../../components/FormTemplate";
 import useFormHook from "../../hooks/useFormHook.js";
 import { addBook } from "../../axiosHelp/axiosConnected.js";
+import { toast } from "react-toastify";
 
 const ImportBook = () => {
   const { formData, setFormData, handleOnChange } = useFormHook({});
@@ -19,14 +20,14 @@ const ImportBook = () => {
       placeholder: "JSON data here",
       name: "importBook",
       rows: 20,
-      value: formData.ImportBook,
+      value: formData.importBook,
     },
   ];
   const handleOnImport = async (e) => {
     e.preventDefault();
-    const conToJson = JSON.parse(formData.ImportBook);
-    const addBookResult = await addBook(conToJson);
-    console.log(addBookResult);
+    const conToJson = JSON.parse(formData.importBook);
+    const result = await addBook(conToJson);
+    result?.status === "success" && toast.success(result.message);
   };
   return (
     <div>
