@@ -6,6 +6,7 @@ import AddBook from "./AddBook";
 import ImportBook from "./ImportBook";
 import { getAllBooks } from "../../axiosHelp/axiosConnected";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const BookLandingPage = () => {
   // const bookCollection = [
@@ -140,7 +141,19 @@ const BookLandingPage = () => {
       setBookCollection(getBook.book);
     }
   };
+  const handleDeleteBook = async (book_id) => {
+    const conf = window.confirm("Are you sure want to delete this book?");
 
+    if (conf) {
+      const { status, message } = await deleteBook(book_id);
+      if (status === "success") {
+        toast.success("Deleted book successfully!!");
+        handelGetAllBook();
+      } else {
+        toast.error("Failed to delete book.!");
+      }
+    }
+  };
   useEffect(() => {
     handelGetAllBook();
   }, []);
@@ -191,6 +204,7 @@ const BookLandingPage = () => {
             <BookTable
               searchBook={searchBook}
               bookCollection={bookCollection}
+              handleDeleteBook={handleDeleteBook}
             />
           </div>
         </Col>

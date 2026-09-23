@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Badge, Pagination, Table } from "react-bootstrap";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
 
-const BookTable = ({ searchBook, bookCollection }) => {
+const BookTable = ({ searchBook, bookCollection, handleDeleteBook }) => {
   return (
     <div className="border rounded-3 overflow-hidden">
       <Table
@@ -52,7 +52,11 @@ const BookTable = ({ searchBook, bookCollection }) => {
               </td>
               <td>
                 <PencilFill className="me-3 text-secondary" role="button" />
-                <TrashFill className="text-danger" role="button" />
+                <TrashFill
+                  className="text-danger"
+                  role="button"
+                  onClick={() => handleDeleteBook(book._id)}
+                />
               </td>
             </tr>
           ))}

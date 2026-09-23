@@ -46,3 +46,12 @@ export const getAllBooks = async () => {
   };
   return processAPI(book);
 };
+export const deleteBook = async (data) => {
+  //console.log(data.importBook, " axios");
+  const book = {
+    method: "delete",
+    url: urlAdmin + "/",
+    data,
+  };
+  return processAPI(book);
+};
