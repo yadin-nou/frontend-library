@@ -6,12 +6,14 @@ import FormTemplate from "../../components/FormTemplate";
 import useFormHook from "../../hooks/useFormHook";
 import { addBook } from "../../axiosHelp/axiosConnected";
 import { toast } from "react-toastify";
+import useSpinner from "../../hooks/useSpinner";
 
 const AddBook = ({ handelGetAllBook }) => {
   const { formData, setFormData, handleOnChange } = useFormHook([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const { spinner, setSpinner } = useSpinner(false);
   const fromTPL = [
     {
       type: "text",
@@ -58,17 +60,23 @@ const AddBook = ({ handelGetAllBook }) => {
   const handleSaveBook = async (e) => {
     e.preventDefault();
     try {
+      setSpinner(true);
       const toJson = JSON.stringify(formData);
-      const result = await addBook(toJson);
+      const pendingResp = addBook(toJson);
+      //promise is the behavior of pending
+      toast.promise(pendingResp, { pending: "Please wait...." });
+      const result = await pendingResp;
       if (result?.status === "success") {
         toast.success(result?.message);
         handelGetAllBook();
         setShow(false);
       } else {
+        setSpinner(false);
         toast.error(result?.message);
       }
     } catch (error) {
       console.log(error.message);
+      setSpinner(false);
     }
   };
   return (
@@ -91,9 +99,11 @@ const AddBook = ({ handelGetAllBook }) => {
             <Button variant="danger" onClick={handleClose}>
               Close
             </Button>
-            <Button type="submit" variant="success">
-              Save Changes
-            </Button>
+            {!spinner && (
+              <Button type="submit" variant="success">
+                Save Changes
+              </Button>
+            )}
           </Modal.Footer>
         </Form>
       </Modal>

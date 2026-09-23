@@ -28,7 +28,9 @@ const ImportBook = ({ handelGetAllBook }) => {
 
     try {
       const conToJson = JSON.parse(formData.importBook);
-      const result = await addBook(conToJson);
+      const pendingResp = addBook(conToJson);
+      toast.promise(pendingResp, { pending: "Please wait...." });
+      const result = await pendingResp;
       if (result?.status === "success") {
         toast.success(result.message);
         handelGetAllBook();
