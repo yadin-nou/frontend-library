@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Badge, Pagination, Table } from "react-bootstrap";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
+import AddBook from "./AddBook";
 
 const BookTable = ({ searchBook, bookCollection, handleDeleteBook }) => {
   return (
@@ -51,7 +52,7 @@ const BookTable = ({ searchBook, bookCollection, handleDeleteBook }) => {
                 {book.averageRating}
               </td>
               <td>
-                <PencilFill className="me-3 text-secondary" role="button" />
+                <AddBook edit={true} id={book._id} />
                 <TrashFill
                   className="text-danger"
                   role="button"

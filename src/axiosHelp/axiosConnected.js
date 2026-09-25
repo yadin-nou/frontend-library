@@ -4,12 +4,13 @@ const userRoute = "/api/v1/users";
 const urlUser = import.meta.env.VITE_SERVER_URL + userRoute;
 const urlAdmin = import.meta.env.VITE_SERVER_URL + adminRoute;
 
-const processAPI = async ({ method, url, data, headers }) => {
+const processAPI = async ({ method, url, data, headers, params }) => {
   try {
     const response = await axios({
       method,
       url,
       data,
+      params,
       headers,
     });
     return response.data;
@@ -38,16 +39,16 @@ export const addBook = async (data) => {
   return processAPI(book);
 };
 
-export const getAllBooks = async () => {
+export const getAllBooks = async (filter = {}) => {
   //console.log(data.importBook, " axios");
   const book = {
     method: "get",
     url: urlAdmin + "/book",
+    params: filter,
   };
   return processAPI(book);
 };
 export const deleteBook = async (data) => {
-  //console.log(data.importBook, " axios");
   const book = {
     method: "delete",
     url: urlAdmin + "/",

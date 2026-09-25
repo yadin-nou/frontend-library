@@ -4,7 +4,7 @@ import BookTable from "./BookTable";
 import { PlusLg, Search } from "react-bootstrap-icons";
 import AddBook from "./AddBook";
 import ImportBook from "./ImportBook";
-import { getAllBooks } from "../../axiosHelp/axiosConnected";
+import { deleteBook, getAllBooks } from "../../axiosHelp/axiosConnected";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
@@ -145,9 +145,10 @@ const BookLandingPage = () => {
     const conf = window.confirm("Are you sure want to delete this book?");
 
     if (conf) {
-      const { status, message } = await deleteBook(book_id);
+      const jsonBook_id = [book_id];
+      const { status, message } = await deleteBook(jsonBook_id);
       if (status === "success") {
-        toast.success("Deleted book successfully!!");
+        toast.success(message);
         handelGetAllBook();
       } else {
         toast.error("Failed to delete book.!");
