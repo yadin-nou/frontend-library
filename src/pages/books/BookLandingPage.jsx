@@ -206,6 +206,7 @@ const BookLandingPage = () => {
               searchBook={searchBook}
               bookCollection={bookCollection}
               handleDeleteBook={handleDeleteBook}
+              handelGetAllBook={handelGetAllBook}
             />
           </div>
         </Col>

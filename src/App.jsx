@@ -11,7 +11,7 @@ const App = () => {
         className="container-m p-5"
         style={{
           background: "#e1e1e1de",
-          minHeight: "120vh",
+          minHeight: "220vh",
           margin: "0 auto",
           position: "relative",
         }}

@@ -16,7 +16,7 @@ export const UserLayout = () => {
             <Header />
           </Col>
         </Row>
-        <Row style={{ height: "80vh" }} className="border rounded-4 shadow ">
+        <Row style={{ height: "auto" }} className="border rounded-4 shadow ">
           <Col sm={1}>
             <aside>
               <PageNav />

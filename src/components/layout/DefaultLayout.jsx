@@ -10,7 +10,10 @@ export const DefaultLayout = () => {
       <main className="main">
         <Outlet />
       </main>
-      <Footer />
+      <footer>
+        {" "}
+        <Footer />
+      </footer>
     </>
   );
 };

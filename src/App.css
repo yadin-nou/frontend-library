@@ -25,3 +25,25 @@
 body {
   background: "#e1e1e1de";
 }
+
+.book-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.book-card img {
+  max-height: 220px; /* prevents an overly tall image on mobile when stacked */
+}
+
+@media (min-width: 576px) {
+  .book-card img {
+    max-height: none; /* let it fill the side-by-side column height on tablet+ */
+  }
+}
