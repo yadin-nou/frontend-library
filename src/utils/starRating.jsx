@@ -13,6 +13,6 @@ export const renderStars = (rating, size = "fs-5") => {
       stars.push(<MdStarOutline key={i} className={`${size} text-warning`} />);
     }
   }
-  console.log(stars);
+
   return stars;
 };

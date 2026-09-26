@@ -74,6 +74,14 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
       name: "genre",
       value: formData.genre,
     },
+    {
+      type: "text",
+      label: "Description",
+      required: true,
+      placeholder: "Book Description",
+      name: "description",
+      value: formData.description,
+    },
   ];
   const handleSaveBook = async (e) => {
     e.preventDefault();

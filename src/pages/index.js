@@ -11,3 +11,5 @@ export { default as BookLandingPage } from "./books/BookLandingPage";
 export { default as BookList } from "./books/BookList";
 export { default as ProfilePage } from "./profiles/ProfilePage";
 export { default as PageNotFound } from "./not_found/PageNotFound";
+export { default as SearchBookBlobal } from "./home/SearchBookGlobal";
+export { default as DisplayBook } from "./home/DispalyBook";
