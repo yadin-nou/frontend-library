@@ -13,6 +13,7 @@ import {
   BorrowPage,
   Reviewspage,
   ProfilePage,
+  BookList,
 } from "../pages";
 import { DefaultLayout } from "../components/layout/DefaultLayout";
 import { UserLayout } from "../components/layout/UserLayout";
@@ -34,7 +35,8 @@ const AppRoutes = () => {
 
         <Route path="/user" element={<UserLayout />}>
           <Route index element={<DashboardPage />}></Route>
-          <Route path="/user/books" element={<BookLandingPage />}></Route>
+          <Route path="/user/details" element={<BookLandingPage />}></Route>
+          <Route path="/user/books" element={<BookList />}></Route>
           <Route path="/user/userpage" element={<UserPage />}></Route>
           <Route path="/user/borrows" element={<BorrowPage />}></Route>
           <Route path="/user/reviews" element={<Reviewspage />}></Route>

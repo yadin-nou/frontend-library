@@ -8,5 +8,6 @@ export { default as BorrowPage } from "./borrows/BorrowPage";
 export { default as Reviewspage } from "./reviews/Reviewspage";
 export { default as UserPage } from "./user/UserPage";
 export { default as BookLandingPage } from "./books/BookLandingPage";
+export { default as BookList } from "./books/BookList";
 export { default as ProfilePage } from "./profiles/ProfilePage";
 export { default as PageNotFound } from "./not_found/PageNotFound";

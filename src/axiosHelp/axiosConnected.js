@@ -54,6 +54,7 @@ export const deleteBook = async (data) => {
     url: urlAdmin + "/",
     data,
   };
+  return processAPI(book);
 };
 export const updateBook = async (data) => {
   console.log(data);
