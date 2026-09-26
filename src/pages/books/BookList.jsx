@@ -8,7 +8,7 @@ import { deleteBook, getAllBooks } from "../../axiosHelp/axiosConnected";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
-const BookLandingPage = () => {
+const BookList = () => {
   // const bookCollection = [
   //   {
   //     _id: "64f1a2b3c4d5e6f7a8b9c0d1",
@@ -217,4 +217,4 @@ const BookLandingPage = () => {
   );
 };
 
-export default BookLandingPage;
+export default BookList;
