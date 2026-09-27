@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Col, Row, Tabs, Tab } from "react-bootstrap";
+import { Button, Card, Col, Row, Tabs, Tab, Badge } from "react-bootstrap";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Alert } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { getAllBooks } from "../../axiosHelp/axiosConnected";
 import { toast } from "react-toastify";
+import { renderStars } from "../../utils/starRating";
 const BookLandingPage = () => {
   const { id } = useParams();
   const [bookDetail, setBookDetail] = useState(null);
@@ -17,6 +18,7 @@ const BookLandingPage = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getBookDetails();
   }, []);
 
