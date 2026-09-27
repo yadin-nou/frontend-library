@@ -24,6 +24,11 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={<HomePage />}></Route>
+          <Route path="/books" element={<HomePage />}></Route>
+          <Route
+            path="/books/details/:id"
+            element={<BookLandingPage />}
+          ></Route>
           <Route path="/signup" element={<SignUpPage />}></Route>
           <Route path="/login" element={<SignInPage />}></Route>
           <Route
@@ -35,7 +40,10 @@ const AppRoutes = () => {
 
         <Route path="/user" element={<UserLayout />}>
           <Route index element={<DashboardPage />}></Route>
-          <Route path="/user/details" element={<BookLandingPage />}></Route>
+          {/* <Route
+            path="/user/books/details"
+            element={<BookLandingPage />}
+          ></Route> */}
           <Route path="/user/books" element={<BookList />}></Route>
           <Route path="/user/userpage" element={<UserPage />}></Route>
           <Route path="/user/borrows" element={<BorrowPage />}></Route>

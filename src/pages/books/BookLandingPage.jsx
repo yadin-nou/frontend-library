@@ -1,8 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Row, Tabs, Tab } from "react-bootstrap";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Alert } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { getAllBooks } from "../../axiosHelp/axiosConnected";
+import { toast } from "react-toastify";
 const BookLandingPage = () => {
+  const { id } = useParams();
+  const [bookDetail, setBookDetail] = useState(null);
+
+  const getBookDetails = async () => {
+    const pendingResp = getAllBooks({ _id: id });
+    toast.promise(pendingResp, { pending: "Please wait...." });
+    const books = await pendingResp;
+    setBookDetail(books.book[0]);
+  };
+
+  useEffect(() => {
+    getBookDetails();
+  }, []);
+
+  if (!bookDetail) return <p>Loading...</p>;
+
+  const {
+    title,
+    author,
+    availability,
+    averageRating,
+    description,
+    genre,
+    imgURL,
+    isbn,
+  } = bookDetail;
+
   return (
     <>
       <Row>
@@ -17,7 +47,7 @@ const BookLandingPage = () => {
             }}
           >
             <Card.Img
-              src="https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg"
+              src={imgURL}
               style={{
                 width: "320px",
                 height: "100%",
@@ -26,18 +56,31 @@ const BookLandingPage = () => {
               }}
             />
             <Card.Body className="d-flex align-items-left flex-column">
-              <Card.Text>Available</Card.Text>
-              <Card.Title>Hello</Card.Title>
-              <Card.Text>By:J.R.R Tokien</Card.Text>
-              <Card.Text>Review</Card.Text>
-              <div className="d-flex justify-content-space gap-5">
-                <Card.Text>Hello</Card.Text>
-                <Card.Text>Hello</Card.Text>
-              </div>
+              <Card.Text>{availability}</Card.Text>
+              <Card.Title>
+                <h2>{title}</h2>
+              </Card.Title>
+              <Card.Text>by {author}</Card.Text>
               <Card.Text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                {" "}
+                {renderStars(averageRating)} {averageRating} <br />
+                <Badge bg={averageRating ? "success" : "danger"} pill>
+                  {averageRating ? "Available" : "Borrowed"}
+                </Badge>
               </Card.Text>
+              <div className="d-flex justify-content-space gap-5">
+                <Card.Text>
+                  <span style={{ color: "gray" }}>Genre:</span>
+                  <br />
+                  {genre}
+                </Card.Text>
+                <Card.Text>
+                  <span style={{ color: "gray" }}>ISBN</span>
+                  <br />
+                  {isbn}
+                </Card.Text>
+              </div>
+              <Card.Text>{"description"}</Card.Text>
               <Card.Text className="d-flex justify-content-center">
                 <Button variant="success">Borrow now</Button>
                 {"  "}
