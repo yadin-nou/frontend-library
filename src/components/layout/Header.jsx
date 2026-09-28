@@ -10,11 +10,12 @@ const Header = () => {
           <div>
             <img
               src={lmsLogo}
-              width={150}
-              height={150}
+              width={100}
+              height={100}
               style={{ mixBlendMode: "multiply" }}
             />
           </div>
+          <div className="p-1">Welcome back, Yadin</div>
           {/* if login we show this */}
           {/* <div>Welcome to Yadin</div> */}
         </div>

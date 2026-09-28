@@ -16,7 +16,10 @@ export const DefaultLayout = () => {
             <Header />
           </Col>
         </Row>
-        <Row style={{ height: "auto" }} className="border rounded-4 shadow ">
+        <Row
+          style={{ height: "auto" }}
+          className=" container-m border rounded-4 shadow "
+        >
           <Col sm={11} className="d-flex justify-content-center pt-3">
             <main className="main ps-5" style={{ width: "100vw" }}>
               <Outlet />

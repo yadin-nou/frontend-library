@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Row, Tabs, Tab, Badge } from "react-bootstrap";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Alert } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getAllBooks } from "../../axiosHelp/axiosConnected";
 import { toast } from "react-toastify";
 import { renderStars } from "../../utils/starRating";
 const BookLandingPage = () => {
   const { id } = useParams();
   const [bookDetail, setBookDetail] = useState(null);
-
   const getBookDetails = async () => {
     const pendingResp = getAllBooks({ _id: id });
     toast.promise(pendingResp, { pending: "Please wait...." });
@@ -38,13 +37,20 @@ const BookLandingPage = () => {
   return (
     <>
       <Row>
-        <Col xs={3}></Col>
-        <Col xl={9} md={8}>
+        <Col xs={2}>
+          <Link
+            to="/books"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            &lt;&lt; back
+          </Link>
+        </Col>
+        <Col xl={8} md={8}>
           <Card
             style={{
               display: "flex",
               flexDirection: "row",
-              maxWidth: "580px",
+              // maxWidth: "750px",
               height: "auto",
             }}
           >
@@ -82,8 +88,8 @@ const BookLandingPage = () => {
                   {isbn}
                 </Card.Text>
               </div>
-              <Card.Text>{"description"}</Card.Text>
-              <Card.Text className="d-flex justify-content-center">
+              <Card.Text style={{ maxWidth: "400px" }}>{description}</Card.Text>
+              <Card.Text className="d-flex justify-content-left">
                 <Button variant="success">Borrow now</Button>
                 {"  "}
                 <Button variant="light">
@@ -96,8 +102,7 @@ const BookLandingPage = () => {
       </Row>
 
       <Row className="pt-5">
-        <Col xs={3}></Col>
-        <Col xs={4}>
+        <Col xs={12} md={12}>
           <Tabs
             defaultActiveKey="review"
             id="uncontrolled-tab-example"
