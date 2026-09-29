@@ -2,6 +2,7 @@ import React from "react";
 import lmsLogo from "../../assets/images/logo.jpg";
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { GiShoppingCart } from "react-icons/gi";
 const Header = () => {
   return (
     <div>
@@ -51,11 +52,29 @@ const Header = () => {
                 Login
               </Nav.Link>
             </Nav.Item>
-            {/* <Nav.Item>
-              <Nav.Link as={NavLink} eventKey="/logout">
+            <Nav.Item>
+              <Nav.Link
+                as={NavLink}
+                to="/logout"
+                eventKey="/logout"
+                className="sidebar-link mb-1 "
+              >
                 Logout
               </Nav.Link>
-            </Nav.Item> */}
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link
+                as={NavLink}
+                to="/carts"
+                eventKey="/carts"
+                className="sidebar-link mb-1 position-relative"
+              >
+                {" "}
+                <div className="position-absolute cart-count">3</div>
+                <GiShoppingCart className="fs-3" />
+              </Nav.Link>
+            </Nav.Item>
           </Nav>
         </div>
       </header>
