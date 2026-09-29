@@ -12,6 +12,7 @@ const ImportBook = ({ handelGetAllBook }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const url = import.meta.env.VITE_FRONT_END_URL;
   const fromTPL = [
     {
       as: "textarea",
@@ -43,6 +44,8 @@ const ImportBook = ({ handelGetAllBook }) => {
       return;
     }
   };
+
+  const handleDowndLoadJsonTemplate = () => {};
   return (
     <div>
       <Button variant="success" onClick={handleShow}>
@@ -60,6 +63,22 @@ const ImportBook = ({ handelGetAllBook }) => {
             ))}
           </Modal.Body>
           <Modal.Footer>
+            {/* <Button
+              as="a"
+              href={jsonFiles}
+              download="jsonFormatTemplate.json"
+              variant="primary"
+            >
+              Download JSON Template
+            </Button> */}
+            <a
+              href={url + "/src/assets/jsonFormatTemplate.json"}
+              download="jsonFormatTemplate.json"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download JSON Template
+            </a>
             <Button variant="danger" onClick={handleClose}>
               Close
             </Button>
