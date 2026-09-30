@@ -1,8 +1,6 @@
 import axios from "axios";
-const adminRoute = "/api/v1/admin";
 const userRoute = "/api/v1/users";
 const urlUser = import.meta.env.VITE_SERVER_URL + userRoute;
-const urlAdmin = import.meta.env.VITE_SERVER_URL + adminRoute;
 
 const processAPI = async ({ method, url, data, headers, params }) => {
   try {
@@ -25,43 +23,45 @@ const processAPI = async ({ method, url, data, headers, params }) => {
   }
 };
 
-//adming API
-export const addBook = async (data) => {
-  //console.log(data.importBook, " axios");
-  const book = {
-    method: "post",
-    url: urlAdmin + "/addbook",
-    data,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  return processAPI(book);
-};
+// //adming API
+// export const addBook = async (data) => {
+//   //console.log(data.importBook, " axios");
+//   const book = {
+//     method: "post",
+//     url: urlAdmin + "/addbook",
+//     data,
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   };
+//   return processAPI(book);
+// };
 
-export const getAllBooks = async (filter = {}) => {
-  //console.log(data.importBook, " axios");
-  const book = {
-    method: "get",
-    url: urlAdmin + "/book",
-    params: filter,
-  };
-  return processAPI(book);
-};
-export const deleteBook = async (data) => {
-  const book = {
-    method: "delete",
-    url: urlAdmin + "/",
-    data,
-  };
-  return processAPI(book);
-};
-export const updateBook = async (data) => {
-  console.log(data);
-  const book = {
-    method: "patch",
-    url: urlAdmin + "/",
-    data,
-  };
-  return processAPI(book);
-};
+// export const getAllBooks = async (filter = {}) => {
+//   //console.log(data.importBook, " axios");
+//   const book = {
+//     method: "get",
+//     url: urlAdmin + "/book",
+//     params: filter,
+//   };
+//   return processAPI(book);
+// };
+// export const deleteBook = async (data) => {
+//   const book = {
+//     method: "delete",
+//     url: urlAdmin + "/",
+//     data,
+//   };
+//   return processAPI(book);
+// };
+// export const updateBook = async (data) => {
+//   console.log(data);
+//   const book = {
+//     method: "patch",
+//     url: urlAdmin + "/",
+//     data,
+//   };
+//   return processAPI(book);
+// };
+
+export default processAPI;

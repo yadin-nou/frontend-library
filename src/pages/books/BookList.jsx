@@ -4,9 +4,13 @@ import BookTable from "./BookTable";
 import { PlusLg, Search } from "react-bootstrap-icons";
 import AddBook from "./AddBook";
 import ImportBook from "./ImportBook";
-import { deleteBook, getAllBooks } from "../../axiosHelp/axiosConnected";
+// import { deleteBook, getAllBooks } from "../../axiosHelp/axiosConnected";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import {
+  deleteBookAction,
+  getAllBooksAction,
+} from "../../features/book/bookAction";
 
 const BookList = () => {
   // const bookCollection = [
@@ -134,7 +138,7 @@ const BookList = () => {
     setSearchBook(filteredBooks);
   };
   const handelGetAllBook = async () => {
-    const getBook = await getAllBooks();
+    const getBook = await getAllBooksAction();
     if (getBook?.status === "success") {
       //console.log(getBook.book);
       //If getBook.book is an array of book objects
@@ -147,7 +151,7 @@ const BookList = () => {
     if (conf) {
       const jsonBook_id = [book_id];
 
-      const { status, message } = await deleteBook(jsonBook_id);
+      const { status, message } = await deleteBookAction(jsonBook_id);
 
       if (status === "success") {
         toast.success(message);

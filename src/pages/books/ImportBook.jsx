@@ -4,10 +4,11 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import FormTemplate from "../../components/FormTemplate";
 import useFormHook from "../../hooks/useFormHook.js";
-import { addBook } from "../../axiosHelp/axiosConnected.js";
+// import { addBook } from "../../axiosHelp/axiosConnected.js";
 import { toast } from "react-toastify";
 // tell Vite you want the URL, not the parsed data, using Vite's ?url suffix:
 import jsonPath from "@assets/jsonFormatTemplate.json?url";
+import { addBookAction } from "../../features/book/bookAction.js";
 
 const ImportBook = ({ handelGetAllBook }) => {
   const { formData, setFormData, handleOnChange } = useFormHook({});
@@ -31,7 +32,7 @@ const ImportBook = ({ handelGetAllBook }) => {
 
     try {
       const conToJson = JSON.parse(formData.importBook);
-      const pendingResp = addBook(conToJson);
+      const pendingResp = addBookAction(conToJson);
       toast.promise(pendingResp, { pending: "Please wait...." });
       const result = await pendingResp;
       if (result?.status === "success") {

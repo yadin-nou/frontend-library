@@ -4,15 +4,20 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import FormTemplate from "../../components/FormTemplate";
 import useFormHook from "../../hooks/useFormHook";
-import {
-  addBook,
-  getAllBooks,
-  updateBook,
-} from "../../axiosHelp/axiosConnected";
+// import {
+//   addBook,
+//   getAllBooks,
+//   updateBook,
+// } from "../../axiosHelp/axiosConnected";
 import { toast } from "react-toastify";
 import useSpinner from "../../hooks/useSpinner";
 import { PencilFill } from "react-bootstrap-icons";
 import { useEffect } from "react";
+import {
+  addBookAction,
+  getAllBooksAction,
+  updateBookAction,
+} from "../../features/book/bookAction";
 
 const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
   const { formData, setFormData, handleOnChange } = useFormHook([]);
@@ -27,7 +32,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
   const { spinner, setSpinner } = useSpinner(false);
   const book_id = { _id: id };
   const getBookID = async () => {
-    const response = await getAllBooks(book_id);
+    const response = await getAllBooksAction(book_id);
     const book = response.book[0]; // unwrap array + nested key
     setFormData(book);
   };
@@ -88,7 +93,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
     try {
       setSpinner(true);
       const toJson = JSON.stringify(formData);
-      const pendingResp = addBook(toJson);
+      const pendingResp = addBookAction(toJson);
       //promise is the behavior of pending
       toast.promise(pendingResp, { pending: "Please wait...." });
       const result = await pendingResp;
@@ -110,7 +115,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
     e.preventDefault();
     try {
       setSpinner(true);
-      const pendingResp = updateBook(formData);
+      const pendingResp = updateBookAction(formData);
       //promise is the behavior of pending
       toast.promise(pendingResp, { pending: "Please wait...." });
       const result = await pendingResp;

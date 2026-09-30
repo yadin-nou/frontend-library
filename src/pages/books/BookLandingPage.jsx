@@ -3,14 +3,15 @@ import { Button, Card, Col, Row, Tabs, Tab, Badge } from "react-bootstrap";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Alert } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import { getAllBooks } from "../../axiosHelp/axiosConnected";
+// import { getAllBooks } from "../../axiosHelp/axiosConnected";
 import { toast } from "react-toastify";
 import { renderStars } from "../../utils/starRating";
+import { getAllBooksAction } from "../../features/book/bookAction";
 const BookLandingPage = () => {
   const { id } = useParams();
   const [bookDetail, setBookDetail] = useState(null);
   const getBookDetails = async () => {
-    const pendingResp = getAllBooks({ _id: id });
+    const pendingResp = getAllBooksAction({ _id: id });
     toast.promise(pendingResp, { pending: "Please wait...." });
     const books = await pendingResp;
     setBookDetail(books.book[0]);
