@@ -4,6 +4,7 @@ const urlUser = import.meta.env.VITE_SERVER_URL + userRoute;
 
 const processAPI = async ({ method, url, data, headers, params }) => {
   try {
+    console.log(data, "axios");
     const response = await axios({
       method,
       url,

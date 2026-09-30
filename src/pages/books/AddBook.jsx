@@ -18,6 +18,7 @@ import {
   getAllBooksAction,
   updateBookAction,
 } from "../../features/book/bookAction";
+import { useSelector } from "react-redux";
 
 const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
   const { formData, setFormData, handleOnChange } = useFormHook([]);
@@ -25,17 +26,21 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const book = useSelector((state) =>
+    state.bookInfo.bookCollection.find((b) => b._id === id),
+  );
   const handleEdit = () => {
     setShow(true);
-    getBookID();
-  };
-  const { spinner, setSpinner } = useSpinner(false);
-  const book_id = { _id: id };
-  const getBookID = async () => {
-    const response = await getAllBooksAction(book_id);
-    const book = response.book[0]; // unwrap array + nested key
+    //getBookID();
     setFormData(book);
   };
+  const { spinner, setSpinner } = useSpinner(false);
+  //const book_id = { _id: id };
+  // const getBookID = () => {
+  //   // const response = await getAllBooksAction(book_id);
+  //   //const book = response; // unwrap array + nested key
+  //   setFormData(book);
+  // };
 
   const fromTPL = [
     {

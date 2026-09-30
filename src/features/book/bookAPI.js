@@ -5,7 +5,7 @@ const urlAdmin = import.meta.env.VITE_SERVER_URL + adminRoute;
 
 //adming API
 export const addBook = async (data) => {
-  //console.log(data.importBook, " axios");
+  //console.log(data, "API");
   const book = {
     method: "post",
     url: urlAdmin + "/addbook",

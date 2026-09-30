@@ -5,6 +5,7 @@
     "imgURL": "https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg",
     "isbn": "9780547928227",
     "genre": "Fantasy",
+    "description": "This book is action good for reader",
     "availability": true,
     "averageRating": 4.7
   },
@@ -14,6 +15,7 @@
     "imgURL": "https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg",
     "isbn": "9780451524935",
     "genre": "Dystopian",
+    "description": "This book is action good for reader",
     "availability": false,
     "averageRating": 4.6
   }
