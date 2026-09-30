@@ -7,19 +7,23 @@ import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { renderStars } from "../../utils/starRating";
 import { getAllBooksAction } from "../../features/book/bookAction";
+import { useSelector } from "react-redux";
 const BookLandingPage = () => {
   const { id } = useParams();
-  const [bookDetail, setBookDetail] = useState(null);
-  const getBookDetails = async () => {
-    const pendingResp = getAllBooksAction({ _id: id });
-    toast.promise(pendingResp, { pending: "Please wait...." });
-    const books = await pendingResp;
-    setBookDetail(books.book[0]);
-  };
+  const bookDetail = useSelector((state) =>
+    state.bookInfo.bookCollection.find((bid) => bid._id === id),
+  );
+  //const [bookDetail, setBookDetail] = useState(null);
+  // const getBookDetails = async () => {
+  //   const pendingResp = getAllBooksAction({ _id: id });
+  //   toast.promise(pendingResp, { pending: "Please wait...." });
+  //   const books = await pendingResp;
+  //   setBookDetail(books.book[0]);
+  // };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    getBookDetails();
+    // getBookDetails();
   }, []);
 
   if (!bookDetail) return <p>Loading...</p>;
