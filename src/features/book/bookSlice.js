@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   bookCollection: [],
+  cart: [],
 };
 const bookSlice = createSlice({
   name: "bookCollection",
@@ -10,8 +11,11 @@ const bookSlice = createSlice({
     setBookCollection: (state, action) => {
       state.bookCollection = action.payload;
     },
+    setCart: (state, action) => {
+      state.cart = [...state.cart, action.payload];
+    },
   },
 });
 const { reducer, actions } = bookSlice;
-export const { setBookCollection } = actions;
+export const { setBookCollection, setCart } = actions;
 export default reducer;

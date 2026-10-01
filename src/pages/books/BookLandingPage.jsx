@@ -7,12 +7,14 @@ import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { renderStars } from "../../utils/starRating";
 import { getAllBooksAction } from "../../features/book/bookAction";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart } from "../../features/book/bookSlice";
 const BookLandingPage = () => {
   const { id } = useParams();
   const bookDetail = useSelector((state) =>
     state.bookInfo.bookCollection.find((bid) => bid._id === id),
   );
+  const dispatch = useDispatch();
   //const [bookDetail, setBookDetail] = useState(null);
   // const getBookDetails = async () => {
   //   const pendingResp = getAllBooksAction({ _id: id });
@@ -23,6 +25,10 @@ const BookLandingPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    // bookDetail not exist or refresh page
+    if (!bookDetail) {
+      dispatch(getAllBooksAction({ _id: id }));
+    }
     // getBookDetails();
   }, []);
 
@@ -38,6 +44,10 @@ const BookLandingPage = () => {
     imgURL,
     isbn,
   } = bookDetail;
+
+  const handleAddToCart = () => {
+    dispatch(setCart(id));
+  };
 
   return (
     <>
@@ -95,7 +105,9 @@ const BookLandingPage = () => {
               </div>
               <Card.Text style={{ maxWidth: "400px" }}>{description}</Card.Text>
               <Card.Text className="d-flex justify-content-left">
-                <Button variant="success">Borrow now</Button>
+                <Button variant="success" onClick={handleAddToCart}>
+                  Borrow now
+                </Button>
                 {"  "}
                 <Button variant="light">
                   <MdFavoriteBorder /> Save

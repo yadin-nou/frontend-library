@@ -10,6 +10,7 @@ export const getAllBooksAction =
   async (dispatch) => {
     const result = await getAllBooks(filter);
     result?.status === "success" && dispatch(setBookCollection(result?.book));
+    return result.book;
   };
 
 export const deleteBookAction = async (data) => {
