@@ -14,6 +14,7 @@ import {
   Reviewspage,
   ProfilePage,
   BookList,
+  CartPage,
 } from "../pages";
 import { DefaultLayout } from "../components/layout/DefaultLayout";
 import { UserLayout } from "../components/layout/UserLayout";
@@ -31,6 +32,7 @@ const AppRoutes = () => {
           ></Route>
           <Route path="/signup" element={<SignUpPage />}></Route>
           <Route path="/login" element={<SignInPage />}></Route>
+          <Route path="/carts" element={<CartPage />}></Route>
           <Route
             path="/forget-password"
             element={<ForgetPasswordPage />}
