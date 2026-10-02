@@ -7,7 +7,6 @@ import { TrashFill } from "react-bootstrap-icons";
 
 const CartPage = () => {
   const carts = useSelector((state) => state.bookInfo.cart);
-  let rmCart = [];
   const dispatch = useDispatch();
   const handleRemove = (id) => {
     const confirm = window.confirm("Are you sure want to Delete?");
@@ -56,16 +55,24 @@ const CartPage = () => {
                   </td>
                 </tr>
               ))}
-            </tbody>
-            {carts.length === 0 && (
-              <tbody>
+
+              {carts.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="text-danger">
                     <h4>Cart Is Empty</h4>
                   </td>
                 </tr>
-              </tbody>
-            )}
+              ) : (
+                <tr>
+                  <td colSpan={3}></td>
+                  <td colSpan={2}>
+                    <Link to="/login" state={{ from: "/cart" }}>
+                      <Button variant="success">Proceed to Borrow </Button>
+                    </Link>
+                  </td>
+                </tr>
+              )}
+            </tbody>
           </Table>
         </div>
       </Container>
