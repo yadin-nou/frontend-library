@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Alert } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 // import { getAllBooks } from "../../axiosHelp/axiosConnected";
 import { toast } from "react-toastify";
 import { renderStars } from "../../utils/starRating";
@@ -23,6 +23,10 @@ const BookLandingPage = () => {
   const bookDetail = useSelector((state) =>
     state.bookInfo.bookCollection.find((bid) => bid._id === id),
   );
+  const relatedBook = useSelector((state) =>
+    state.bookInfo.bookCollection.slice(5, 10),
+  );
+
   const carts = useSelector((state) => state.bookInfo.cart);
   const dispatch = useDispatch();
   //const [bookDetail, setBookDetail] = useState(null);
@@ -66,6 +70,11 @@ const BookLandingPage = () => {
       }
     });
     !isInclude && dispatch(setCart(bookDetail)) && toast.success("Cart added");
+  };
+
+  const navi = useNavigate();
+  const handleBookDetails = (id) => {
+    navi("/books/details/" + id);
   };
 
   return (
@@ -152,7 +161,49 @@ const BookLandingPage = () => {
               className="mb-3"
             >
               <Tab eventKey="related" title="Related Books">
-                Tab content for related book
+                <Row xs={3} sm={5} md={6} lg={8} xl={10} className="g-2 pt-1">
+                  {relatedBook.map((book, idx) => (
+                    <Col key={idx}>
+                      <Card
+                        className="book-card h-100"
+                        onClick={(e) => handleBookDetails(book._id)}
+                      >
+                        <Card.Img
+                          variant="top"
+                          src={book.imgURL}
+                          className="object-fit-cover"
+                          style={{
+                            height: "180px",
+                            width: "100%",
+                          }}
+                        />
+                        <Card.Body className="p-2">
+                          <Card.Title className="fs-6 text-truncate">
+                            {book.title}
+                          </Card.Title>
+                          <Card.Text className="small mb-1">
+                            {/* {renderStars(book.averageRating)}{" "}
+                            {book.averageRating} <br /> */}
+                            <Badge
+                              bg={book.availability ? "success" : "danger"}
+                              pill
+                              className="small"
+                            >
+                              {book.availability ? "Available" : "Borrowed"}
+                            </Badge>
+                          </Card.Text>
+                          <Button
+                            variant="primary"
+                            size="sm"
+                            disabled={!book.availability}
+                          >
+                            Borrow
+                          </Button>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
               </Tab>
               <Tab eventKey="review" title="Review">
                 <Alert variant="light" className="border-start border-4">
