@@ -56,11 +56,16 @@ const BookLandingPage = () => {
   } = bookDetail;
 
   const handleAddToCart = () => {
-    if (carts.includes(id)) {
-      toast.warning("This book has already in your Carts!");
-      return;
-    }
-    dispatch(setCart(bookDetail));
+    //console.log(carts);
+    let isInclude = false;
+    carts.map((book) => {
+      if (book._id.includes(id)) {
+        toast.warning("This book has already in your Carts!");
+        isInclude = true;
+        return;
+      }
+    });
+    !isInclude && dispatch(setCart(bookDetail)) && toast.success("Cart added");
   };
 
   return (
