@@ -3,7 +3,9 @@ import lmsLogo from "../../assets/images/logo.jpg";
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { GiShoppingCart } from "react-icons/gi";
+import { useSelector } from "react-redux";
 const Header = () => {
+  const carts = useSelector((state) => state.bookInfo.cart);
   return (
     <div>
       <header className="d-flex justify-content-between align-items-center border rounded-4 shadow ">
@@ -71,7 +73,9 @@ const Header = () => {
                 className="sidebar-link mb-1 position-relative"
               >
                 {" "}
-                <div className="position-absolute cart-count">3</div>
+                <div className="position-absolute cart-count">
+                  {carts.length}
+                </div>
                 <GiShoppingCart className="fs-3" />
               </Nav.Link>
             </Nav.Item>

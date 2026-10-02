@@ -14,6 +14,7 @@ const BookLandingPage = () => {
   const bookDetail = useSelector((state) =>
     state.bookInfo.bookCollection.find((bid) => bid._id === id),
   );
+  const carts = useSelector((state) => state.bookInfo.cart);
   const dispatch = useDispatch();
   //const [bookDetail, setBookDetail] = useState(null);
   // const getBookDetails = async () => {
@@ -46,6 +47,10 @@ const BookLandingPage = () => {
   } = bookDetail;
 
   const handleAddToCart = () => {
+    if (carts.includes(id)) {
+      toast.warning("This book has already in your Carts!");
+      return;
+    }
     dispatch(setCart(id));
   };
 
@@ -105,7 +110,11 @@ const BookLandingPage = () => {
               </div>
               <Card.Text style={{ maxWidth: "400px" }}>{description}</Card.Text>
               <Card.Text className="d-flex justify-content-left">
-                <Button variant="success" onClick={handleAddToCart}>
+                <Button
+                  variant="success"
+                  onClick={handleAddToCart}
+                  disabled={availability ? false : true}
+                >
                   Borrow now
                 </Button>
                 {"  "}
@@ -121,10 +130,13 @@ const BookLandingPage = () => {
       <Row className="pt-5">
         <Col xs={12} md={12}>
           <Tabs
-            defaultActiveKey="review"
+            defaultActiveKey="related"
             id="uncontrolled-tab-example"
             className="mb-3"
           >
+            <Tab eventKey="related" title="Related Books">
+              Tab content for related book
+            </Tab>
             <Tab eventKey="review" title="Review">
               <Alert variant="light" className="border-start border-4">
                 <div className="d-flex justify-content-between mb-1">
@@ -146,9 +158,6 @@ const BookLandingPage = () => {
                   cozy weekend read.
                 </p>
               </Alert>
-            </Tab>
-            <Tab eventKey="related" title="Related Books">
-              Tab content for related book
             </Tab>
           </Tabs>
         </Col>
