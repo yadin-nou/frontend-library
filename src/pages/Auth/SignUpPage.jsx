@@ -58,8 +58,13 @@ const SignUpPage = () => {
     const pendingResp = signupNewUserAPI(formData);
 
     toast.promise(pendingResp, { pending: "Please wait..." });
-    const result = await pendingResp;
-    console.log(result);
+    const { status, message } = await pendingResp;
+    if (status === "success") {
+      toast.success(message);
+    }
+    if (status === "error") {
+      toast.error(message);
+    }
   };
   return (
     <>
