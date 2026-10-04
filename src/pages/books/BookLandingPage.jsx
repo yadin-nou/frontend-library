@@ -20,15 +20,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "../../features/book/bookSlice";
 const BookLandingPage = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const navi = useNavigate();
   const bookDetail = useSelector((state) =>
     state.bookInfo.bookCollection.find((bid) => bid._id === id),
   );
+
   const relatedBook = useSelector((state) =>
     state.bookInfo.bookCollection.slice(5, 10),
   );
 
   const carts = useSelector((state) => state.bookInfo.cart);
-  const dispatch = useDispatch();
+
   //const [bookDetail, setBookDetail] = useState(null);
   // const getBookDetails = async () => {
   //   const pendingResp = getAllBooksAction({ _id: id });
@@ -40,11 +43,15 @@ const BookLandingPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     // bookDetail not exist or refresh page
-    if (!bookDetail) {
-      dispatch(getAllBooksAction({ _id: id }));
+
+    // if (!bookDetail) {
+    //   dispatch(getAllBooksAction({ _id: id }));
+    // }
+    if (!relatedBook.lenth) {
+      dispatch(getAllBooksAction());
     }
     // getBookDetails();
-  }, []);
+  }, [id]);
 
   if (!bookDetail) return <p>Loading...</p>;
 
@@ -72,7 +79,6 @@ const BookLandingPage = () => {
     !isInclude && dispatch(setCart(bookDetail)) && toast.success("Cart added");
   };
 
-  const navi = useNavigate();
   const handleBookDetails = (id) => {
     navi("/books/details/" + id);
   };
@@ -116,8 +122,8 @@ const BookLandingPage = () => {
                 <Card.Text>
                   {" "}
                   {renderStars(averageRating)} {averageRating} <br />
-                  <Badge bg={averageRating ? "success" : "danger"} pill>
-                    {averageRating ? "Available" : "Borrowed"}
+                  <Badge bg={availability ? "success" : "danger"} pill>
+                    {availability ? "Available" : "Borrowed"}
                   </Badge>
                 </Card.Text>
                 <div className="d-flex justify-content-space gap-5">

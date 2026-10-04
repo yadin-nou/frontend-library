@@ -1,6 +1,4 @@
 import axios from "axios";
-const userRoute = "/api/v1/users";
-const urlUser = import.meta.env.VITE_SERVER_URL + userRoute;
 
 const processAPI = async ({ method, url, data, headers, params }) => {
   try {

@@ -3,6 +3,8 @@ import { Button, Container, Form, Placeholder } from "react-bootstrap";
 import FormTemplate from "../../components/FormTemplate";
 import { Link } from "react-router-dom";
 import useFormHook from "../../hooks/useFormHook";
+import { signupNewUserAPI } from "../../service/authAPI";
+import { toast } from "react-toastify";
 
 const SignUpPage = () => {
   const { formData, setFormData, handleOnChange } = useFormHook({});
@@ -51,15 +53,25 @@ const SignUpPage = () => {
     },
   ];
 
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    const pendingResp = signupNewUserAPI(formData);
+
+    toast.promise(pendingResp, { pending: "Please wait..." });
+    const result = await pendingResp;
+    console.log(result);
+  };
   return (
     <>
       <Container className="pb-3">
-        <Form>
+        <Form onSubmit={handleOnSubmit}>
           {formSignup.map((frm) => (
             <FormTemplate key={frm.name} {...frm} onChange={handleOnChange} />
           ))}
 
-          <Button variant="success">Submit</Button>
+          <Button type="submit" variant="success">
+            Submit
+          </Button>
         </Form>
       </Container>
     </>
