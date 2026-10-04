@@ -16,7 +16,7 @@ const ImportBook = ({ handelGetAllBook }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const url = import.meta.env.VITE_FRONT_END_URL;
-  const fromTPL = [
+  const formTPL = [
     {
       as: "textarea",
       label: "Please paste JSON data here:",
@@ -60,7 +60,7 @@ const ImportBook = ({ handelGetAllBook }) => {
             <Modal.Title>Import Book by JSON Data </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {fromTPL.map((frm) => (
+            {formTPL.map((frm) => (
               <FormTemplate key={frm.name} {...frm} onChange={handleOnChange} />
             ))}
           </Modal.Body>
