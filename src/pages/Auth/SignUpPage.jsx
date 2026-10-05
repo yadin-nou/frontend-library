@@ -111,7 +111,7 @@ const SignUpPage = () => {
       setSpinner(false);
     }
   };
-  console.log(pwdErrors.length);
+  // console.log(pwdErrors.length);
   return (
     <>
       <Container className="pb-3">

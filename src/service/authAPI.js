@@ -18,3 +18,16 @@ export const signupNewUserAPI = async (data) => {
   const result = await processAPI(user);
   return result;
 };
+
+export const activateUserAPI = async (data) => {
+  const user = {
+    method: "post",
+    url: urlRoute + "/activate-user",
+    data,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const result = await processAPI(user);
+  return result;
+};
