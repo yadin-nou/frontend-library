@@ -1,13 +1,25 @@
 import React from "react";
-import { Button, Container, Form, Placeholder } from "react-bootstrap";
+import { Button, Container, Form, Placeholder, Spinner } from "react-bootstrap";
 import FormTemplate from "../../components/FormTemplate";
 import { Link } from "react-router-dom";
 import useFormHook from "../../hooks/useFormHook";
 import { signupNewUserAPI } from "../../service/authAPI";
 import { toast } from "react-toastify";
+import useSpinner from "../../hooks/useSpinner";
+import { useState } from "react";
 
 const SignUpPage = () => {
   const { formData, setFormData, handleOnChange } = useFormHook({});
+  const { spinner, setSpinner } = useSpinner(false);
+  const errorForm = {
+    fName: "",
+    lName: "",
+    email: "",
+    phone: "",
+    password: "",
+    cpassword: "",
+  };
+  const [frmError, setFrmError] = useState(errorForm);
   const formSignup = [
     {
       type: "text",
@@ -15,6 +27,7 @@ const SignUpPage = () => {
       label: "First Name",
       required: true,
       placeholder: "First Name",
+      value: formData.fName,
     },
     {
       type: "text",
@@ -22,6 +35,7 @@ const SignUpPage = () => {
       label: "Last Name",
       required: true,
       placeholder: "Last Name",
+      value: formData.lName,
     },
     {
       type: "text",
@@ -29,6 +43,7 @@ const SignUpPage = () => {
       label: "Email",
       required: true,
       placeholder: "Eg: yourname@gmail.com",
+      value: formData.email,
     },
     {
       type: "text",
@@ -36,6 +51,7 @@ const SignUpPage = () => {
       label: "Phone",
       required: true,
       placeholder: "0432xxxxxx",
+      value: formData.phone,
     },
     {
       type: "password",
@@ -43,6 +59,7 @@ const SignUpPage = () => {
       label: "Password",
       required: true,
       placeholder: "*******",
+      value: formData.password,
     },
     {
       type: "password",
@@ -50,20 +67,53 @@ const SignUpPage = () => {
       label: "Comfirm Password",
       required: true,
       placeholder: "*******",
+      value: formData.cpassword,
     },
   ];
+  const emptyForm = {
+    fName: "",
+    lName: "",
+    email: "",
+    phone: "",
+    password: "",
+    cpassword: "",
+  };
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const pendingResp = signupNewUserAPI(formData);
 
-    toast.promise(pendingResp, { pending: "Please wait..." });
-    const { status, message } = await pendingResp;
-    if (status === "success") {
-      toast.success(message);
+    const { cpassword, password } = formData;
+    if (password !== cpassword) {
+      setFrmError({
+        ...frmError,
+        password: "Password is not match.!",
+        cpassword: "C-Password is not match.!",
+      });
+      return toast.warning("Password is not match! Please type again!");
     }
-    if (status === "error") {
-      toast.error(message);
+
+    const pendingResp = signupNewUserAPI(formData);
+    toast.promise(pendingResp, { pending: "Please wait..." });
+    setSpinner(true);
+    const result = await pendingResp;
+    //console.log(result, " Result");
+    if (result?.status === "success") {
+      setFormData(emptyForm);
+      toast.success(result?.message);
+      setSpinner(false);
+    }
+
+    if (result?.status === "error") {
+      if (result?.message.includes("fName")) {
+        setFrmError(emptyForm);
+        setFrmError({ ...frmError, fName: result.message });
+      }
+      if (result?.message.includes("lName")) {
+        setFrmError(emptyForm);
+        setFrmError({ ...frmError, lName: result.message });
+      }
+      toast.error(result?.message);
+      setSpinner(false);
     }
   };
   return (
@@ -71,12 +121,21 @@ const SignUpPage = () => {
       <Container className="pb-3">
         <Form onSubmit={handleOnSubmit}>
           {formSignup.map((frm) => (
-            <FormTemplate key={frm.name} {...frm} onChange={handleOnChange} />
+            <FormTemplate
+              key={frm.name}
+              {...frm}
+              onChange={handleOnChange}
+              error={frmError[frm.name]}
+            />
           ))}
 
-          <Button type="submit" variant="success">
-            Submit
-          </Button>
+          {!spinner ? (
+            <Button type="submit" variant="success">
+              Submit
+            </Button>
+          ) : (
+            <Spinner animation="border" variant="success" />
+          )}
         </Form>
       </Container>
     </>
