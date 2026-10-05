@@ -8,6 +8,9 @@
 
 export const formValidater = (password = "", confirmPassword = "") => {
   const errors = [];
+  if (password.length === 0) {
+    return errors;
+  }
   password.length < 6 && errors.push("At least 6 charactoers required.");
   //Regex VS Code
   !/[A-Z]/.test(password) &&
