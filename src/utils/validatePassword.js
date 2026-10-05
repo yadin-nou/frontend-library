@@ -18,7 +18,10 @@ export const formValidater = (password = "", confirmPassword = "") => {
     errors.push("Password must contain at least one number.");
   !/[!@#$%^&*()<>?{}|]/.test(password) &&
     errors.push("Password must contain at least one symble charactor.");
+  // this only accur when confirmPassword change
+  confirmPassword.length > 0 &&
+    password !== confirmPassword &&
+    errors.push("Password is not match.");
 
-  password !== confirmPassword && errors.push("Password is not match.");
   return errors;
 };

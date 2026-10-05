@@ -7,7 +7,8 @@ import useSpinner from "../../hooks/useSpinner";
 import { useState } from "react";
 
 const SignUpPage = () => {
-  const { formData, setFormData, handleOnChange, pwdErrors } = useFormHook({});
+  const { formData, setFormData, handleOnChange, pwdErrors, setPwdErrors } =
+    useFormHook({});
   const { spinner, setSpinner } = useSpinner(false);
   const errorForm = {
     fName: "",
@@ -82,14 +83,9 @@ const SignUpPage = () => {
 
     const { cpassword, password } = formData;
     if (password !== cpassword) {
-      setFrmError({
-        ...frmError,
-        password: "Password is not match.!",
-        cpassword: "C-Password is not match.!",
-      });
       return toast.warning("Password is not match! Please type again!");
     }
-
+    //clear when passwor match
     const pendingResp = signupNewUserAPI(formData);
     toast.promise(pendingResp, { pending: "Please wait..." });
     setSpinner(true);
@@ -99,21 +95,23 @@ const SignUpPage = () => {
       setFormData(emptyForm);
       toast.success(result?.message);
       setSpinner(false);
+      setPwdErrors([]);
     }
 
     if (result?.status === "error") {
       if (result?.message.includes("fName")) {
-        setFrmError(emptyForm);
-        setFrmError({ ...frmError, fName: result.message });
+        setFrmError({ ...frmError, fName: result.message, lName: "" });
       }
       if (result?.message.includes("lName")) {
         setFrmError(emptyForm);
-        setFrmError({ ...frmError, lName: result.message });
+        setFrmError({ ...frmError, lName: result.message, fName: "" });
       }
+
       toast.error(result?.message);
       setSpinner(false);
     }
   };
+
   return (
     <>
       <Container className="pb-3">
@@ -126,15 +124,16 @@ const SignUpPage = () => {
               error={frmError[frm.name]}
             />
           ))}
+
           <div className="text-danger">
             <ul>
-              {pwdErrors.map((pwd, index) => (
-                <li key={pwd}>{pwd}</li>
-              ))}
+              {pwdErrors.length > 0 &&
+                pwdErrors.map((pwd) => <li key={pwd}>{pwd}</li>)}
             </ul>
           </div>
+
           {!spinner ? (
-            <Button type="submit" variant="success">
+            <Button type="submit" variant="success" disabled={pwdErrors.length}>
               Submit
             </Button>
           ) : (

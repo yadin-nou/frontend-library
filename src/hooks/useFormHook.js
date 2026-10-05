@@ -22,6 +22,7 @@ const useFormHook = (initial) => {
     formData,
     setFormData,
     pwdErrors,
+    setPwdErrors,
     handleOnChange: (e) => handleOnChange({ e, formData, setFormData }),
   };
 };

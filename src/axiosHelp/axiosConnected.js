@@ -13,7 +13,8 @@ const processAPI = async ({ method, url, data, headers, params }) => {
     return response.data;
   } catch (error) {
     //console.log(error);
-    return error.response?.data;
+    const msg = error.response?.data || error.message;
+    return msg;
     //check in the error respone, if error has response,
     // response has data ,data has error, otherwise error.message
     // message: error?.response?.data?.error || error.message,
