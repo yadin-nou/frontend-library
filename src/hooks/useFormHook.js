@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useState } from "react";
+import { formValidater } from "../utils/validatePassword.js";
 
 const handleOnChange = ({ e, formData, setFormData }) => {
   const { name, value } = e.target;
@@ -9,9 +11,17 @@ const handleOnChange = ({ e, formData, setFormData }) => {
 };
 const useFormHook = (initial) => {
   const [formData, setFormData] = useState(initial);
+  const [pwdErrors, setPwdErrors] = useState([]);
+
+  //only when password and confirmPassword have changed
+  useEffect(() => {
+    const pwdErrorLists = formValidater(formData.password, formData.cpassword);
+    setPwdErrors(pwdErrorLists);
+  }, [formData.password, formData.cpassword]);
   return {
     formData,
     setFormData,
+    pwdErrors,
     handleOnChange: (e) => handleOnChange({ e, formData, setFormData }),
   };
 };

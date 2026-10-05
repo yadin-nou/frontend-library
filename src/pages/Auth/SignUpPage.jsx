@@ -1,7 +1,5 @@
-import React from "react";
 import { Button, Container, Form, Placeholder, Spinner } from "react-bootstrap";
 import FormTemplate from "../../components/FormTemplate";
-import { Link } from "react-router-dom";
 import useFormHook from "../../hooks/useFormHook";
 import { signupNewUserAPI } from "../../service/authAPI";
 import { toast } from "react-toastify";
@@ -9,7 +7,7 @@ import useSpinner from "../../hooks/useSpinner";
 import { useState } from "react";
 
 const SignUpPage = () => {
-  const { formData, setFormData, handleOnChange } = useFormHook({});
+  const { formData, setFormData, handleOnChange, pwdErrors } = useFormHook({});
   const { spinner, setSpinner } = useSpinner(false);
   const errorForm = {
     fName: "",
@@ -128,7 +126,13 @@ const SignUpPage = () => {
               error={frmError[frm.name]}
             />
           ))}
-
+          <div className="text-danger">
+            <ul>
+              {pwdErrors.map((pwd, index) => (
+                <li key={pwd}>{pwd}</li>
+              ))}
+            </ul>
+          </div>
           {!spinner ? (
             <Button type="submit" variant="success">
               Submit
