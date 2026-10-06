@@ -19,6 +19,19 @@ export const signupNewUserAPI = async (data) => {
   return result;
 };
 
+export const loginUserAPI = async (data) => {
+  const user = {
+    method: "post",
+    url: urlRoute + "/login",
+    data,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const result = await processAPI(user);
+  return result;
+};
+
 export const activateUserAPI = async (data) => {
   const user = {
     method: "post",

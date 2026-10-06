@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Button, Container, Form, Placeholder } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 import FormTemplate from "../../components/FormTemplate";
 import useFormHook from "../../hooks/useFormHook";
 import { Link } from "react-router-dom";
+import { loginUserAPI } from "../../service/authAPI";
+import { toast } from "react-toastify";
 
 const SignInPage = () => {
   const { formData, setFormData, handleOnChange } = useFormHook({});
@@ -23,9 +25,25 @@ const SignInPage = () => {
     },
   ];
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    const { email, password } = formData;
+    if (email && password) {
+      const pendingResp = loginUserAPI({ email, password });
+      toast.promise(pendingResp, { pending: "Please wait..." });
+      const result = await pendingResp;
+      console.log(result);
+      if (result?.status === "success") {
+        toast.success("Login successfully");
+        return;
+      }
+      if (result?.status === "error") {
+        toast.error(result.message);
+        return;
+      }
+    } else {
+      alert("Please file both forms!");
+    }
   };
   return (
     <div
