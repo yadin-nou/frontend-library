@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Container, Form, Placeholder } from "react-bootstrap";
 import FormTemplate from "../../components/FormTemplate";
+import useFormHook from "../../hooks/useFormHook";
+import { Link } from "react-router-dom";
 
 const SignInPage = () => {
+  const { formData, setFormData, handleOnChange } = useFormHook({});
   const formLogin = [
     {
       type: "text",
@@ -19,6 +22,11 @@ const SignInPage = () => {
       placeholder: "********",
     },
   ];
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
   return (
     <div
       className="bg-white p-4 rounded-4 shadow"
@@ -31,15 +39,18 @@ const SignInPage = () => {
     >
       <h3 className="d-flex justify-content-center">Welcome back!</h3>
       <Container fluid style={{ alignSelf: "center" }}>
-        <Form>
+        <Form onSubmit={handleOnSubmit}>
           {formLogin.map((frm) => (
-            <FormTemplate key={frm.name} {...frm} />
+            <FormTemplate key={frm.name} {...frm} onChange={handleOnChange} />
           ))}
 
           <Button type="submit" variant="success">
             Login
           </Button>
         </Form>
+        <p className="pt-3">
+          Forget Password? <Link to="/forget-password">Reset Now</Link>
+        </p>
       </Container>
     </div>
   );
