@@ -3,7 +3,7 @@ import "./App.css";
 import { Button } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import AppRoutes from "./routes/AppRoutes";
-
+import bgImg from "./assets/images/jonathan-francisca-BpbkLACP64M-unsplash.jpg";
 const App = () => {
   return (
     <>

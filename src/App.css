@@ -56,7 +56,13 @@ body {
   right: -5px;
   transition: all 0.5s;
 }
-
+.signIN-page {
+  background: url("./assets/images/jonathan-francisca-BpbkLACP64M-unsplash.jpg")
+    center no-repeat;
+  background-size: cover;
+  min-height: 80vh;
+  margin: 0 auto;
+}
 @media (min-width: 576px) {
   .book-card img {
     max-height: none; /* let it fill the side-by-side column height on tablet+ */

@@ -5,7 +5,6 @@ import { Outlet } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import PageNav from "./PageNav";
 import AuthRoutes from "../privateRoutes/AuthRoutes";
-
 export const UserLayout = () => {
   return (
     <>
@@ -16,7 +15,8 @@ export const UserLayout = () => {
             <Header />
           </Col>
         </Row>
-        <Row style={{ height: "auto" }} className="border rounded-4 shadow ">
+
+        <Row style={{ height: "auto" }} className="border rounded-4 shadow">
           <Col sm={1}>
             <aside>
               <PageNav />

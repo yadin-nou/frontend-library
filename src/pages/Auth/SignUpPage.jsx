@@ -113,7 +113,17 @@ const SignUpPage = () => {
   };
   // console.log(pwdErrors.length);
   return (
-    <>
+    <div
+      className="bg-white p-4 rounded-4 shadow"
+      style={{
+        width: "100%",
+        maxWidth: "580px",
+        margin: "0 auto",
+      }}
+    >
+      <h3 className="d-flex justify-content-center">
+        Please complete all information:
+      </h3>
       <Container className="pb-3">
         <Form onSubmit={handleOnSubmit}>
           {formSignup.map((frm) => (
@@ -141,7 +151,7 @@ const SignUpPage = () => {
           )}
         </Form>
       </Container>
-    </>
+    </div>
   );
 };
 
