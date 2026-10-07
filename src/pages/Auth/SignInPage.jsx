@@ -5,6 +5,7 @@ import useFormHook from "../../hooks/useFormHook";
 import { Link } from "react-router-dom";
 import { loginUserAPI } from "../../service/authAPI";
 import { toast } from "react-toastify";
+import { setLocalStorage, setSessionStorage } from "../../localStorage/storage";
 
 const SignInPage = () => {
   const { formData, setFormData, handleOnChange } = useFormHook({});
@@ -32,9 +33,12 @@ const SignInPage = () => {
       const pendingResp = loginUserAPI({ email, password });
       toast.promise(pendingResp, { pending: "Please wait..." });
       const result = await pendingResp;
-      console.log(result);
+      //  console.log(result);
       if (result?.status === "success") {
         toast.success("Login successfully");
+        // console.log(result.payload.refreshJWT);
+        setLocalStorage(result.payload.refreshJWT);
+        setSessionStorage(result.payload.accessJWT);
         return;
       }
       if (result?.status === "error") {
