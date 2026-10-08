@@ -48,7 +48,7 @@ const SignInPage = () => {
         setLocalStorage(result.payload.refreshJWT);
         setSessionStorage(result.payload.accessJWT);
         await dispatch(getUserAction());
-        navi("user/profile");
+        //navi("user/profile");
         return;
       }
       if (result?.status === "error") {
