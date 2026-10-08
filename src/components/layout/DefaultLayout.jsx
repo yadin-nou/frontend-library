@@ -9,36 +9,36 @@ import PageNav from "./PageNav";
 export const DefaultLayout = () => {
   return (
     <>
-      <AuthRoutes>
-        <Row>
-          <Col sm={12}>
-            {" "}
-            <Header />
-          </Col>
-        </Row>
-        <Row
-          style={{ height: "auto" }}
-          className="container-m border rounded-4 shadow signIN-page d-flex justify-content-center align-items-center"
+      {/* <AuthRoutes> */}
+      <Row>
+        <Col sm={12}>
+          {" "}
+          <Header />
+        </Col>
+      </Row>
+      <Row
+        style={{ height: "auto" }}
+        className="container-m border rounded-4 shadow signIN-page d-flex justify-content-center align-items-center"
+      >
+        <Col sm={11} className="d-flex justify-content-center">
+          <main className="main" style={{ width: "100vw" }}>
+            <Outlet />
+          </main>
+        </Col>
+      </Row>
+      <Row className="mt-2 ">
+        <Col
+          sm={12}
+          className="border rounded-4 shadow  bg-black text-white d-flex justify-content-center align-items-center"
+          style={{ minHeight: "10vh" }}
         >
-          <Col sm={11} className="d-flex justify-content-center">
-            <main className="main" style={{ width: "100vw" }}>
-              <Outlet />
-            </main>
-          </Col>
-        </Row>
-        <Row className="mt-2 ">
-          <Col
-            sm={12}
-            className="border rounded-4 shadow  bg-black text-white d-flex justify-content-center align-items-center"
-            style={{ minHeight: "10vh" }}
-          >
-            <footer>
-              {" "}
-              <Footer />
-            </footer>
-          </Col>
-        </Row>
-      </AuthRoutes>
+          <footer>
+            {" "}
+            <Footer />
+          </footer>
+        </Col>
+      </Row>
+      {/* </AuthRoutes> */}
     </>
   );
 };

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import FormTemplate from "../../components/FormTemplate";
 import useFormHook from "../../hooks/useFormHook";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUserAPI } from "../../service/authAPI";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setLocalStorage,
   setSessionStorage,
@@ -14,7 +14,12 @@ import { getUserAction } from "../../features/user/userAction.js";
 
 const SignInPage = () => {
   const { formData, setFormData, handleOnChange } = useFormHook({});
+  const { user } = useSelector((state) => state.userInfo);
   const navi = useNavigate();
+  useEffect(() => {
+    user?._id && navi("/user"); // at user URL will check by AuthRoute to check user in Redux again to show.
+  }, [user?._id, navi]);
+
   const dispatch = useDispatch();
   const formLogin = [
     {
@@ -48,7 +53,7 @@ const SignInPage = () => {
         setLocalStorage(result.payload.refreshJWT);
         setSessionStorage(result.payload.accessJWT);
         await dispatch(getUserAction());
-        //navi("user/profile");
+        //useEffect will check user avaiable in Redux state if yes, direct to user
         return;
       }
       if (result?.status === "error") {

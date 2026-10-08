@@ -6,6 +6,7 @@ import { GiShoppingCart } from "react-icons/gi";
 import { useSelector } from "react-redux";
 const Header = () => {
   const carts = useSelector((state) => state.bookInfo.cart);
+  const { user } = useSelector((state) => state.userInfo);
   return (
     <div>
       <header className="d-flex justify-content-between align-items-center border rounded-4 shadow ">
@@ -34,36 +35,53 @@ const Header = () => {
                 Home
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                as={NavLink}
-                to="/signup"
-                eventKey="/signup"
-                className="sidebar-link mb-1"
-              >
-                SignUp
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                eventKey="/login"
-                as={NavLink}
-                to="/login"
-                className="sidebar-link mb-1 "
-              >
-                Login
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                as={NavLink}
-                to="/logout"
-                eventKey="/logout"
-                className="sidebar-link mb-1 "
-              >
-                Logout
-              </Nav.Link>
-            </Nav.Item>
+            {user?._id ? (
+              <>
+                <Nav.Item>
+                  <Nav.Link
+                    as={NavLink}
+                    to="/user"
+                    eventKey="/dashboard"
+                    className="sidebar-link mb-1"
+                  >
+                    Dashboard
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    as={NavLink}
+                    to="/logout"
+                    eventKey="/logout"
+                    className="sidebar-link mb-1 "
+                  >
+                    Logout
+                  </Nav.Link>
+                </Nav.Item>
+              </>
+            ) : (
+              <>
+                <Nav.Item>
+                  <Nav.Link
+                    as={NavLink}
+                    to="/signup"
+                    eventKey="/signup"
+                    className="sidebar-link mb-1"
+                  >
+                    SignUp
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    eventKey="/login"
+                    as={NavLink}
+                    to="/login"
+                    className="sidebar-link mb-1 "
+                  >
+                    Login
+                  </Nav.Link>
+                </Nav.Item>
+              </>
+            )}
 
             <Nav.Item>
               <Nav.Link
