@@ -2,13 +2,20 @@ import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import FormTemplate from "../../components/FormTemplate";
 import useFormHook from "../../hooks/useFormHook";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUserAPI } from "../../service/authAPI";
 import { toast } from "react-toastify";
-import { setLocalStorage, setSessionStorage } from "../../localStorage/storage";
+import { useDispatch } from "react-redux";
+import {
+  setLocalStorage,
+  setSessionStorage,
+} from "../../localStorage/storage.js";
+import { getUserAction } from "../../features/user/userAction.js";
 
 const SignInPage = () => {
   const { formData, setFormData, handleOnChange } = useFormHook({});
+  const navi = useNavigate();
+  const dispatch = useDispatch();
   const formLogin = [
     {
       type: "text",
@@ -28,6 +35,7 @@ const SignInPage = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+
     const { email, password } = formData;
     if (email && password) {
       const pendingResp = loginUserAPI({ email, password });
@@ -39,6 +47,8 @@ const SignInPage = () => {
         // console.log(result.payload.refreshJWT);
         setLocalStorage(result.payload.refreshJWT);
         setSessionStorage(result.payload.accessJWT);
+        await dispatch(getUserAction());
+        navi("user/profile");
         return;
       }
       if (result?.status === "error") {

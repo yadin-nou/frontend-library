@@ -65,7 +65,7 @@ const PageNav = () => {
         </Nav.Link>
         <Nav.Link
           as={NavLink}
-          to="profiles"
+          to="profile"
           className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
         >
           <PersonCircle className="me-2" size={40} />

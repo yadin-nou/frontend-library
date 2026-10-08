@@ -7,9 +7,9 @@ export const addBookAction = async (data) => {
 };
 export const getAllBooksAction =
   (filter = {}) =>
-  async (dispatch) => {
+  async (dis) => {
     const result = await getAllBooks(filter);
-    result?.status === "success" && dispatch(setBookCollection(result?.book));
+    result?.status === "success" && dis(setBookCollection(result?.book));
     return result.book;
   };
 

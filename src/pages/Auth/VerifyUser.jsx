@@ -13,7 +13,7 @@ const VerifyUser = () => {
   const sessionId = searchParams.get("sessionId");
   const [response, setResponse] = useState({});
   const t = searchParams.get("t");
-  const navi = useNavigate();
+
   useEffect(() => {
     const activateUser = async () => {
       const result = await activateUserAPI({ sessionId, t });
