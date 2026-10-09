@@ -81,15 +81,17 @@ const SignInPage = () => {
       }}
     >
       <h3 className="d-flex justify-content-center">Welcome back!</h3>
+
       <Container fluid style={{ alignSelf: "center" }}>
         <Form onSubmit={handleOnSubmit}>
           {formLogin.map((frm) => (
             <FormTemplate key={frm.name} {...frm} onChange={handleOnChange} />
           ))}
-
-          <Button type="submit" variant="success">
-            Login
-          </Button>
+          <div className="d-grid">
+            <Button type="submit" variant="success">
+              Login
+            </Button>
+          </div>
         </Form>
         <p className="pt-3">
           Forget Password? <Link to="/forget-password">Reset Now</Link>
