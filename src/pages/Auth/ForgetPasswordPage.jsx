@@ -21,10 +21,10 @@ const ForgetPasswordPage = () => {
 
   const formResetPassword = [
     {
-      type: "password",
-      name: "currentPassword",
-      label: "Current Password",
-      placeholder: "***",
+      type: "text",
+      name: "otp",
+      label: "OTP",
+      placeholder: "Code OTP",
       required: true,
     },
     {
