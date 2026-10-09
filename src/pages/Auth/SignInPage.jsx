@@ -10,14 +10,19 @@ import {
   setLocalStorage,
   setSessionStorage,
 } from "../../localStorage/storage.js";
-import { getUserAction } from "../../features/user/userAction.js";
+import {
+  autoLoginUser,
+  getUserAction,
+} from "../../features/user/userAction.js";
 
 const SignInPage = () => {
   const { formData, setFormData, handleOnChange } = useFormHook({});
   const { user } = useSelector((state) => state.userInfo);
   const navi = useNavigate();
   useEffect(() => {
-    user?._id && navi("/user"); // at user URL will check by AuthRoute to check user in Redux again to show.
+    // at user URL will check by AuthRoute to check user in Redux again to show.
+    // otherwise, dispatch autologin by accessJWT to user infomation and then set to Redux again.
+    user?._id ? navi("/user") : dispatch(autoLoginUser());
   }, [user?._id, navi]);
 
   const dispatch = useDispatch();
