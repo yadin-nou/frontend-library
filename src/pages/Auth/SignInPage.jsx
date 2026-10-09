@@ -19,11 +19,6 @@ const SignInPage = () => {
   const { formData, setFormData, handleOnChange } = useFormHook({});
   const { user } = useSelector((state) => state.userInfo);
   const navi = useNavigate();
-  useEffect(() => {
-    // at user URL will check by AuthRoute to check user in Redux again to show.
-    // otherwise, dispatch autologin by accessJWT to user infomation and then set to Redux again.
-    user?._id ? navi("/user") : dispatch(autoLoginUser());
-  }, [user?._id, navi]);
 
   const dispatch = useDispatch();
   const formLogin = [
@@ -69,6 +64,12 @@ const SignInPage = () => {
       alert("Please file both forms!");
     }
   };
+  useEffect(() => {
+    // at user URL will check by AuthRoute to check user when refresh page or new tap.
+    // otherwise, dispatch autologin by accessJWT to user infomation and then set to Redux again.
+    user?._id ? navi("/user") : dispatch(autoLoginUser());
+  }, [user?._id, navi]);
+
   return (
     <div
       className="bg-white p-4 rounded-4 shadow"

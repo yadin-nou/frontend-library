@@ -37,7 +37,7 @@ export const deleteBook = async (data) => {
   return result;
 };
 export const updateBook = async (data) => {
-  console.log(data);
+  //console.log(data);
   const book = {
     method: "patch",
     url: urlAdmin + "/",

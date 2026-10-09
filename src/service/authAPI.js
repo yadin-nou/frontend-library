@@ -32,6 +32,19 @@ export const loginUserAPI = async (data) => {
   return result;
 };
 
+export const getNewAccessJWTAPI = async (authorization) => {
+  const user = {
+    method: "get",
+    url: urlRoute + "/renew-jwt",
+    headers: {
+      "Content-Type": "application/json",
+      authorization,
+    },
+  };
+  const result = await processAPI(user);
+  return result;
+};
+
 export const activateUserAPI = async (data) => {
   const user = {
     method: "post",

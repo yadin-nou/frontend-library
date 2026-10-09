@@ -3,7 +3,7 @@ export const setLocalStorage = (refreshJWT) => {
 };
 
 export const getLocalStorage = (refreshJWT) => {
-  return sessionStorage.getItem(refreshJWT);
+  return localStorage.getItem(refreshJWT);
 };
 
 export const setSessionStorage = (accessJWT) => {
