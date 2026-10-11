@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import { Alert, Button, Container, Form } from "react-bootstrap";
+import { Alert, Button, Container, Form, Spinner } from "react-bootstrap";
 import FormTemplate from "../../components/FormTemplate";
-import { Link } from "react-router-dom";
+
 import useFormHook from "../../hooks/useFormHook";
+import { requestPassUserAPI } from "../../service/authAPI";
+import { toast } from "react-toastify";
+import useSpinner from "../../hooks/useSpinner";
+import { Link } from "react-router-dom";
 
 const ForgetPasswordPage = () => {
   const { formData, setFormData, handleOnChange, pwdErrors, setPwdErrors } =
     useFormHook({});
   const [showForm, setShowForm] = useState(false);
+  const { spinner, setSpinner } = useSpinner(false);
   const formForgetPass = [
     {
       type: "text",
@@ -24,7 +29,7 @@ const ForgetPasswordPage = () => {
       type: "text",
       name: "otp",
       label: "OTP Code",
-      placeholder: "Code 4 Digits",
+      placeholder: "Code 6 Digits",
       required: true,
     },
     {
@@ -47,15 +52,30 @@ const ForgetPasswordPage = () => {
       email: "",
     },
   ];
-  const handleOnSendEmailSubmit = (e) => {
+  const handleOnSendEmailSubmit = async (e) => {
     e.preventDefault();
-    setShowForm(true);
-    console.log(formData);
+    setSpinner(true);
+    //  const { email } = formData.email;
+    const pendingRes = requestPassUserAPI({ email: formData.email });
+    toast.promise(pendingRes, { pending: "Please wait...." });
+    const { status, message } = await pendingRes;
+    if (status === "success") {
+      setShowForm(true);
+      setSpinner(false);
+      toast.success(message);
+      setFormData(emptyEmail);
+    }
+    if (status === "error") {
+      toast.error(message);
+      setSpinner(false);
+    }
+
+    //  console.log(formData);
   };
   const handleOnResetSubmit = (e) => {
     e.preventDefault();
     setFormData(emptyEmail);
-    console.log(formData);
+    //  console.log(formData);
   };
 
   return (
@@ -84,10 +104,14 @@ const ForgetPasswordPage = () => {
                     onChange={handleOnChange}
                   />
                 ))}
-                <div className="d-grid">
-                  <Button type="submit" variant="success">
-                    Send
-                  </Button>
+                <div className="d-grid text-center">
+                  {!spinner ? (
+                    <Button type="submit" variant="success">
+                      Send
+                    </Button>
+                  ) : (
+                    <Spinner animation="border" variant="success" />
+                  )}
                 </div>
                 <p className="pt-3">
                   Ready to Login <Link to="/login">Login</Link>
@@ -121,6 +145,10 @@ const ForgetPasswordPage = () => {
                       Reset Now
                     </Button>
                   </div>
+                  <p className="pt-3">
+                    Forget Password?{" "}
+                    <Link to="/forget-password">Try again</Link>
+                  </p>
                 </div>
               </Form>
             </>

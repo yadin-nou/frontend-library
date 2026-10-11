@@ -45,6 +45,19 @@ export const getNewAccessJWTAPI = async (authorization) => {
   return result;
 };
 
+export const requestPassUserAPI = async (data) => {
+  const user = {
+    method: "post",
+    url: urlRoute + "/otp",
+    data,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const result = await processAPI(user);
+  return result;
+};
+
 export const activateUserAPI = async (data) => {
   const user = {
     method: "post",
