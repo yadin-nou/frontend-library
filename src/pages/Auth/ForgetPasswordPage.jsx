@@ -23,8 +23,8 @@ const ForgetPasswordPage = () => {
     {
       type: "text",
       name: "otp",
-      label: "OTP",
-      placeholder: "Code OTP",
+      label: "OTP Code",
+      placeholder: "Code 4 Digits",
       required: true,
     },
     {
@@ -98,7 +98,7 @@ const ForgetPasswordPage = () => {
             <>
               <Form onSubmit={handleOnResetSubmit}>
                 <div>
-                  <Alert>Please complete the requirement below:</Alert>
+                  <Alert>Please fill OTP code from your email:</Alert>
                   {formResetPassword.map((frm) => (
                     <FormTemplate
                       key={frm.name}
