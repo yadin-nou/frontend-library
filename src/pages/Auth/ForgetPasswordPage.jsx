@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Button, Container, Form, Spinner } from "react-bootstrap";
 import FormTemplate from "../../components/FormTemplate";
 
 import useFormHook from "../../hooks/useFormHook";
-import { requestPassUserAPI } from "../../service/authAPI";
+import { requestPassUserAPI, resetPassUserAPI } from "../../service/authAPI";
 import { toast } from "react-toastify";
 import useSpinner from "../../hooks/useSpinner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ForgetPasswordPage = () => {
   const { formData, setFormData, handleOnChange, pwdErrors, setPwdErrors } =
     useFormHook({});
   const [showForm, setShowForm] = useState(false);
   const { spinner, setSpinner } = useSpinner(false);
+  const [count, setCount] = useState(0);
+  const navi = useNavigate();
   const formForgetPass = [
     {
       type: "text",
@@ -31,6 +33,7 @@ const ForgetPasswordPage = () => {
       label: "OTP Code",
       placeholder: "Code 6 Digits",
       required: true,
+      value: formData.otp,
     },
     {
       type: "password",
@@ -38,6 +41,7 @@ const ForgetPasswordPage = () => {
       label: "New Password",
       required: true,
       placeholder: "********",
+      value: formData.password,
     },
     {
       type: "password",
@@ -45,11 +49,15 @@ const ForgetPasswordPage = () => {
       label: "Confirm Password",
       required: true,
       placeholder: "********",
+      value: formData.cpassword,
     },
   ];
-  const emptyEmail = [
+
+  const emptyResetForm = [
     {
-      email: "",
+      otp: "",
+      password: "",
+      cpassword: "",
     },
   ];
   const handleOnSendEmailSubmit = async (e) => {
@@ -63,7 +71,10 @@ const ForgetPasswordPage = () => {
       setShowForm(true);
       setSpinner(false);
       toast.success(message);
-      setFormData(emptyEmail);
+      setCount(120);
+      setInterval(() => {
+        setCount((prev) => (prev > 0 ? prev - 1 : 0));
+      }, 1000);
     }
     if (status === "error") {
       toast.error(message);
@@ -72,10 +83,21 @@ const ForgetPasswordPage = () => {
 
     //  console.log(formData);
   };
-  const handleOnResetSubmit = (e) => {
+  const handleOnResetSubmit = async (e) => {
     e.preventDefault();
-    setFormData(emptyEmail);
-    //  console.log(formData);
+    setSpinner(true);
+    const pendingRes = resetPassUserAPI(formData);
+    toast.promise(pendingRes, { pending: "Please wait" });
+    const user = await pendingRes;
+    if (user?.status === "success") {
+      toast.success("Your password has been updated!");
+      setTimeout(() => navi("/login"), 3000);
+      setSpinner(false);
+    } else {
+      toast.error("Invalid OTP");
+      setSpinner(false);
+    }
+    //console.log(formData);
   };
 
   return (
@@ -94,31 +116,31 @@ const ForgetPasswordPage = () => {
         </div>
 
         <Container fluid style={{ alignSelf: "center" }}>
-          {!showForm ? (
-            <>
-              <Form onSubmit={handleOnSendEmailSubmit}>
-                {formForgetPass.map((frm) => (
-                  <FormTemplate
-                    key={frm.name}
-                    {...frm}
-                    onChange={handleOnChange}
-                  />
-                ))}
-                <div className="d-grid text-center">
-                  {!spinner ? (
-                    <Button type="submit" variant="success">
-                      Send
-                    </Button>
-                  ) : (
-                    <Spinner animation="border" variant="success" />
-                  )}
+          <Form onSubmit={handleOnSendEmailSubmit}>
+            {formForgetPass.map((frm) => (
+              <FormTemplate key={frm.name} {...frm} onChange={handleOnChange} />
+            ))}
+            <div className="d-grid text-center">
+              {!spinner ? (
+                <Button
+                  type="submit"
+                  variant="success"
+                  disabled={count === 0 ? false : true}
+                >
+                  Send {showForm && (count === 0 ? " " : count)}
+                </Button>
+              ) : (
+                <div className="d-flex justify-content-center align-items-center">
+                  <Spinner animation="border" variant="success" />
                 </div>
-                <p className="pt-3">
-                  Ready to Login <Link to="/login">Login</Link>
-                </p>
-              </Form>
-            </>
-          ) : (
+              )}
+            </div>
+            <p className="pt-3">
+              Ready to Login <Link to="/login">Login</Link>
+            </p>
+          </Form>
+
+          {showForm && (
             <>
               <Form onSubmit={handleOnResetSubmit}>
                 <div>
@@ -137,18 +159,20 @@ const ForgetPasswordPage = () => {
                     </ul>
                   </div>
                   <div className="d-grid">
-                    <Button
-                      type="submit"
-                      variant="success"
-                      disabled={pwdErrors.length}
-                    >
-                      Reset Now
-                    </Button>
+                    {!spinner ? (
+                      <Button
+                        type="submit"
+                        variant="success"
+                        disabled={pwdErrors.length}
+                      >
+                        Reset Now
+                      </Button>
+                    ) : (
+                      <div className="d-flex justify-content-center align-items-center">
+                        <Spinner animation="border" variant="success" />
+                      </div>
+                    )}
                   </div>
-                  <p className="pt-3">
-                    Forget Password?{" "}
-                    <Link to="/forget-password">Try again</Link>
-                  </p>
                 </div>
               </Form>
             </>

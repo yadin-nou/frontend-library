@@ -58,6 +58,20 @@ export const requestPassUserAPI = async (data) => {
   return result;
 };
 
+export const resetPassUserAPI = async (data) => {
+  data.cpassword = undefined;
+  const user = {
+    method: "post",
+    url: urlRoute + "/reset-pwd",
+    data,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const result = await processAPI(user);
+  return result;
+};
+
 export const activateUserAPI = async (data) => {
   const user = {
     method: "post",
