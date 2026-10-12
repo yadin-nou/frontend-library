@@ -14,14 +14,17 @@ export const getUserAction = () => async (dis) => {
   return user;
 };
 
+// auto login user execute when redux empty by refresh page
 export const autoLoginUser = () => async (dis) => {
+  // when refesh page accessJWT execute
   const accessJWT = getSessionStorage("accessJWT");
   if (accessJWT) {
     // console.log("accessJWT", accessJWT);
     dis(getUserAction());
     return;
   }
-  // accessJWT not exist, but not expired : that mean user open new tab or direct url
+  // This refreshJWT execute when user open new tab or direct url
+  //OR accessJWT expired
   const refreshJWT = getLocalStorage("refreshJWT");
   if (refreshJWT) {
     //get accessJWT from browser and set in the sessionStorage
