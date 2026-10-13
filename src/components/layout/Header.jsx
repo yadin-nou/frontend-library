@@ -1,12 +1,37 @@
 import React from "react";
 import lmsLogo from "../../assets/images/logo.jpg";
 import { Nav } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { GiShoppingCart } from "react-icons/gi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getSessionStorage,
+  removeLocalStorage,
+  removeSessionStorage,
+} from "../../localStorage/storage";
+import { setUser } from "../../features/user/userSlice";
+import { logoutUserAPI } from "../../service/authAPI";
 const Header = () => {
   const carts = useSelector((state) => state.bookInfo.cart);
   const { user } = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
+  const navi = useNavigate();
+  const handelLogoutUser = async (e) => {
+    e.preventDefault();
+    try {
+      //call api
+      await logoutUserAPI(getSessionStorage("accessJWT"));
+    } catch (error) {
+      console.log("Logout API failed", error);
+    } finally {
+      //remove session & local session
+      removeLocalStorage("refreshJWT");
+      removeSessionStorage("accessJWT");
+      //remove user from redux
+      dispatch(setUser(null));
+      //redirect to home page
+    }
+  };
   return (
     <div>
       <header className="d-flex justify-content-between align-items-center border rounded-4 shadow ">
@@ -53,6 +78,7 @@ const Header = () => {
                     to="/logout"
                     eventKey="/logout"
                     className="sidebar-link mb-1 "
+                    onClick={handelLogoutUser}
                   >
                     Logout
                   </Nav.Link>
