@@ -13,3 +13,7 @@ export const setSessionStorage = (accessJWT) => {
 export const getSessionStorage = (accessJWT) => {
   return sessionStorage.getItem(accessJWT);
 };
+
+export const removeSessionStorage = (accessJWT) => {
+  return sessionStorage.removeItem(accessJWT);
+};

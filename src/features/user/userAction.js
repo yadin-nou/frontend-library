@@ -1,6 +1,7 @@
 import {
   getLocalStorage,
   getSessionStorage,
+  removeSessionStorage,
   setSessionStorage,
 } from "../../localStorage/storage.js";
 import { getNewAccessJWTAPI } from "../../service/authAPI.js";
@@ -11,6 +12,11 @@ export const getUserAction = () => async (dis) => {
   const user = await getUserApi();
   // console.log(user.payload);
   user?.status === "success" && dis(setUser(user.payload));
+  if (user?.status === "error" && user.message.includes("jwt expired")) {
+    console.log(user, "hee");
+    removeSessionStorage("accessJWT");
+    dis(autoLoginUser());
+  }
   return user;
 };
 
@@ -29,7 +35,7 @@ export const autoLoginUser = () => async (dis) => {
   if (refreshJWT) {
     //get accessJWT from browser and set in the sessionStorage
     const { payload } = await getNewAccessJWTAPI(refreshJWT);
-    // console.log(payload);
+    // console.log(payload, "new tab");
     if (payload) {
       //when accessJWT avairable on browser ,dispatch will call getUserAction again to update redux store
       setSessionStorage(payload);
