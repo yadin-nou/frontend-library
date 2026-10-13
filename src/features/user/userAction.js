@@ -1,6 +1,7 @@
 import {
   getLocalStorage,
   getSessionStorage,
+  removeLocalStorage,
   removeSessionStorage,
   setSessionStorage,
 } from "../../localStorage/storage.js";
@@ -13,7 +14,7 @@ export const getUserAction = () => async (dis) => {
   // console.log(user.payload);
   user?.status === "success" && dis(setUser(user.payload));
   if (user?.status === "error" && user.message.includes("jwt expired")) {
-    console.log(user, "hee");
+    //  console.log(user, "jwt eeex");
     removeSessionStorage("accessJWT");
     dis(autoLoginUser());
   }
@@ -40,6 +41,10 @@ export const autoLoginUser = () => async (dis) => {
       //when accessJWT avairable on browser ,dispatch will call getUserAction again to update redux store
       setSessionStorage(payload);
       dis(getUserAction());
+    } else {
+      //console.log(payload, "refreshJWT");
+      removeLocalStorage("refreshJWT");
+      removeSessionStorage("accessJWT");
     }
   }
 };

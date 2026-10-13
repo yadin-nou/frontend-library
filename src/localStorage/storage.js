@@ -5,6 +5,9 @@ export const setLocalStorage = (refreshJWT) => {
 export const getLocalStorage = (refreshJWT) => {
   return localStorage.getItem(refreshJWT);
 };
+export const removeLocalStorage = (refreshJWT) => {
+  return localStorage.removeItem(refreshJWT);
+};
 
 export const setSessionStorage = (accessJWT) => {
   sessionStorage.setItem("accessJWT", accessJWT);
