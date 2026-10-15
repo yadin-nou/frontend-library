@@ -19,8 +19,11 @@ import {
 } from "../pages";
 import { DefaultLayout } from "../components/layout/DefaultLayout";
 import { UserLayout } from "../components/layout/UserLayout";
+import { useSelector } from "react-redux";
 
 const AppRoutes = () => {
+  const { user } = useSelector((state) => state.userInfo);
+  const msg = <h1>Access Deny Page</h1>;
   return (
     <>
       <Routes>
@@ -44,16 +47,34 @@ const AppRoutes = () => {
         </Route>
 
         <Route path="/user" element={<UserLayout />}>
+          {/*All users*/}
           <Route index element={<DashboardPage />}></Route>
+          <Route path="/user/profile" element={<UserPage />}></Route>
+          {/*Thank you page*/}
+          {/*my-borrow page*/}
           {/* <Route
             path="/user/books/details"
             element={<BookLandingPage />}
           ></Route> */}
-          <Route path="/user/books" element={<BookList />}></Route>
-          <Route path="/user/userpage" element={<UserPage />}></Route>
-          <Route path="/user/borrows" element={<BorrowPage />}></Route>
-          <Route path="/user/reviews" element={<Reviewspage />}></Route>
-          <Route path="/user/profile" element={<UserPage />}></Route>
+          {/*Only Admin*/}
+          <Route
+            path="/user/books"
+            element={user?.role === "admin" ? <BookList /> : msg}
+          ></Route>
+          <Route
+            path="/user/userpage"
+            element={user?.role === "admin" ? <UserPage /> : msg}
+          ></Route>
+          <Route
+            path="/user/borrows"
+            element={user?.role === "admin" ? <BorrowPage /> : msg}
+          ></Route>
+          <Route
+            path="/user/reviews"
+            element={user?.role === "admin" ? <Reviewspage /> : msg}
+          ></Route>
+
+          {/*Page not found*/}
           <Route path="*" element={<PageNotFound />}></Route>
         </Route>
       </Routes>
