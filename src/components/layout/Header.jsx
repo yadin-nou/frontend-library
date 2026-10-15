@@ -44,7 +44,9 @@ const Header = () => {
               style={{ mixBlendMode: "multiply" }}
             />
           </div>
-          <div className="p-1">Welcome back, Yadin</div>
+          <div className="p-1">
+            Welcome back, {user.fName} ({user.role})
+          </div>
           {/* if login we show this */}
           {/* <div>Welcome to Yadin</div> */}
         </div>

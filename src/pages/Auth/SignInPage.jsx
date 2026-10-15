@@ -75,6 +75,7 @@ const SignInPage = () => {
       setSpinner(true);
       setTimeout(() => {
         user?._id ? navi("/user") : dispatch(autoLoginUser());
+        setSpinner(false);
       }, 1000);
 
       //setSpinner(false);
