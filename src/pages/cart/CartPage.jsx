@@ -66,7 +66,8 @@ const CartPage = () => {
                 <tr>
                   <td colSpan={3}></td>
                   <td colSpan={2}>
-                    <Link to="/login" state={{ from: "/cart" }}>
+                    {/* add state to show that when go login and comeback to cart*/}
+                    <Link to="/login" state={{ from: "/carts" }}>
                       <Button variant="success">Proceed to Borrow </Button>
                     </Link>
                   </td>

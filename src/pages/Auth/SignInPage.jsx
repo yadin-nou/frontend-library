@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Spinner } from "react-bootstrap";
 import FormTemplate from "../../components/FormTemplate";
 import useFormHook from "../../hooks/useFormHook";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loginUserAPI } from "../../service/authAPI";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +23,7 @@ const SignInPage = () => {
   const { user } = useSelector((state) => state.userInfo);
   const { spinner, setSpinner } = useSpinner(false);
   const navi = useNavigate();
-
+  const location = useLocation();
   const dispatch = useDispatch();
   const formLogin = [
     {
@@ -68,13 +68,14 @@ const SignInPage = () => {
       alert("Please file both forms!");
     }
   };
+  const from = location.state?.from || "/user";
   useEffect(() => {
     // at user URL will check by AuthRoute to check user when refresh page or new tap.
     // otherwise, dispatch autologin by accessJWT to user infomation and then set to Redux again.
     if (getSessionStorage("accessJWT") || getLocalStorage("refreshJWT")) {
       setSpinner(true);
       setTimeout(() => {
-        user?._id ? navi("/user") : dispatch(autoLoginUser());
+        user?._id ? navi(from, { replace: true }) : dispatch(autoLoginUser());
         setSpinner(false);
       }, 1000);
 
