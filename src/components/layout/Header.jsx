@@ -12,7 +12,7 @@ import {
 import { setUser } from "../../features/user/userSlice";
 import { logoutUserAPI } from "../../service/authAPI";
 const Header = () => {
-  const carts = useSelector((state) => state.bookInfo.cart);
+  const carts = useSelector((state) => state.cartInfo.cart);
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
   const navi = useNavigate();

@@ -17,7 +17,8 @@ import { toast } from "react-toastify";
 import { renderStars } from "../../utils/starRating";
 import { getAllBooksAction } from "../../features/book/bookAction";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "../../features/book/bookSlice";
+import { setCart } from "../../features/cart/cartSlice";
+
 const BookLandingPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const BookLandingPage = () => {
     state.bookInfo.bookCollection.slice(5, 10),
   );
 
-  const carts = useSelector((state) => state.bookInfo.cart);
+  const carts = useSelector((state) => state.cartInfo.cart);
 
   //const [bookDetail, setBookDetail] = useState(null);
   // const getBookDetails = async () => {

@@ -25,6 +25,22 @@ const PageNav = () => {
           <Speedometer2 className="me-2" size={40} />
           Dashboard
         </Nav.Link>
+        <Nav.Link
+          as={NavLink}
+          to="my-borrow"
+          className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
+        >
+          <ArrowLeftRight className="me-2" size={40} />
+          My borrow
+        </Nav.Link>
+        <Nav.Link
+          as={NavLink}
+          to="profile"
+          className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
+        >
+          <PersonCircle className="me-2" size={40} />
+          Profile
+        </Nav.Link>
         {user?.role === "admin" && (
           <>
             <Nav.Link
@@ -70,14 +86,6 @@ const PageNav = () => {
             </Nav.Link>
           </>
         )}
-        <Nav.Link
-          as={NavLink}
-          to="profile"
-          className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
-        >
-          <PersonCircle className="me-2" size={40} />
-          Profile
-        </Nav.Link>
       </Nav>
     </>
   );

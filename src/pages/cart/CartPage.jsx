@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { Badge, Button, Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeCart, setCart } from "../../features/book/bookSlice";
+import { removeCart, setCart } from "../../features/cart/cartSlice";
 import { TrashFill } from "react-bootstrap-icons";
 
 const CartPage = () => {
-  const carts = useSelector((state) => state.bookInfo.cart);
+  const carts = useSelector((state) => state.cartInfo.cart);
   const dispatch = useDispatch();
   const handleRemove = (id) => {
     const confirm = window.confirm("Are you sure want to Delete?");

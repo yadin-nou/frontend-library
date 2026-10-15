@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   bookCollection: [],
-  cart: [],
+  // cart: [],
 };
 const bookSlice = createSlice({
   name: "bookCollection",
@@ -11,14 +11,14 @@ const bookSlice = createSlice({
     setBookCollection: (state, action) => {
       state.bookCollection = action.payload;
     },
-    setCart: (state, action) => {
-      state.cart = [...state.cart, action.payload];
-    },
-    removeCart: (state, action) => {
-      state.cart = state.cart.filter((item) => item._id !== action.payload);
-    },
+    // setCart: (state, action) => {
+    //   state.cart = [...state.cart, action.payload];
+    // },
+    // removeCart: (state, action) => {
+    //   state.cart = state.cart.filter((item) => item._id !== action.payload);
+    // },
   },
 });
 const { reducer, actions } = bookSlice;
-export const { setBookCollection, setCart, removeCart } = actions;
+export const { setBookCollection } = actions;
 export default reducer;

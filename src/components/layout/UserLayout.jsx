@@ -23,7 +23,10 @@ export const UserLayout = () => {
             </aside>
           </Col>
           <Col sm={11} className="d-flex justify-content-center pt-3">
-            <main className="main ps-5" style={{ width: "100vw" }}>
+            <main
+              className="main ps-5 d-flex justify-content-center "
+              style={{ width: "100vw" }}
+            >
               <Outlet />
             </main>
           </Col>
