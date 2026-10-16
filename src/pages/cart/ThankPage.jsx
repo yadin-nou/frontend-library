@@ -1,11 +1,17 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const ThankPage = () => {
   return (
-    <div>
-      <Alert variant="success">
-        Thank you for borrow book from the library.
+    <div className="d-flex justify-content-center flex-column">
+      <Alert variant="success" style={{ margin: "0 auto" }}>
+        <h2>Thank you.</h2>
+      </Alert>{" "}
+      <br />
+      <Alert variant="success" style={{ margin: "0 auto" }}>
+        <h5>Thank you for borrow book from the library.</h5>{" "}
+        <Link to="/user">User</Link>
       </Alert>
     </div>
   );

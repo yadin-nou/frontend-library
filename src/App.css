@@ -68,3 +68,161 @@ body {
     max-height: none; /* let it fill the side-by-side column height on tablet+ */
   }
 }
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #f3f4f6;
+  color: #1f2937;
+  padding: 24px;
+}
+
+.profile {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  background: #198754;
+  color: #fff;
+}
+
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+}
+
+.profile-header h1 {
+  font-size: 1.5rem;
+}
+
+.profile-header p {
+  opacity: 0.9;
+}
+
+.section {
+  padding: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.section h2 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+/* Personal details: 4 columns on wide screens, fewer on small ones */
+.details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.details dt {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.details dd {
+  font-weight: 500;
+}
+
+/* Borrowed books */
+.books-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.book {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.book img {
+  width: 48px;
+  height: 68px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.book-info {
+  flex: 1;
+}
+
+.due {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background: #198754;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #157347;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+}
+
+.btn-outline:hover {
+  background: #dc3545;
+  color: #fff;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .books-list {
+    grid-template-columns: 1fr;
+  }
+}

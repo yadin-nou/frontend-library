@@ -16,6 +16,7 @@ import {
   BookList,
   CartPage,
   VerifyUser,
+  ThankPage,
 } from "../pages";
 import { DefaultLayout } from "../components/layout/DefaultLayout";
 import { UserLayout } from "../components/layout/UserLayout";
@@ -39,6 +40,7 @@ const AppRoutes = () => {
           <Route path="/logout" element={<HomePage />}></Route>
           <Route path="/activate-user" element={<VerifyUser />}></Route>
           <Route path="/carts" element={<CartPage />}></Route>
+          <Route path="/thanks" element={<ThankPage />}></Route>
           <Route
             path="/forget-password"
             element={<ForgetPasswordPage />}
@@ -49,7 +51,7 @@ const AppRoutes = () => {
         <Route path="/user" element={<UserLayout />}>
           {/*All users*/}
           <Route index element={<DashboardPage />}></Route>
-          <Route path="/user/profile" element={<UserPage />}></Route>
+          <Route path="/user/profile" element={<ProfilePage />}></Route>
           {/*Thank you page*/}
           {/*my-borrow page*/}
           {/* <Route

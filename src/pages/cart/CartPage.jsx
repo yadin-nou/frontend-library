@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Badge, Button, Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { emptyCart, removeCart, setCart } from "../../features/cart/cartSlice";
 import { TrashFill } from "react-bootstrap-icons";
 import { addBorrowBookAPI } from "../../features/cart/cartAPI";
@@ -11,6 +11,7 @@ const CartPage = () => {
   const carts = useSelector((state) => state.cartInfo.cart);
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
+  const navi = useNavigate();
   const handleRemove = (id) => {
     const confirm = window.confirm("Are you sure want to Delete?");
     confirm && dispatch(removeCart(id));
@@ -27,6 +28,8 @@ const CartPage = () => {
       const result = await pendingResp;
       if (result) {
         dispatch(emptyCart({}));
+        toast.success("Your book borrowed successfully!");
+        navi("/thanks");
       }
     }
   };
