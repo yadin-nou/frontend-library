@@ -15,3 +15,4 @@ export { default as PageNotFound } from "./not_found/PageNotFound";
 export { default as SearchBookBlobal } from "./home/SearchBookGlobal";
 export { default as DisplayBook } from "./home/DispalyBook";
 export { default as CartPage } from "./cart/CartPage";
+export { default as ThankPage } from "./cart/ThankPage";

@@ -2,15 +2,33 @@ import React, { useEffect } from "react";
 import { Badge, Button, Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeCart, setCart } from "../../features/cart/cartSlice";
+import { emptyCart, removeCart, setCart } from "../../features/cart/cartSlice";
 import { TrashFill } from "react-bootstrap-icons";
+import { addBorrowBookAPI } from "../../features/cart/cartAPI";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
   const carts = useSelector((state) => state.cartInfo.cart);
+  const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
   const handleRemove = (id) => {
     const confirm = window.confirm("Are you sure want to Delete?");
     confirm && dispatch(removeCart(id));
+  };
+
+  const handleOnSubmit = async () => {
+    const conf = confirm("Are you sure you wantto borrow the books?");
+    if (conf) {
+      const bookArg = carts.map(({ _id, title, imgURL }) => {
+        return { bookId: _id, bookTitle: title, thumbnail: imgURL };
+      });
+      const pendingResp = addBorrowBookAPI(bookArg);
+      toast.promise(pendingResp, { pending: "Please wait..." });
+      const result = await pendingResp;
+      if (result) {
+        dispatch(emptyCart({}));
+      }
+    }
   };
   return (
     <>
@@ -67,9 +85,15 @@ const CartPage = () => {
                   <td colSpan={3}></td>
                   <td colSpan={2}>
                     {/* add state to show that when go login and comeback to cart*/}
-                    <Link to="/login" state={{ from: "/carts" }}>
-                      <Button variant="success">Proceed to Borrow </Button>
-                    </Link>
+                    {user?._id ? (
+                      <Button variant="success" onClick={handleOnSubmit}>
+                        Proceed to Borrow{" "}
+                      </Button>
+                    ) : (
+                      <Link to="/login" state={{ from: "/carts" }}>
+                        <Button variant="success">Proceed to Borrow </Button>
+                      </Link>
+                    )}
                   </td>
                 </tr>
               )}
