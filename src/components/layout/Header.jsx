@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import lmsLogo from "../../assets/images/logo.jpg";
 import { Nav } from "react-bootstrap";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { GiShoppingCart } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getLocalStorage,
   getSessionStorage,
   removeLocalStorage,
   removeSessionStorage,
 } from "../../localStorage/storage";
 import { setUser } from "../../features/user/userSlice";
 import { logoutUserAPI } from "../../service/authAPI";
+import { autoLoginUser } from "../../features/user/userAction";
 const Header = () => {
   const carts = useSelector((state) => state.cartInfo.cart);
   const { user } = useSelector((state) => state.userInfo);
@@ -32,6 +34,11 @@ const Header = () => {
       //redirect to home page
     }
   };
+  useEffect(() => {
+    if (getSessionStorage("accessJWT") || getLocalStorage("refreshJWT")) {
+      dispatch(autoLoginUser());
+    }
+  }, [user?._id]);
   return (
     <div>
       <header className="d-flex justify-content-between align-items-center">
