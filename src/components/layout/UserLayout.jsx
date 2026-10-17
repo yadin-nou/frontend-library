@@ -11,7 +11,6 @@ export const UserLayout = () => {
       <AuthRoutes>
         <Row>
           <Col sm={12}>
-            {" "}
             <Header />
           </Col>
         </Row>

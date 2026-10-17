@@ -34,7 +34,7 @@ const Header = () => {
   };
   return (
     <div>
-      <header className="d-flex justify-content-between align-items-center border rounded-4 shadow ">
+      <header className="d-flex justify-content-between align-items-center">
         <div>
           <div>
             <img

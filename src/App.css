@@ -22,9 +22,9 @@
   color: #adb5bd !important;
   cursor: not-allowed;
 }
-body {
-  background: "#e1e1e1de";
-}
+/* body {
+  background: "#e1e1e1de" !important ;
+} */
 
 .book-card {
   transition:
@@ -75,12 +75,12 @@ body {
   padding: 0;
 }
 
-body {
+/* body {
   font-family: system-ui, sans-serif;
   background: #f3f4f6;
   color: #1f2937;
   padding: 24px;
-}
+} */
 
 .profile {
   width: 100%;
@@ -215,9 +215,9 @@ button {
 
 /* Mobile */
 @media (max-width: 600px) {
-  body {
+  /* body {
     padding: 12px;
-  }
+  } */
   .profile-header {
     flex-direction: column;
     text-align: center;
