@@ -10,14 +10,14 @@ export const DefaultLayout = () => {
   return (
     <>
       {/* <AuthRoutes> */}
-      <Row>
+      <Row style={{ height: "100px" }}>
         <Col sm={12}>
           <Header />
         </Col>
       </Row>
       <Row
         style={{ height: "auto" }}
-        className="container-m border rounded-4 shadow signIN-page d-flex justify-content-center align-items-center mt-2"
+        className="container-m border rounded-4 shadow signIN-page d-flex justify-content-center align-items-center mt-5"
       >
         <Col sm={11} className="d-flex justify-content-center">
           <main className="main" style={{ width: "100vw" }}>

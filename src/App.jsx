@@ -8,7 +8,7 @@ const App = () => {
   return (
     <>
       <div
-        className="container-m p-5"
+        className="container-m p-3"
         style={{
           background: "#e1e1e1de",
           minHeight: "220vh",

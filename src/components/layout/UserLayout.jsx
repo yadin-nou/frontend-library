@@ -9,7 +9,7 @@ export const UserLayout = () => {
   return (
     <>
       <AuthRoutes>
-        <Row>
+        <Row style={{ height: "auto" }}>
           <Col sm={12}>
             <Header />
           </Col>
@@ -21,7 +21,7 @@ export const UserLayout = () => {
               <PageNav />
             </aside>
           </Col>
-          <Col sm={11} className="d-flex justify-content-center pt-3">
+          <Col sm={11} className="d-flex justify-content-center pt-1">
             <main
               className="main ps-5 d-flex justify-content-center "
               style={{ width: "100vw" }}

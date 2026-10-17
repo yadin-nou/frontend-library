@@ -114,7 +114,7 @@ const SignUpPage = () => {
   // console.log(pwdErrors.length);
   return (
     <div
-      className="bg-white p-4 rounded-4 shadow"
+      className="bg-white  rounded-4 shadow mt-2 mb-2 "
       style={{
         width: "100%",
         maxWidth: "580px",
