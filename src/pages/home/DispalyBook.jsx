@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -13,7 +12,7 @@ const DispalyBook = ({ bookCollection }) => {
   return (
     <>
       <h4 className="pt-5">{bookCollection.length} book(s)</h4>
-      <Row xs={2} sm={4} md={6} lg={8} xl={10} className="g-2 pt-1">
+      <Row xs={1} sm={2} md={3} lg={4} className="g-3 pt-1">
         {bookCollection.map((book, idx) => (
           <Col key={idx}>
             <Card
@@ -25,7 +24,9 @@ const DispalyBook = ({ bookCollection }) => {
                 src={book.imgURL}
                 className="object-fit-cover"
                 style={{
-                  height: "350px",
+                  aspectRatio: "1 / 3",
+                  objectFit: "contain",
+                  maxHeight: "450px",
                   width: "100%",
                 }}
               />
