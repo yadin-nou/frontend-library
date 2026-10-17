@@ -114,11 +114,12 @@ const SignUpPage = () => {
   // console.log(pwdErrors.length);
   return (
     <div
-      className="bg-white  rounded-4 shadow mt-2 mb-2 "
+      className="rounded-4 shadow mt-2 mb-2 "
       style={{
         width: "100%",
         maxWidth: "580px",
         margin: "0 auto",
+        background: "#ffffffb5",
       }}
     >
       <h3 className="d-flex justify-content-center">

@@ -71,7 +71,7 @@ const ForgetPasswordPage = () => {
       setShowForm(true);
       setSpinner(false);
       toast.success(message);
-      setCount(120);
+      setCount(60);
       setInterval(() => {
         setCount((prev) => (prev > 0 ? prev - 1 : 0));
       }, 1000);
@@ -103,12 +103,13 @@ const ForgetPasswordPage = () => {
   return (
     <>
       <div
-        className="bg-white p-4 rounded-4 shadow"
+        className="p-4 rounded-4 shadow mt-2 mb-2"
         style={{
           width: "100%",
           maxWidth: "380px",
           height: "auto",
           margin: "0 auto",
+          background: "#ffffffb5",
         }}
       >
         <div className="d-flex justify-content-center align-items-center flex-column">

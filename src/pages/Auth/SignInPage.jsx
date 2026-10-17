@@ -89,12 +89,13 @@ const SignInPage = () => {
     <>
       {!spinner ? (
         <div
-          className="bg-white p-4 rounded-4 shadow"
+          className="p-4 rounded-4 shadow"
           style={{
             width: "100%",
             maxWidth: "380px",
             height: "400px",
             margin: "0 auto",
+            background: "#ffffffb5",
           }}
         >
           <h3 className="d-flex justify-content-center">Welcome back!</h3>
