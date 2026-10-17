@@ -87,8 +87,8 @@ const BookLandingPage = () => {
   return (
     <>
       <Container>
-        <Row>
-          <Col xs={2}>
+        <Row className="g-3 pt-5">
+          <Col xs={2} md={2}>
             <Link
               to="/books"
               style={{ textDecoration: "none", color: "inherit" }}
@@ -96,21 +96,14 @@ const BookLandingPage = () => {
               &lt;&lt; back
             </Link>
           </Col>
-          <Col xl={8} md={8}>
-            <Card
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                // maxWidth: "750px",
-                height: "auto",
-              }}
-            >
+          <Col xs={12} md={10} xl={8}>
+            <Card className="d-flex flex-column flex-lg-row h-auto">
               <Card.Img
                 src={imgURL}
                 style={{
-                  width: "320px",
+                  width: "auto",
                   height: "100%",
-                  objectFit: "cover",
+                  objectFit: "contain",
                   flexShrink: 0,
                 }}
               />
@@ -168,7 +161,7 @@ const BookLandingPage = () => {
               className="mb-3"
             >
               <Tab eventKey="related" title="Related Books">
-                <Row xs={3} sm={5} md={6} lg={8} xl={10} className="g-2 pt-1">
+                <Row xs={1} sm={2} md={3} lg={4} className="g-3 pt-1">
                   {relatedBook.map((book, idx) => (
                     <Col key={idx}>
                       <Card
@@ -180,7 +173,9 @@ const BookLandingPage = () => {
                           src={book.imgURL}
                           className="object-fit-cover"
                           style={{
-                            height: "180px",
+                            aspectRatio: "1/2",
+                            objectFit: "contain",
+                            maxHeight: "350px",
                             width: "100%",
                           }}
                         />
