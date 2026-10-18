@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Badge, Pagination, Table } from "react-bootstrap";
 import { PencilFill, TrashFill } from "react-bootstrap-icons";
 import AddBook from "./AddBook";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const BookTable = ({
   searchBook,
@@ -9,6 +10,13 @@ const BookTable = ({
   handleDeleteBook,
   handelGetAllBook,
 }) => {
+  const navi = useNavigate();
+
+  const handleBookLandingPage = (bookId) => {
+    const linkDetaail = "/books/details/" + bookId;
+    navi(linkDetaail, { state: { from: "/user/books" } });
+    //<Navigate to={linkDetaail} state={{ from: "/user/books" }} replace />;
+  };
   return (
     <div className="border rounded-3 overflow-hidden">
       <Table
@@ -33,7 +41,7 @@ const BookTable = ({
         </thead>
         <tbody>
           {searchBook.map((book, key) => (
-            <tr key={book._id}>
+            <tr key={book._id} onClick={() => handleBookLandingPage(book._id)}>
               <td className="d-none d-md-table-cell">{key + 1}</td>
               <td className="text-secondary">{book.title}</td>
               <td className="d-none d-md-table-cell text-secondary">

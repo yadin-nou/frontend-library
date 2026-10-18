@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Alert } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 // import { getAllBooks } from "../../axiosHelp/axiosConnected";
 import { toast } from "react-toastify";
 import { renderStars } from "../../utils/starRating";
@@ -23,6 +23,8 @@ const BookLandingPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navi = useNavigate();
+  const [preLocate, setPreLocate] = useState("");
+  const location = useLocation();
   const bookDetail = useSelector((state) =>
     state.bookInfo.bookCollection.find((bid) => bid._id === id),
   );
@@ -40,7 +42,7 @@ const BookLandingPage = () => {
   //   const books = await pendingResp;
   //   setBookDetail(books.book[0]);
   // };
-
+  const from = location.state?.from || "/books";
   useEffect(() => {
     window.scrollTo(0, 0);
     // bookDetail not exist or refresh page
@@ -52,6 +54,7 @@ const BookLandingPage = () => {
       dispatch(getAllBooksAction());
     }
     // getBookDetails();
+    setPreLocate(from);
   }, [id]);
 
   if (!bookDetail) return <p>Loading...</p>;
@@ -81,19 +84,17 @@ const BookLandingPage = () => {
   };
 
   const handleBookDetails = (id) => {
-    navi("/books/details/" + id);
+    navi(`/books/details/${id}`, { state: { from: from } });
   };
 
+  // const from = location.pathname + location.search;
   return (
     <>
       <Container>
         <Row className="g-3 pt-5">
           <Col xs={2} md={2}>
-            <Link
-              to="/books"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              &lt;&lt; back
+            <Link to={from} style={{ textDecoration: "none", color: "white" }}>
+              &lt;&lt; Back
             </Link>
           </Col>
           <Col xs={12} md={10} xl={8}>
