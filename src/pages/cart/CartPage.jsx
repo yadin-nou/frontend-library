@@ -11,6 +11,10 @@ const CartPage = () => {
   const carts = useSelector((state) => state.cartInfo.cart);
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
+
+  const dueDate = new Date();
+  dueDate.setDate(dueDate.getDate() + 15);
+
   const navi = useNavigate();
   const handleRemove = (id) => {
     const confirm = window.confirm("Are you sure want to Delete?");
@@ -66,7 +70,9 @@ const CartPage = () => {
                   </td>
 
                   <td className="text-secondary">{book.title}</td>
-                  <td className="text-secondary">15-5-2026</td>
+                  <td className="text-secondary">
+                    {dueDate.toLocaleDateString("en-AU")}
+                  </td>
                   <td className="d-none d-md-table-cell text-secondary">
                     <TrashFill
                       className="text-danger"

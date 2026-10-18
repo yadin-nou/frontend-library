@@ -49,19 +49,19 @@ const Header = () => {
     <>
       <header className="d-flex justify-content-between align-items-center">
         <div>
-          <div>
+          <div className="d-flex justify-content-between align-items-center">
             <img
               src={lmsLogo}
               width={100}
               height={100}
               style={{ mixBlendMode: "multiply" }}
             />
+            {user?._id && (
+              <div className="p-1">
+                Welcome back, {user?.fName} ({user?.role})
+              </div>
+            )}
           </div>
-          {user?._id && (
-            <div className="p-1">
-              Welcome back, {user?.fName} ({user?.role})
-            </div>
-          )}
 
           {/* if login we show this */}
           {/* <div>Welcome to Yadin</div> */}
