@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import lmsLogo from "../../assets/images/logo.jpg";
-import { Nav } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import Offcanvas from "react-bootstrap/Offcanvas";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { GiShoppingCart } from "react-icons/gi";
 import { IoPersonAddOutline } from "react-icons/io5";
@@ -45,7 +46,7 @@ const Header = () => {
     }
   }, [user?._id]);
   return (
-    <div>
+    <>
       <header className="d-flex justify-content-between align-items-center">
         <div>
           <div>
@@ -65,89 +66,110 @@ const Header = () => {
           {/* if login we show this */}
           {/* <div>Welcome to Yadin</div> */}
         </div>
-        <div className="d-flex justify-content-between align-items-center gap-3">
-          <Nav justify variant="tabs" defaultActiveKey="/">
-            <Nav.Item>
-              <Nav.Link
-                as={NavLink}
-                to="/"
-                eventKey="/home"
-                className="sidebar-link mb-1 d-flex justify-content-center align-items-center gap-1"
+        {["xl"].map((expand) => (
+          <Navbar key={expand} expand={expand} className=" mb-3">
+            <Container fluid>
+              <Navbar.Toggle
+                aria-controls={`offcanvasNavbar-expand-${expand}`}
+              />
+              <Navbar.Offcanvas
+                id={`offcanvasNavbar-expand-${expand}`}
+                aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+                placement="end"
               >
-                <FaHome />
-                Home
-              </Nav.Link>
-            </Nav.Item>
-            {user?._id ? (
-              <>
-                <Nav.Item>
-                  <Nav.Link
-                    as={NavLink}
-                    to="/user"
-                    eventKey="/dashboard"
-                    className="sidebar-link mb-1 d-flex justify-content-center align-items-center gap-1"
-                  >
-                    <MdOutlineDashboard />
-                    Dashboard
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link
-                    as={NavLink}
-                    to="/logout"
-                    eventKey="/logout"
-                    className="sidebar-link mb-1 d-flex justify-content-center align-items-center gap-1 "
-                    onClick={handelLogoutUser}
-                  >
-                    <CiLogout /> Logout
-                  </Nav.Link>
-                </Nav.Item>
-              </>
-            ) : (
-              <>
-                <Nav.Item>
-                  <Nav.Link
-                    as={NavLink}
-                    to="/signup"
-                    eventKey="/signup"
-                    className="sidebar-link mb-1 d-flex justify-content-center align-items-center gap-1"
-                  >
-                    <IoPersonAddOutline />
-                    SignUp
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link
-                    eventKey="/login"
-                    as={NavLink}
-                    to="/login"
-                    className="sidebar-link mb-1 d-flex justify-content-center align-items-center gap-1"
-                  >
-                    <CiLogin /> Login
-                  </Nav.Link>
-                </Nav.Item>
-              </>
-            )}
+                <Offcanvas.Header closeButton>
+                  <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                    Library System
+                  </Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                  <div className="d-flex justify-content-left align-items-center gap-3">
+                    <Nav justify variant="tabs" defaultActiveKey="/">
+                      <Nav.Item>
+                        <Nav.Link
+                          as={NavLink}
+                          to="/"
+                          eventKey="/home"
+                          className="sidebar-link mb-1 d-flex justify-content-base align-items-center gap-1"
+                        >
+                          <FaHome />
+                          Home
+                        </Nav.Link>
+                      </Nav.Item>
+                      {user?._id ? (
+                        <>
+                          <Nav.Item>
+                            <Nav.Link
+                              as={NavLink}
+                              to="/user"
+                              eventKey="/dashboard"
+                              className="sidebar-link mb-1 d-flex justify-content-center align-items-center gap-1"
+                            >
+                              <MdOutlineDashboard />
+                              Dashboard
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item>
+                            <Nav.Link
+                              as={NavLink}
+                              to="/logout"
+                              eventKey="/logout"
+                              className="sidebar-link mb-1 d-flex justify-content-base align-items-center gap-1 "
+                              onClick={handelLogoutUser}
+                            >
+                              <CiLogout /> Logout
+                            </Nav.Link>
+                          </Nav.Item>
+                        </>
+                      ) : (
+                        <>
+                          <Nav.Item>
+                            <Nav.Link
+                              as={NavLink}
+                              to="/signup"
+                              eventKey="/signup"
+                              className="sidebar-link mb-1 d-flex justify-content-center align-items-center gap-1"
+                            >
+                              <IoPersonAddOutline />
+                              SignUp
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item>
+                            <Nav.Link
+                              eventKey="/login"
+                              as={NavLink}
+                              to="/login"
+                              className="sidebar-link mb-1 d-flex justify-content-base align-items-center gap-1"
+                            >
+                              <CiLogin /> Login
+                            </Nav.Link>
+                          </Nav.Item>
+                        </>
+                      )}
 
-            <Nav.Item>
-              <Nav.Link
-                as={NavLink}
-                to="/carts"
-                eventKey="/carts"
-                className="sidebar-link mb-1 position-relative"
-              >
-                {" "}
-                <div className="position-absolute cart-count">
-                  {carts.length}
-                </div>
-                <GiShoppingCart className="fs-3" />
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </div>
+                      <Nav.Item>
+                        <Nav.Link
+                          as={NavLink}
+                          to="/carts"
+                          eventKey="/carts"
+                          className="sidebar-link mb-1 position-relative d-flex justify-content-base align-items-center gap-1"
+                        >
+                          {" "}
+                          <div className="position-absolute cart-count">
+                            {carts.length}
+                          </div>
+                          <GiShoppingCart className="fs-3" />
+                        </Nav.Link>
+                      </Nav.Item>
+                    </Nav>
+                  </div>
+                </Offcanvas.Body>
+              </Navbar.Offcanvas>
+            </Container>
+          </Navbar>
+        ))}
       </header>
-      <hr />
-    </div>
+    </>
   );
 };
 
