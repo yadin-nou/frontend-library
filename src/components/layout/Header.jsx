@@ -3,6 +3,11 @@ import lmsLogo from "../../assets/images/logo.jpg";
 import { Nav } from "react-bootstrap";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { GiShoppingCart } from "react-icons/gi";
+import { IoPersonAddOutline } from "react-icons/io5";
+import { MdOutlineDashboard } from "react-icons/md";
+import { FaHome } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
+import { CiLogin } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getLocalStorage,
@@ -67,8 +72,9 @@ const Header = () => {
                 as={NavLink}
                 to="/"
                 eventKey="/home"
-                className="sidebar-link mb-1"
+                className="sidebar-link mb-1 d-flex justify-content-center align-items-center gap-1"
               >
+                <FaHome />
                 Home
               </Nav.Link>
             </Nav.Item>
@@ -79,8 +85,9 @@ const Header = () => {
                     as={NavLink}
                     to="/user"
                     eventKey="/dashboard"
-                    className="sidebar-link mb-1"
+                    className="sidebar-link mb-1 d-flex justify-content-center align-items-center gap-1"
                   >
+                    <MdOutlineDashboard />
                     Dashboard
                   </Nav.Link>
                 </Nav.Item>
@@ -89,10 +96,10 @@ const Header = () => {
                     as={NavLink}
                     to="/logout"
                     eventKey="/logout"
-                    className="sidebar-link mb-1 "
+                    className="sidebar-link mb-1 d-flex justify-content-center align-items-center gap-1 "
                     onClick={handelLogoutUser}
                   >
-                    Logout
+                    <CiLogout /> Logout
                   </Nav.Link>
                 </Nav.Item>
               </>
@@ -103,8 +110,9 @@ const Header = () => {
                     as={NavLink}
                     to="/signup"
                     eventKey="/signup"
-                    className="sidebar-link mb-1"
+                    className="sidebar-link mb-1 d-flex justify-content-center align-items-center gap-1"
                   >
+                    <IoPersonAddOutline />
                     SignUp
                   </Nav.Link>
                 </Nav.Item>
@@ -113,9 +121,9 @@ const Header = () => {
                     eventKey="/login"
                     as={NavLink}
                     to="/login"
-                    className="sidebar-link mb-1 "
+                    className="sidebar-link mb-1 d-flex justify-content-center align-items-center gap-1"
                   >
-                    Login
+                    <CiLogin /> Login
                   </Nav.Link>
                 </Nav.Item>
               </>

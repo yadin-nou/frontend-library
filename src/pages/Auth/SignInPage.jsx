@@ -126,7 +126,11 @@ const SignInPage = () => {
             margin: "0 auto",
           }}
         >
-          <Spinner animation="border" variant="success"></Spinner>
+          <Spinner
+            animation="border"
+            variant="primary"
+            style={{ width: "5rem", height: "5rem" }}
+          ></Spinner>
         </div>
       )}
     </>
