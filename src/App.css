@@ -226,3 +226,7 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
