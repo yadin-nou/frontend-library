@@ -52,8 +52,8 @@ const Header = () => {
           <div className="d-flex justify-content-between align-items-center">
             <img
               src={lmsLogo}
-              width={100}
-              height={100}
+              width={80}
+              height={80}
               style={{ mixBlendMode: "multiply" }}
             />
             {user?._id && (
