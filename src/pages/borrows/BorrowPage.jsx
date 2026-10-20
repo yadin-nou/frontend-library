@@ -22,6 +22,7 @@ function BorrowPage() {
         hover
         responsive
         className="mb-0 align-middle fs-5 text-center table-spaced"
+        style={{ minWidth: "800px" }}
       >
         <thead className="bg-light">
           <tr>
@@ -46,7 +47,7 @@ function BorrowPage() {
               <td className="text-secondary">
                 {new Date(book.dueDate).toLocaleDateString("en-AU")}
               </td>
-              <td className="d-none d-md-table-cell">
+              <td>
                 {book.returnedDate
                   ? new Date(book.returnedDate).toLocaleDateString("en-AU")
                   : "-"}
