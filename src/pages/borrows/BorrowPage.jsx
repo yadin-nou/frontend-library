@@ -3,10 +3,13 @@ import { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBorrowsAction } from "../../features/borrow/borrowAction";
+import { FaBimobject } from "react-icons/fa";
 
 function BorrowPage() {
   //const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
+  const { allBorrows } = useSelector((state) => state.borrowInfo);
+  //console.log(allBorrows);
   useEffect(() => {
     dispatch(getAllBorrowsAction());
   }, [dispatch]);
@@ -27,18 +30,31 @@ function BorrowPage() {
             <th>Due</th>
             <th>Returned Date</th>
             <th className="d-none d-md-table-cell">Actions</th>
-            <th className="d-none d-md-table-cell">Edit</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="d-none d-md-table-cell"></td>
-            <td></td>
-            <td className="text-secondary"></td>
-            <td></td>
-            <td className="d-none d-md-table-cell"></td>
-            <td className="d-none d-md-table-cell"></td>
-          </tr>
+          {allBorrows.map((book, k) => (
+            <tr key={k + 1}>
+              <td className="d-none d-md-table-cell">{k + 1}</td>
+              <td>
+                <img
+                  src={book.thumbnail}
+                  alt={book.bookTitle}
+                  style={{ width: 50 }}
+                />
+              </td>
+              <td className="text-secondary">
+                {new Date(book.dueDate).toLocaleDateString("en-AU")}
+              </td>
+              <td className="d-none d-md-table-cell">
+                {book.returnedDate
+                  ? new Date(book.returnedDate).toLocaleDateString("en-AU")
+                  : "-"}
+              </td>
+
+              <td className="d-none d-md-table-cell"></td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </div>
