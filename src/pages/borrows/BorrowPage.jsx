@@ -1,7 +1,15 @@
 import React from "react";
+import { useEffect } from "react";
 import { Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBorrowsAction } from "../../features/borrow/borrowAction";
 
 function BorrowPage() {
+  //const { user } = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllBorrowsAction());
+  }, [dispatch]);
   return (
     <div>
       <h3>All Borrows</h3>
