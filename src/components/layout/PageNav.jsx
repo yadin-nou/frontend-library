@@ -45,14 +45,14 @@ const PageNav = () => {
               <PeopleFill className="me-2" size={40} />
               Users
             </Nav.Link>
-            <Nav.Link
+            {/* <Nav.Link
               as={NavLink}
               to="admins"
               className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
             >
               <ShieldLockFill className="me-2" size={40} />
               Admins
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link
               as={NavLink}
               to="borrows"
