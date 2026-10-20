@@ -40,7 +40,7 @@ const AppRoutes = () => {
           <Route path="/logout" element={<HomePage />}></Route>
           <Route path="/activate-user" element={<VerifyUser />}></Route>
           <Route path="/carts" element={<CartPage />}></Route>
-          <Route path="/thanks" element={<ThankPage />}></Route>
+
           <Route
             path="/forget-password"
             element={<ForgetPasswordPage />}
@@ -52,6 +52,7 @@ const AppRoutes = () => {
           {/*All users*/}
           <Route index element={<DashboardPage />}></Route>
           <Route path="/user/profile" element={<ProfilePage />}></Route>
+          <Route path="/user/thanks" element={<ThankPage />}></Route>
           {/*Thank you page*/}
           {/*my-borrow page*/}
           {/* <Route

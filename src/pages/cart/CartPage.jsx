@@ -6,6 +6,7 @@ import { emptyCart, removeCart, setCart } from "../../features/cart/cartSlice";
 import { TrashFill } from "react-bootstrap-icons";
 import { addBorrowBookAPI } from "../../features/cart/cartAPI";
 import { toast } from "react-toastify";
+import { autoLoginUser } from "../../features/user/userAction";
 
 const CartPage = () => {
   const carts = useSelector((state) => state.cartInfo.cart);
@@ -22,18 +23,27 @@ const CartPage = () => {
   };
 
   const handleOnSubmit = async () => {
-    const conf = confirm("Are you sure you wantto borrow the books?");
+    const conf = confirm("Are you sure you want to borrow the books?");
     if (conf) {
       const bookArg = carts.map(({ _id, title, imgURL }) => {
         return { bookId: _id, bookTitle: title, thumbnail: imgURL };
       });
       const pendingResp = addBorrowBookAPI(bookArg);
       toast.promise(pendingResp, { pending: "Please wait..." });
-      const result = await pendingResp;
-      if (result) {
+      const { status, message } = await pendingResp;
+      //console.log(status);
+      if (status === "success") {
         dispatch(emptyCart({}));
         toast.success("Your book borrowed successfully!");
-        navi("/thanks");
+        navi("/user/thanks");
+        return;
+      }
+      if (status === "error" && message === "jwt expired") {
+        dispatch(autoLoginUser());
+        // navi("/login", { state: { from: "/carts" } });
+      }
+      if (status === "error") {
+        toast.error("Something went wrong!");
       }
     }
   };

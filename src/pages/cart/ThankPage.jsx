@@ -11,7 +11,7 @@ const ThankPage = () => {
       <br />
       <Alert variant="success" style={{ margin: "0 auto" }}>
         <h5>Thank you for borrow book from the library.</h5>{" "}
-        <Link to="/my-borrow">My Borrow</Link>
+        <Link to="/user/my-borrow">My Borrow</Link>
       </Alert>
     </div>
   );
