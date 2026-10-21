@@ -37,6 +37,8 @@ const Header = () => {
       removeSessionStorage("accessJWT");
       //remove user from redux
       dispatch(setUser(null));
+      dispatch(setAllBorrow(null));
+      dispatch(setMyBorrow(null));
       //redirect to home page
     }
   };
