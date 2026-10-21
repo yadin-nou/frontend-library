@@ -4,16 +4,16 @@ import { getSessionStorage } from "../../localStorage/storage.js";
 const borrowRouteLink = "/api/v1/borrows";
 const urlBorrow = import.meta.env.VITE_SERVER_URL + borrowRouteLink;
 
-export const getAllBorrowsApi = async () => {
-  const user = {
+export const getAllBorrowsApi = async (role) => {
+  const obj = {
     method: "get",
-    url: urlBorrow + "/admin",
+    url: urlBorrow + "/" + role,
     data: {},
     headers: {
       "Content-Type": "application/json",
       authorization: getSessionStorage("accessJWT"),
     },
   };
-  const result = await processAPI(user);
+  const result = await processAPI(obj);
   return result;
 };

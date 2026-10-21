@@ -4,15 +4,22 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBorrowsAction } from "../../features/borrow/borrowAction";
 import { FaBimobject } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 function BorrowPage() {
-  //const { user } = useSelector((state) => state.userInfo);
+  const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
-  const { allBorrows } = useSelector((state) => state.borrowInfo);
-  //console.log(allBorrows);
+  const location = useLocation();
+  const path = location.pathname.split("/").at(-1);
+  const { allBorrows, myBorrows } = useSelector((state) => state.borrowInfo);
+  const borrows =
+    user.role === "admin" && path === "allborrows" ? allBorrows : myBorrows;
+  const role =
+    user.role === "admin" && path === "allborrows" ? "admin" : "user";
   useEffect(() => {
-    dispatch(getAllBorrowsAction());
-  }, [dispatch]);
+    dispatch(getAllBorrowsAction(role));
+  }, [dispatch, role]);
+
   return (
     <div>
       <h3>All Borrows</h3>
@@ -34,7 +41,7 @@ function BorrowPage() {
           </tr>
         </thead>
         <tbody>
-          {allBorrows.map((book, k) => (
+          {borrows.map((book, k) => (
             <tr key={k + 1}>
               <td className="d-none d-md-table-cell">{k + 1}</td>
               <td>

@@ -55,11 +55,11 @@ const PageNav = () => {
             </Nav.Link> */}
             <Nav.Link
               as={NavLink}
-              to="borrows"
+              to="allborrows"
               className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
             >
               <ArrowLeftRight className="me-2" size={40} />
-              Borrow History
+              All Borrow
             </Nav.Link>
             <Nav.Link
               as={NavLink}

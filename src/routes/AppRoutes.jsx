@@ -53,6 +53,7 @@ const AppRoutes = () => {
           <Route index element={<DashboardPage />}></Route>
           <Route path="/user/profile" element={<ProfilePage />}></Route>
           <Route path="/user/thanks" element={<ThankPage />}></Route>
+          <Route path="/user/my-borrow" element={<BorrowPage />}></Route>
           {/*Thank you page*/}
           {/*my-borrow page*/}
           {/* <Route
@@ -69,7 +70,7 @@ const AppRoutes = () => {
             element={user?.role === "admin" ? <UserPage /> : msg}
           ></Route>
           <Route
-            path="/user/borrows"
+            path="/user/allborrows"
             element={user?.role === "admin" ? <BorrowPage /> : msg}
           ></Route>
           <Route
