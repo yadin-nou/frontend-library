@@ -4,7 +4,7 @@ import { Badge, Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBorrowsAction } from "../../features/borrow/borrowAction";
 import { FaBimobject } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function BorrowPage() {
   const { user } = useSelector((state) => state.userInfo);
@@ -21,6 +21,14 @@ function BorrowPage() {
     dispatch(getAllBorrowsAction(role));
   }, [dispatch, role]);
 
+  const navi = useNavigate();
+
+  const handleBookLandingPage = (bookId) => {
+    const linkDetaail = "/books/details/" + bookId;
+    navi(linkDetaail, { state: { from: location.pathname } });
+    //<Navigate to={linkDetaail} state={{ from: "/user/books" }} replace />;
+  };
+
   return (
     <div>
       <h3>All Borrows</h3>
@@ -36,6 +44,7 @@ function BorrowPage() {
           <tr>
             <th className="d-none d-md-table-cell">#</th>
             <th>Thumbnail</th>
+            <th>Book Title</th>
             {isAdmin && <th>Status</th>}
 
             <th>Due</th>
@@ -54,6 +63,12 @@ function BorrowPage() {
                   style={{ width: 50 }}
                 />
               </td>
+              <td
+                onClick={() => handleBookLandingPage(book.bookId)}
+                style={{ cursor: "pointer" }}
+              >
+                {book.bookTitle}
+              </td>
               {isAdmin && (
                 <td>
                   <Badge bg={book.isReturned ? "success" : "danger"} pill>
@@ -68,7 +83,7 @@ function BorrowPage() {
               <td>
                 {book.returnedDate
                   ? new Date(book.returnedDate).toLocaleDateString("en-AU")
-                  : "N/A"}
+                  : "No"}
               </td>
               {!isAdmin && (
                 <td className="d-none d-md-table-cell">
