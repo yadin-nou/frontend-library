@@ -68,6 +68,7 @@ const BookLandingPage = () => {
     genre,
     imgURL,
     isbn,
+    expectAvailabilityDate,
   } = bookDetail;
 
   const handleAddToCart = () => {
@@ -121,6 +122,17 @@ const BookLandingPage = () => {
                     {availability ? "Available" : "Borrowed"}
                   </Badge>
                 </Card.Text>
+                <Card.Text>
+                  Availability on:{" "}
+                  <span style={{ color: "blue" }}>
+                    {!availability
+                      ? new Date(expectAvailabilityDate).toLocaleDateString(
+                          "en-AU",
+                        )
+                      : "Today"}
+                  </span>
+                  <br />
+                </Card.Text>
                 <div className="d-flex justify-content-space gap-5">
                   <Card.Text>
                     <span style={{ color: "gray" }}>Genre:</span>
@@ -142,7 +154,7 @@ const BookLandingPage = () => {
                     onClick={handleAddToCart}
                     disabled={availability ? false : true}
                   >
-                    Borrow now
+                    Borrow Now
                   </Button>
                   {"  "}
                   <Button variant="light">
