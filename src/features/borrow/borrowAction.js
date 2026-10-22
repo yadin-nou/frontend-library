@@ -6,6 +6,5 @@ export const getAllBorrowsAction = (role) => async (dis) => {
   const pending = getAllBorrowsApi(role);
   toast.promise(pending, { pending: "Please wait..." });
   const { status, message, payload } = await pending;
-  // console.log(payload);
   role === "admin" ? dis(setAllBorrow(payload)) : dis(setMyBorrow(payload));
 };

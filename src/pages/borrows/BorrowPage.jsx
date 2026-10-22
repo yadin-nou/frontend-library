@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { Badge, Button, Table } from "react-bootstrap";
+import { Alert, Badge, Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBorrowsAction } from "../../features/borrow/borrowAction";
 import { FaBimobject } from "react-icons/fa";
@@ -53,49 +53,57 @@ function BorrowPage() {
           </tr>
         </thead>
         <tbody>
-          {borrows.map((book, k) => (
-            <tr key={k + 1}>
-              <td className="d-none d-md-table-cell">{k + 1}</td>
-              <td>
-                <img
-                  src={book.thumbnail}
-                  alt={book.bookTitle}
-                  style={{ width: 50 }}
-                />
-              </td>
-              <td
-                onClick={() => handleBookLandingPage(book.bookId)}
-                style={{ cursor: "pointer" }}
-              >
-                {book.bookTitle}
-              </td>
-              {isAdmin && (
+          {borrows.length > 0 ? (
+            borrows.map((book, k) => (
+              <tr key={k + 1}>
+                <td className="d-none d-md-table-cell">{k + 1}</td>
                 <td>
-                  <Badge bg={book.isReturned ? "success" : "danger"} pill>
-                    {book.isReturned ? "Returned" : "Borrowed"}
-                  </Badge>
+                  <img
+                    src={book.thumbnail}
+                    alt={book.bookTitle}
+                    style={{ width: 50 }}
+                  />
                 </td>
-              )}
+                <td
+                  onClick={() => handleBookLandingPage(book.bookId)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {book.bookTitle}
+                </td>
+                {isAdmin && (
+                  <td>
+                    <Badge bg={book.isReturned ? "success" : "danger"} pill>
+                      {book.isReturned ? "Returned" : "Borrowed"}
+                    </Badge>
+                  </td>
+                )}
 
-              <td className="text-secondary">
-                {new Date(book.dueDate).toLocaleDateString("en-AU")}
-              </td>
-              <td>
-                {book.returnedDate
-                  ? new Date(book.returnedDate).toLocaleDateString("en-AU")
-                  : "No"}
-              </td>
-              {!isAdmin && (
-                <td className="d-none d-md-table-cell">
-                  {!book.isReturned ? (
-                    <Button variant="success">Return Book</Button>
-                  ) : (
-                    <Button variant="success">Review</Button>
-                  )}{" "}
+                <td className="text-secondary">
+                  {new Date(book.dueDate).toLocaleDateString("en-AU")}
                 </td>
-              )}
+                <td>
+                  {book.returnedDate
+                    ? new Date(book.returnedDate).toLocaleDateString("en-AU")
+                    : "No"}
+                </td>
+                {!isAdmin && (
+                  <td className="d-none d-md-table-cell">
+                    {!book.isReturned ? (
+                      <Button variant="success">Return Book</Button>
+                    ) : (
+                      <Button variant="success">Review</Button>
+                    )}{" "}
+                  </td>
+                )}
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={6}>
+                <Alert variant="warning">No Borrow Data</Alert>
+              </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </Table>
     </div>
