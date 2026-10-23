@@ -21,10 +21,14 @@ export const UserLayout = () => {
               <PageNav />
             </aside>
           </Col>
-          <Col sm={11} className="d-flex justify-content-center pt-1">
+          <Col
+            sm={11}
+            className="d-flex justify-content-center pt-1"
+            style={{ minWidth: 0 }}
+          >
             <main
-              className="main ps-5 d-flex justify-content-center "
-              style={{ width: "100vw" }}
+              className="main ps-5 w-100 d-flex justify-content-center "
+              style={{ overflow: "auto", minWidth: 0 }}
             >
               <Outlet />
             </main>

@@ -123,7 +123,7 @@ const BookLandingPage = () => {
                   </Badge>
                 </Card.Text>
                 <Card.Text>
-                  Availability on:{" "}
+                  Expected Available:{" "}
                   <span style={{ color: "blue" }}>
                     {!availability
                       ? new Date(expectAvailabilityDate).toLocaleDateString(

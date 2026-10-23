@@ -17,3 +17,17 @@ export const getAllBorrowsApi = async (role) => {
   const result = await processAPI(obj);
   return result;
 };
+
+export const returnBookAPI = async (data) => {
+  const obj = {
+    method: "patch",
+    url: urlBorrow + "/",
+    data,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: getSessionStorage("accessJWT"),
+    },
+  };
+  const result = await processAPI(obj);
+  return result;
+};

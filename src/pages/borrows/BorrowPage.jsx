@@ -2,9 +2,13 @@ import React from "react";
 import { useEffect } from "react";
 import { Alert, Badge, Button, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBorrowsAction } from "../../features/borrow/borrowAction";
+import {
+  getAllBorrowsAction,
+  returnBookAction,
+} from "../../features/borrow/borrowAction";
 import { FaBimobject } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function BorrowPage() {
   const { user } = useSelector((state) => state.userInfo);
@@ -17,6 +21,7 @@ function BorrowPage() {
   const role =
     user.role === "admin" && path === "allborrows" ? "admin" : "user";
   const isAdmin = role === "admin";
+  // console.log(role);
   useEffect(() => {
     dispatch(getAllBorrowsAction(role));
   }, [dispatch, role]);
@@ -27,6 +32,13 @@ function BorrowPage() {
     const linkDetaail = "/books/details/" + bookId;
     navi(linkDetaail, { state: { from: location.pathname } });
     //<Navigate to={linkDetaail} state={{ from: "/user/books" }} replace />;
+  };
+
+  const handleReturnBook = async (borrowId) => {
+    const conf = confirm("Are you sure you want to Return Book?");
+    if (conf) {
+      dispatch(returnBookAction({ _id: borrowId }, role));
+    }
   };
 
   return (
@@ -82,14 +94,19 @@ function BorrowPage() {
                   {new Date(book.dueDate).toLocaleDateString("en-AU")}
                 </td>
                 <td>
-                  {book.returnedDate
+                  {book.isReturned
                     ? new Date(book.returnedDate).toLocaleDateString("en-AU")
                     : "No"}
                 </td>
                 {!isAdmin && (
                   <td className="d-none d-md-table-cell">
                     {!book.isReturned ? (
-                      <Button variant="success">Return Book</Button>
+                      <Button
+                        variant="warning"
+                        onClick={() => handleReturnBook(book._id)}
+                      >
+                        Return Book
+                      </Button>
                     ) : (
                       <Button variant="success">Review</Button>
                     )}{" "}
