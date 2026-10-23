@@ -9,6 +9,7 @@ import {
 import { FaBimobject } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import AddReview from "../reviews/AddReview";
 
 function BorrowPage() {
   const { user } = useSelector((state) => state.userInfo);
@@ -108,7 +109,11 @@ function BorrowPage() {
                         Return Book
                       </Button>
                     ) : (
-                      <Button variant="success">Review</Button>
+                      <AddReview
+                        bookId={book.bookId}
+                        borrowId={book._id}
+                        role={role}
+                      />
                     )}{" "}
                   </td>
                 )}
