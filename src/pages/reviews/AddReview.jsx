@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -52,21 +52,31 @@ const AddReview = ({ bookId, borrowId, role }) => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     setSpinner(true);
-    setFormData({ ...formData, bookId, borrowId });
-    let pendingRes;
-    setTimeout(() => {
-      pendingRes = insertReviewAction(formData, role);
-      toast.promise(pendingRes, { pending: "Please wait...." });
-    }, 1000);
-    const result = await pendingRes;
-    //const result = await dispatch(pendingRes);
-    if (result) {
+    //setFormData({ ...formData});
+    // console.log(bookId, " , ", borrowId);
+    //setTimeout(() => {
+    const pendingRes = dispatch(insertReviewAction(formData, role));
+    toast.promise(pendingRes, { pending: "Please wait...." });
+    //}, 1000);
+    try {
+      const result = await pendingRes;
+      console.log(result);
+    } finally {
       setSpinner(false);
-      toast.success("Review Added");
-      handleClose();
     }
-    console.log(result);
+
+    // if (status === "success") {
+    //   setSpinner(false);
+    //   toast.success("Review Added");
+    //   handleClose();
+    // }
   };
+  useEffect(() => {
+    setFormData({});
+    setFormData({ bookId, borrowId });
+  }, []);
+
+  //console.log(formData);
   return (
     <>
       <Button variant="success" onClick={handleShow}>
