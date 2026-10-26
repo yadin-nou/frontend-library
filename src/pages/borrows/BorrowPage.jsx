@@ -101,20 +101,23 @@ function BorrowPage() {
                 </td>
                 {!isAdmin && (
                   <td className="d-none d-md-table-cell">
-                    {!book.isReturned ? (
+                    {!book.isReturned && (
                       <Button
                         variant="warning"
                         onClick={() => handleReturnBook(book._id)}
                       >
                         Return Book
                       </Button>
-                    ) : (
+                    )}
+                    {!book.reviewId ? (
                       <AddReview
                         bookId={book.bookId}
                         borrowId={book._id}
                         role={role}
                       />
-                    )}{" "}
+                    ) : (
+                      "Reviewed"
+                    )}
                   </td>
                 )}
               </tr>
