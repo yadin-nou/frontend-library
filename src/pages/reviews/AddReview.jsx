@@ -59,20 +59,24 @@ const AddReview = ({ bookId, borrowId, role }) => {
     toast.promise(pendingRes, { pending: "Please wait...." });
     //}, 1000);
     try {
-      const result = await pendingRes;
-      console.log(result);
+      const { status, message } = await pendingRes;
+      if (status === "success") {
+        setSpinner(false);
+        toast.success(message);
+        handleClose();
+      }
+      if (status === "error") {
+        setSpinner(false);
+        toast.error(message);
+        handleShow();
+        return;
+      }
     } finally {
       setSpinner(false);
+      handleClose();
     }
-
-    // if (status === "success") {
-    //   setSpinner(false);
-    //   toast.success("Review Added");
-    //   handleClose();
-    // }
   };
   useEffect(() => {
-    setFormData({});
     setFormData({ bookId, borrowId });
   }, []);
 

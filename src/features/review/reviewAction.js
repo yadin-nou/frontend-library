@@ -3,6 +3,7 @@ import { insertReviewAPI } from "./reviewAPI";
 
 export const insertReviewAction = (data, role) => async (dis) => {
   //console.log(data, "action");
-  const { status, message } = await insertReviewAPI(data);
-  status === "success" && dis(getAllBorrowsAction(role));
+  const result = await insertReviewAPI(data);
+  result?.status === "success" && dis(getAllBorrowsAction(role));
+  return result;
 };

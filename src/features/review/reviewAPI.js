@@ -5,7 +5,7 @@ const reviewRouteLink = "/api/v1/reviews";
 const urlReview = import.meta.env.VITE_SERVER_URL + reviewRouteLink;
 
 export const insertReviewAPI = async (data) => {
-  console.log(data);
+  // console.log(data);
   const obj = {
     method: "post",
     url: urlReview + "/",
