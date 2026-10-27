@@ -53,7 +53,7 @@ const AddReview = ({ bookId, borrowId, role }) => {
     e.preventDefault();
     setSpinner(true);
     //setFormData({ ...formData});
-    // console.log(bookId, " , ", borrowId);
+
     //setTimeout(() => {
     const pendingRes = dispatch(insertReviewAction(formData, role));
     toast.promise(pendingRes, { pending: "Please wait...." });

@@ -4,8 +4,8 @@ const initialState = {
   allBorrows: [], // admin to see
   myBorrows: [], // only client to see
 };
-const userSlice = createSlice({
-  name: "user",
+const borrowSlice = createSlice({
+  name: "borrow",
   initialState,
   reducers: {
     setAllBorrow: (state, action) => {
@@ -16,6 +16,6 @@ const userSlice = createSlice({
     },
   },
 });
-const { reducer, actions } = userSlice;
+const { reducer, actions } = borrowSlice;
 export const { setAllBorrow, setMyBorrow } = actions;
 export default reducer;
