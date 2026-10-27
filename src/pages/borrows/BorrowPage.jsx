@@ -62,7 +62,7 @@ function BorrowPage() {
 
             <th>Due</th>
             <th>Returned Date</th>
-            {!isAdmin && <th className="d-none d-md-table-cell">Actions</th>}
+            {!isAdmin && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -90,7 +90,6 @@ function BorrowPage() {
                     </Badge>
                   </td>
                 )}
-
                 <td className="text-secondary">
                   {new Date(book.dueDate).toLocaleDateString("en-AU")}
                 </td>
@@ -100,8 +99,8 @@ function BorrowPage() {
                     : "No"}
                 </td>
                 {!isAdmin && (
-                  <td className="d-none d-md-table-cell">
-                    {!book.isReturned && (
+                  <td>
+                    {!book.isReturned && !book.reviewId && (
                       <Button
                         variant="warning"
                         onClick={() => handleReturnBook(book._id)}
@@ -109,15 +108,14 @@ function BorrowPage() {
                         Return Book
                       </Button>
                     )}
-                    {!book.reviewId ? (
+                    {book.isReturned && !book.reviewId && (
                       <AddReview
                         bookId={book.bookId}
                         borrowId={book._id}
                         role={role}
                       />
-                    ) : (
-                      "Reviewed"
                     )}
+                    {book.isReturned && book.reviewId && "reviewed"}
                   </td>
                 )}
               </tr>
