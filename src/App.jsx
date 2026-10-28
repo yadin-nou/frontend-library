@@ -10,12 +10,11 @@ import { getAllReviewAction } from "./features/review/reviewAction";
 const App = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userInfo);
-  //const isAdmin = user?.role === "admin";
-  // console.log(isAdmin, "app");
+  const isAdmin = user?.role === "admin";
+
   useEffect(() => {
-    if (!user) return dispatch(getAllReviewAction(false));
-    dispatch(getAllReviewAction(user.role === "admin"));
-  }, []);
+    dispatch(getAllReviewAction(isAdmin));
+  }, [dispatch, isAdmin]);
   return (
     <>
       <div

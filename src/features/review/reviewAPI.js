@@ -19,14 +19,14 @@ export const insertReviewAPI = async (data) => {
   return result;
 };
 
-export const getAllReviewAPI = async (data, isAdmin) => {
+export const getAllReviewAPI = async (isAdmin) => {
   //console.log(data);
   const path = isAdmin ? "admin" : "";
-  console.log(path, " path");
+  //console.log(path, " path");
   const obj = {
     method: "get",
     url: urlReview + "/" + path,
-    data,
+    data: {},
     headers: {
       "Content-Type": "application/json",
       authorization: getSessionStorage("accessJWT"),

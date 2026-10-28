@@ -19,6 +19,7 @@ import {
 import { setUser } from "../../features/user/userSlice";
 import { logoutUserAPI } from "../../service/authAPI";
 import { autoLoginUser } from "../../features/user/userAction";
+import { setAllBorrow, setMyBorrow } from "../../features/borrow/borrowSlice";
 const Header = () => {
   const carts = useSelector((state) => state.cartInfo.cart);
   const { user } = useSelector((state) => state.userInfo);
