@@ -84,7 +84,7 @@ const AddReview = ({ bookId, borrowId, role }) => {
   return (
     <>
       <Button variant="success" onClick={handleShow}>
-        Review
+        Leave Review
       </Button>
 
       <Modal show={show} onHide={handleClose}>

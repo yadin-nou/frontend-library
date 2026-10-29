@@ -1,10 +1,17 @@
-import React from "react";
-import { Alert, Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { Alert, Button, Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { renderStars } from "../../utils/starRating";
+import { getAllReviewAction } from "../../features/review/reviewAction";
 
 const Reviewspage = () => {
   const review = useSelector((state) => state.reviewInfo.reviews);
-
+  const { user } = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
+  const isAdmin = user?.role === "admin";
+  useEffect(() => {
+    dispatch(getAllReviewAction(isAdmin));
+  }, [dispatch, isAdmin]);
   return (
     <div>
       <h3>All Reviews</h3>
@@ -13,8 +20,8 @@ const Reviewspage = () => {
         bordered
         hover
         responsive
-        className="mb-0 align-middle fs-5 text-center table-spaced"
-        style={{ minWidth: "800px" }}
+        className="mb-0 align-middle text-center table-spaced"
+        style={{ minWidth: "450px" }}
       >
         <thead className="bg-light">
           <tr>
@@ -38,17 +45,25 @@ const Reviewspage = () => {
                     style={{ width: 50 }}
                   />
                 </td>
-                <td>
-                  {rew.reviewMessage}
+                <td className="text-start">
+                  Title:{rew.title}
                   <br />
-                  star:
+                  Message: {rew.reviewMessage}
+                  <br />
+                  Rating: {renderStars(rew.rating)}
+                  <br />
+                  <Button variant="danger" size="sm" className="mt-2">
+                    Delete
+                  </Button>
                 </td>
-                <td>Approve | Delete</td>
+                <td>
+                  <Button variant="warning">Approve now?</Button>
+                </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={6}>
+              <td colSpan={4}>
                 <Alert variant="warning">No Review Avaiable</Alert>
               </td>
             </tr>
