@@ -8,11 +8,15 @@ import {
   updateApproveReviewAction,
 } from "../../features/review/reviewAction";
 import { toast } from "react-toastify";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Reviewspage = () => {
   const review = useSelector((state) => state.reviewInfo.reviews);
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const path = location.pathname.split("/").at(-1);
+  const navi = useNavigate();
   const isAdmin = user?.role === "admin";
 
   const handleDeleteReview = async (_id) => {
@@ -25,7 +29,11 @@ const Reviewspage = () => {
       toast.error(message);
     }
   };
-
+  const handleBookLandingPage = (bookId) => {
+    const linkDetaail = "/books/details/" + bookId;
+    navi(linkDetaail, { state: { from: location.pathname } });
+    //<Navigate to={linkDetaail} state={{ from: "/user/books" }} replace />;
+  };
   const handleUpdateApprove = async (_id, isApproved) => {
     const { status, message } = await updateApproveReviewAction({
       _id,
@@ -33,7 +41,7 @@ const Reviewspage = () => {
     });
     if (status === "success") {
       dispatch(getAllReviewAction(isAdmin));
-      toast.success(message);
+      isApproved ? toast.success(message) : toast.warning(message);
     } else {
       toast.error(message);
     }
@@ -66,7 +74,10 @@ const Reviewspage = () => {
             review.map((rew, k) => (
               <tr key={k + 1}>
                 <td className="d-none d-md-table-cell">{k + 1}</td>
-                <td style={{ cursor: "pointer" }}>
+                <td
+                  onClick={() => handleBookLandingPage(rew.bookId._id)}
+                  style={{ cursor: "pointer" }}
+                >
                   {rew.bookId.title}
                   <br />
                   <img
@@ -102,18 +113,14 @@ const Reviewspage = () => {
                   {rew.isApproved ? (
                     <Button
                       variant="success"
-                      onClick={() =>
-                        handleUpdateApprove(rew._id, !rew.isApproved)
-                      }
+                      onClick={() => handleUpdateApprove(rew._id, false)}
                     >
                       Approved
                     </Button>
                   ) : (
                     <Button
                       variant="warning"
-                      onClick={() =>
-                        handleUpdateApprove(rew._id, rew.isApproved)
-                      }
+                      onClick={() => handleUpdateApprove(rew._id, true)}
                     >
                       Not Approved
                     </Button>
