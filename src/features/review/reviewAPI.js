@@ -35,3 +35,30 @@ export const getAllReviewAPI = async (isAdmin) => {
   const result = await processAPI(obj);
   return result;
 };
+
+export const deleteReviewAPI = async (data) => {
+  const obj = {
+    method: "delete",
+    url: urlReview + "/admin",
+    data,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: getSessionStorage("accessJWT"),
+    },
+  };
+  const result = await processAPI(obj);
+  return result;
+};
+export const updateApprovedReviewAPI = async (data) => {
+  const obj = {
+    method: "patch",
+    url: urlReview + "/admin",
+    data,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: getSessionStorage("accessJWT"),
+    },
+  };
+  const result = await processAPI(obj);
+  return result;
+};

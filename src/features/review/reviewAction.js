@@ -1,6 +1,11 @@
 import { toast } from "react-toastify";
 import { getAllBorrowsAction } from "../borrow/borrowAction";
-import { getAllReviewAPI, insertReviewAPI } from "./reviewAPI";
+import {
+  deleteReviewAPI,
+  getAllReviewAPI,
+  insertReviewAPI,
+  updateApprovedReviewAPI,
+} from "./reviewAPI";
 import { setAllReview } from "./reviewSlice";
 
 export const insertReviewAction = (data, role) => async (dis) => {
@@ -16,4 +21,18 @@ export const getAllReviewAction = (isAdmin) => async (dis) => {
   toast.promise(pending, { pending: "Please wait..." });
   const { status, payload } = await pending;
   status === "success" && dis(setAllReview(payload));
+};
+
+export const deleteReviewAction = async (data) => {
+  const pending = deleteReviewAPI(data);
+  toast.promise(pending, { pending: "Please wait..." });
+  const result = await pending;
+  return result;
+};
+
+export const updateApproveReviewAction = async (data) => {
+  const pending = updateApprovedReviewAPI(data);
+  toast.promise(pending, { pending: "Please wait..." });
+  const result = await pending;
+  return result;
 };
