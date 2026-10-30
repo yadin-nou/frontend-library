@@ -119,7 +119,8 @@ const BookLandingPage = () => {
                 <Card.Text>by {author}</Card.Text>
                 <Card.Text>
                   {" "}
-                  {renderStars(averageRating)} {averageRating} <br />
+                  {renderStars(averageRating)} {showReview.length} review(s){" "}
+                  <br />
                   <Badge bg={availability ? "success" : "danger"} pill>
                     {availability ? "Available" : "Borrowed"}
                   </Badge>
