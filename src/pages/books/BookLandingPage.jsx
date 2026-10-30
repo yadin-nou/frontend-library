@@ -28,13 +28,14 @@ const BookLandingPage = () => {
   const bookDetail = useSelector((state) =>
     state.bookInfo.bookCollection.find((bid) => bid._id === id),
   );
-
+  const review = useSelector((state) => state.reviewInfo.reviews);
   const relatedBook = useSelector((state) =>
     state.bookInfo.bookCollection.slice(5, 10),
   );
-
+  const showReview = review.filter((rev) => rev.bookId._id === id);
   const carts = useSelector((state) => state.cartInfo.cart);
 
+  console.log(showReview.length, "Book Id");
   //const [bookDetail, setBookDetail] = useState(null);
   // const getBookDetails = async () => {
   //   const pendingResp = getAllBooksAction({ _id: id });
@@ -57,7 +58,8 @@ const BookLandingPage = () => {
     setPreLocate(from);
   }, [id]);
 
-  if (!bookDetail) return <p>Loading...</p>;
+  if (!bookDetail)
+    return <p className="d-flex justify-content-center">Loading...</p>;
 
   const {
     title,
@@ -157,9 +159,9 @@ const BookLandingPage = () => {
                     Borrow Now
                   </Button>
                   {"  "}
-                  <Button variant="light">
+                  {/* <Button variant="light">
                     <MdFavoriteBorder /> Save
-                  </Button>
+                  </Button> */}
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -221,17 +223,26 @@ const BookLandingPage = () => {
                 </Row>
               </Tab>
               <Tab eventKey="review" title="Review">
-                <Alert variant="light" className="border-start border-4">
-                  <div className="d-flex justify-content-between mb-1">
-                    <strong>Sarah M.</strong>
-                    <small className="text-muted">2 days ago</small>
-                  </div>
-                  <p className="mb-0 small">
-                    A timeless classic — perfect introduction to Middle-earth
-                    before tackling the trilogy.
-                  </p>
-                </Alert>
-                <Alert variant="light" className="border-start border-4">
+                {showReview.map((reviewCM) => (
+                  <Alert variant="light" className="border-start border-4">
+                    <div className="d-flex justify-content-between mb-1">
+                      <strong>{reviewCM.userId.fName}</strong>
+                      <small className="text-muted">
+                        {new Date(reviewCM.createdAt).toLocaleDateString(
+                          "en-au",
+                        )}
+                      </small>
+                    </div>
+                    <p className="mb-0 small">{reviewCM.reviewMessage}</p>
+                    <p className="mb-0 small">{renderStars(reviewCM.rating)}</p>
+                  </Alert>
+                ))}
+                {showReview.length === 0 && (
+                  <Alert variant="light" className="border-start border-4">
+                    No Review Yet
+                  </Alert>
+                )}
+                {/* <Alert variant="light" className="border-start border-4">
                   <div className="d-flex justify-content-between mb-1">
                     <strong>James T.</strong>
                     <small className="text-muted">1 week ago</small>
@@ -240,7 +251,7 @@ const BookLandingPage = () => {
                     Great condition copy, arrived fast. Highly recommend for a
                     cozy weekend read.
                   </p>
-                </Alert>
+                </Alert> */}
               </Tab>
             </Tabs>
           </Col>
