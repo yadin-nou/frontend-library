@@ -1,18 +1,21 @@
 import processAPI from "../../axiosHelp/axiosConnected.js";
+import { getSessionStorage } from "../../localStorage/storage.js";
 
 // const adminRoute = "/api/v1/admin";
 const bookRoute = "/api/v1/book";
 const urlBook = import.meta.env.VITE_SERVER_URL + bookRoute;
 
+const accessJWT = getSessionStorage("accessJWT");
 //adming API
 export const addBook = async (data) => {
-  //console.log(data, "API");
+  console.log(data, "API");
   const book = {
     method: "post",
     url: urlBook + "/addbook",
     data,
     headers: {
       "Content-Type": "application/json",
+      authorization: accessJWT,
     },
   };
   const result = await processAPI(book);
@@ -24,6 +27,10 @@ export const getAllBooks = async (filter = {}) => {
   const book = {
     method: "get",
     url: urlBook + "/book",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: accessJWT,
+    },
     params: filter,
   };
   return processAPI(book);
@@ -33,6 +40,10 @@ export const deleteBook = async (data) => {
     method: "delete",
     url: urlBook + "/",
     data,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: accessJWT,
+    },
   };
   const result = await processAPI(book);
   return result;
@@ -43,6 +54,10 @@ export const updateBook = async (data) => {
     method: "patch",
     url: urlBook + "/",
     data,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: accessJWT,
+    },
   };
   const result = await processAPI(book);
   return result;
