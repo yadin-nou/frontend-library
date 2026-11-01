@@ -35,7 +35,7 @@ const BookLandingPage = () => {
   const showReview = review.filter((rev) => rev.bookId._id === id);
   const carts = useSelector((state) => state.cartInfo.cart);
 
-  console.log(showReview.length, "Book Id");
+  //  console.log(showReview.length, "Book Id");
   //const [bookDetail, setBookDetail] = useState(null);
   // const getBookDetails = async () => {
   //   const pendingResp = getAllBooksAction({ _id: id });

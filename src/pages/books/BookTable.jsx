@@ -41,13 +41,24 @@ const BookTable = ({
         </thead>
         <tbody>
           {searchBook.map((book, key) => (
-            <tr key={book._id} onClick={() => handleBookLandingPage(book._id)}>
+            <tr key={book._id}>
               <td className="d-none d-md-table-cell">{key + 1}</td>
-              <td className="text-secondary cursor-pointer">{book.title}</td>
-              <td className="d-none d-md-table-cell text-secondary cursor-pointer">
+              <td
+                className="text-secondary cursor-pointer"
+                onClick={() => handleBookLandingPage(book._id)}
+              >
+                {book.title}
+              </td>
+              <td
+                className="d-none d-md-table-cell text-secondary cursor-pointer"
+                onClick={() => handleBookLandingPage(book._id)}
+              >
                 {book.author}
               </td>
-              <td className="d-none d-lg-table-cell text-secondary cursor-pointer">
+              <td
+                className="d-none d-lg-table-cell text-secondary cursor-pointer"
+                onClick={() => handleBookLandingPage(book._id)}
+              >
                 <img src={book.imgURL} width={50} height={55} />
               </td>
               <td className="d-none d-lg-table-cell text-secondary cursor-pointer">
