@@ -60,14 +60,14 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
       name: "author",
       value: formData.author,
     },
-    {
-      type: "text",
-      label: "Image URL",
-      required: true,
-      placeholder: "Image URL",
-      name: "imgURL",
-      value: formData.imgURL,
-    },
+    // {
+    //   type: "text",
+    //   label: "Image URL",
+    //   required: true,
+    //   placeholder: "Image URL",
+    //   name: "imgURL",
+    //   value: formData.imgURL,
+    // },
     {
       type: "text",
       label: "ISBN",
@@ -92,13 +92,32 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
       name: "description",
       value: formData.description,
     },
+    {
+      type: "file",
+      label: "Upload Image",
+      required: true,
+      name: "image",
+    },
   ];
   const handleSaveBook = async (e) => {
     e.preventDefault();
+    // console.log(e.target.image.files[0]);
+    //  console.log(formData);
+    const { image, ...data } = formData; //copy from formData except image
+    //console.log(data);
+    const form = new FormData();
+    for (const key in data) {
+      form.append(key, data[key]);
+    }
+    const imgs = e.target.image.files[0];
+    form.append("image", imgs);
+    // console.log(form);
+    // console.log(form);
+    //return;
     try {
       setSpinner(true);
-      const toJson = JSON.stringify(formData);
-      const pendingResp = addBookAction(toJson);
+      //  const toJson = JSON.stringify(form);
+      const pendingResp = addBookAction(form);
       //promise is the behavior of pending
       toast.promise(pendingResp, { pending: "Please wait...." });
       const result = await pendingResp;

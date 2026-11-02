@@ -14,7 +14,7 @@ export const addBook = async (data) => {
     url: urlBook + "/addbook",
     data,
     headers: {
-      "Content-Type": "application/json",
+      // "Content-Type": "application/json",
       authorization: accessJWT,
     },
   };
