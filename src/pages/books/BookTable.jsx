@@ -11,7 +11,7 @@ const BookTable = ({
   handelGetAllBook,
 }) => {
   const navi = useNavigate();
-
+  const imgPath = import.meta.env.VITE_SERVER_URL;
   const handleBookLandingPage = (bookId) => {
     const linkDetaail = "/books/details/" + bookId;
     navi(linkDetaail, { state: { from: "/user/books" } });
@@ -59,7 +59,11 @@ const BookTable = ({
                 className="d-none d-lg-table-cell text-secondary cursor-pointer"
                 onClick={() => handleBookLandingPage(book._id)}
               >
-                <img src={book.imgURL} width={50} height={55} />
+                <img
+                  src={imgPath + "/images/" + book.imgURL.split("/")[2]}
+                  width={50}
+                  height={55}
+                />
               </td>
               <td className="d-none d-lg-table-cell text-secondary cursor-pointer">
                 {book.isbn}

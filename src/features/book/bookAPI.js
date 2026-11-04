@@ -8,7 +8,6 @@ const urlBook = import.meta.env.VITE_SERVER_URL + bookRoute;
 const accessJWT = getSessionStorage("accessJWT");
 //adming API
 export const addBook = async (data) => {
-  console.log(data, "API");
   const book = {
     method: "post",
     url: urlBook + "/addbook",
