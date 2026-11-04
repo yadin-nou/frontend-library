@@ -26,6 +26,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const imgPath = import.meta.env.VITE_SERVER_URL;
   const book = useSelector((state) =>
     state.bookInfo.bookCollection.find((b) => b._id === id),
   );
@@ -97,6 +98,8 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
       label: "Upload Image",
       required: true,
       name: "image",
+      multiple: true,
+      accept: "image/*",
     },
   ];
   const handleSaveBook = async (e) => {
@@ -182,6 +185,16 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
             {fromTPL.map((frm) => (
               <FormTemplate key={frm.name} {...frm} onChange={handleOnChange} />
             ))}
+            {edit && (
+              <div>
+                <h4> Upload more images (Max 2) </h4>
+                <img
+                  src={imgPath + "/images/" + book.imgURL.split("/")[2]}
+                  width={50}
+                  height={55}
+                />
+              </div>
+            )}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={handleClose}>
