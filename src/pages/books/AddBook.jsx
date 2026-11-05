@@ -96,9 +96,9 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
     {
       type: "file",
       label: "Upload Image",
-      required: true,
+      required: edit ? false : true,
       name: "image",
-      multiple: true,
+      multiple: edit ? true : false,
       accept: "image/*",
     },
   ];
@@ -114,8 +114,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
     }
     const imgs = e.target.image.files[0];
     form.append("image", imgs);
-    // console.log(form);
-    // console.log(form);
+
     //return;
     try {
       setSpinner(true);
@@ -141,8 +140,23 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
   const handleUpdateBook = async (e) => {
     e.preventDefault();
     try {
-      setSpinner(true);
-      const pendingResp = updateBookAction(formData);
+      const imgSize = e.target.image.files.length;
+      if (imgSize > 2) {
+        alert("Two images are allowed to upload!");
+        return;
+      }
+      const { image, ...data } = formData;
+      const form = new FormData();
+      for (const key in data) {
+        form.append(key, data[key]);
+      }
+      form.append("image", e.target.image.files[0]);
+
+      //setSpinner(true);
+      // const pendingResp = updateBookAction(formData);
+      console.log([...form.entries()]);
+      return;
+      const pendingResp = updateBookAction(form);
       //promise is the behavior of pending
       toast.promise(pendingResp, { pending: "Please wait...." });
       const result = await pendingResp;
