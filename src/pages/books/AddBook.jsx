@@ -150,12 +150,12 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
       for (const key in data) {
         form.append(key, data[key]);
       }
-      form.append("image", e.target.image.files[0]);
+      Array.from(e.target.image.files).forEach((f) => form.append("image", f));
 
-      //setSpinner(true);
+      setSpinner(true);
       // const pendingResp = updateBookAction(formData);
-      console.log([...form.entries()]);
-      return;
+      // console.log([...form.entries()]);
+      // return;
       const pendingResp = updateBookAction(form);
       //promise is the behavior of pending
       toast.promise(pendingResp, { pending: "Please wait...." });

@@ -54,7 +54,7 @@ export const updateBook = async (data) => {
     url: urlBook + "/",
     data,
     headers: {
-      "Content-Type": "application/json",
+      //"Content-Type": "application/json",
       authorization: accessJWT,
     },
   };
