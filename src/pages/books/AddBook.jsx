@@ -200,13 +200,18 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
               <FormTemplate key={frm.name} {...frm} onChange={handleOnChange} />
             ))}
             {edit && (
-              <div>
+              <div className="d-flex flex-column">
                 <h4> Upload more images (Max 2) </h4>
-                <img
-                  src={imgPath + "/images/" + book.imgURL.split("/")[2]}
-                  width={50}
-                  height={55}
-                />
+                <span className="d-flex gap-2">
+                  {book.imageList.map((im) => (
+                    <img
+                      key={im}
+                      src={imgPath + "/images/" + im.split("/")[2]}
+                      width={50}
+                      height={55}
+                    />
+                  ))}
+                </span>
               </div>
             )}
           </Modal.Body>
