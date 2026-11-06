@@ -203,7 +203,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
               <div className="d-flex flex-column">
                 <h4> Upload more images (Max 2) </h4>
                 <span className="d-flex gap-2">
-                  {book.imageList.map((im) => (
+                  {book?.imageList?.map((im) => (
                     <img
                       key={im}
                       src={imgPath + "/images/" + im.split("/")[2]}

@@ -17,6 +17,7 @@ export const addBook = async (data) => {
       authorization: accessJWT,
     },
   };
+  console.log(accessJWT, "fron");
   const result = await processAPI(book);
   return result;
 };
