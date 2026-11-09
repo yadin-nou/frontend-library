@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import FormTemplate from "../../components/FormTemplate";
 import useFormHook from "../../hooks/useFormHook";
+import { CiCircleRemove } from "react-icons/ci";
 // import {
 //   addBook,
 //   getAllBooks,
@@ -26,6 +27,9 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [imgSel, setImgSel] = useState(null);
+  const [imgURLSel, setImgURLSel] = useState(null);
+  const [imgDel, setImgDel] = useState(false);
   const imgPath = import.meta.env.VITE_SERVER_URL;
   const book = useSelector((state) =>
     state.bookInfo.bookCollection.find((b) => b._id === id),
@@ -156,11 +160,16 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
       // const pendingResp = updateBookAction(formData);
       // console.log([...form.entries()]);
       // return;
+      imgURLSel !== null && form.set("imgURL", imgURLSel);
+      //console.log(data);
+      // console.log([...form.entries()]);
+      //return;
       const pendingResp = updateBookAction(form);
       //promise is the behavior of pending
       toast.promise(pendingResp, { pending: "Please wait...." });
       const result = await pendingResp;
       if (result?.status === "success") {
+        //  console.log(result);
         toast.success(result?.message);
         setShow(false);
         handelGetAllBook();
@@ -172,6 +181,17 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
     } catch (error) {
       console.log(error.message);
       setSpinner(false);
+    }
+  };
+  const handleImgSelect = (imPath, k) => {
+    if (imgSel === k) {
+      // same selection again: deselect
+      setImgSel(null);
+      setImgDel(false);
+    } else {
+      // a different selection: select it and show the delete icon
+      setImgSel(k);
+      setImgDel(true);
     }
   };
   return (
@@ -202,16 +222,42 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
             {edit && (
               <div className="d-flex flex-column">
                 <h4> Upload more images (Max 2) </h4>
-                <span className="d-flex gap-2">
-                  {book?.imageList?.map((im) => (
-                    <img
+                <div className="d-flex gap-2">
+                  {book?.imageList?.map((im, k) => (
+                    <span
                       key={im}
-                      src={imgPath + "/images/" + im.split("/")[2]}
-                      width={50}
-                      height={55}
-                    />
+                      style={{ position: "relative", display: "inline-block" }}
+                    >
+                      {imgDel && imgSel === k && (
+                        <CiCircleRemove
+                          style={{
+                            position: "absolute",
+                            top: -6,
+                            right: -6,
+                            color: "red",
+                            background: "white",
+                            borderRadius: "50%",
+                            fontSize: 18,
+                            cursor: "pointer",
+                            zIndex: 1,
+                          }}
+                        />
+                      )}
+
+                      <img
+                        src={imgPath + "/images/" + im.split("/")[2]}
+                        width={50}
+                        height={55}
+                        onClick={
+                          im === book.imgURL
+                            ? undefined
+                            : () => handleImgSelect(im, k)
+                        }
+                        className={`${imgSel === k ? "setBgImg" : ""} ${im === book.imgURL ? "no-cursor" : "cursor-pointer"}`}
+                      />
+                    </span>
                   ))}
-                </span>
+                </div>
               </div>
             )}
           </Modal.Body>

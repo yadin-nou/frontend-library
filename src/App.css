@@ -230,3 +230,11 @@ button {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.setBgImg {
+  border: 5px solid blue !important;
+}
+.no-cursor {
+  pointer-events: "none";
+  opacity: 0.5;
+}
