@@ -48,6 +48,20 @@ export const deleteBook = async (data) => {
   const result = await processAPI(book);
   return result;
 };
+
+export const bookImgDeleteAPI = async (data) => {
+  const book = {
+    method: "patch",
+    url: urlBook + "/delImgs",
+    data,
+    headers: {
+      "Content-Type": "application/json",
+      authorization: accessJWT,
+    },
+  };
+  const result = await processAPI(book);
+  return result;
+};
 export const updateBook = async (data) => {
   //console.log(data);
   const book = {

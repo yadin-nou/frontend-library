@@ -16,6 +16,7 @@ import { PencilFill } from "react-bootstrap-icons";
 import { useEffect } from "react";
 import {
   addBookAction,
+  bookImgDeleteAction,
   getAllBooksAction,
   updateBookAction,
 } from "../../features/book/bookAction";
@@ -29,6 +30,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
   const handleShow = () => setShow(true);
   const [imgSel, setImgSel] = useState(null);
   const [imgURLSel, setImgURLSel] = useState(null);
+  const [imgDelPat, setImgDelPat] = useState(null);
   const [imgDel, setImgDel] = useState(false);
   const imgPath = import.meta.env.VITE_SERVER_URL;
   const book = useSelector((state) =>
@@ -183,7 +185,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
       setSpinner(false);
     }
   };
-  const handleImgSelect = (imPath, k) => {
+  const handleImgSelect = (pat, k) => {
     if (imgSel === k) {
       // same selection again: deselect
       setImgSel(null);
@@ -192,6 +194,19 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
       // a different selection: select it and show the delete icon
       setImgSel(k);
       setImgDel(true);
+      setImgDelPat(pat);
+      setImgURLSel(pat);
+    }
+  };
+  const handleDeleleImgs = async () => {
+    const data = { _id: book._id, path: imgDelPat, imageList: book.imageList };
+    const { status, message } = await bookImgDeleteAction(data);
+    if (status === "success") {
+      toast.success(message);
+      // handleEdit();
+      handelGetAllBook();
+    } else {
+      toast.error(message);
     }
   };
   return (
@@ -241,6 +256,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
                             cursor: "pointer",
                             zIndex: 1,
                           }}
+                          onClick={handleDeleleImgs}
                         />
                       )}
 
