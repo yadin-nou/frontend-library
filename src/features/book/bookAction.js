@@ -25,7 +25,7 @@ export const deleteBookAction = async (data) => {
 };
 
 export const bookImgDeleteAction = async (data) => {
-  console.log(data);
+  //console.log(data);
   const result = await bookImgDeleteAPI(data);
   return result;
 };
