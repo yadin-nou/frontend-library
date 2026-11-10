@@ -11,14 +11,11 @@ const bookSlice = createSlice({
     setBookCollection: (state, action) => {
       state.bookCollection = action.payload;
     },
-    // setCart: (state, action) => {
-    //   state.cart = [...state.cart, action.payload];
-    // },
-    // removeCart: (state, action) => {
-    //   state.cart = state.cart.filter((item) => item._id !== action.payload);
-    // },
+    setBookEmpty: (state, action) => {
+      state.bookCollection = [];
+    },
   },
 });
 const { reducer, actions } = bookSlice;
-export const { setBookCollection } = actions;
+export const { setBookCollection, setBookEmpty } = actions;
 export default reducer;

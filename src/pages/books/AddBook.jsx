@@ -20,7 +20,8 @@ import {
   getAllBooksAction,
   updateBookAction,
 } from "../../features/book/bookAction";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setBookEmpty } from "../../features/book/bookSlice";
 
 const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
   const { formData, setFormData, handleOnChange } = useFormHook([]);
@@ -33,6 +34,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
   const [imgDelPat, setImgDelPat] = useState(null);
   const [imgDel, setImgDel] = useState(false);
   const imgPath = import.meta.env.VITE_SERVER_URL;
+  const dispatch = useDispatch();
   const book = useSelector((state) =>
     state.bookInfo.bookCollection.find((b) => b._id === id),
   );
@@ -40,6 +42,10 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
     setShow(true);
     //getBookID();
     setFormData(book);
+    setImgSel(null);
+    setImgDel(false);
+    setImgURLSel(null);
+    setImgDelPat(null);
   };
   const { spinner, setSpinner } = useSpinner(false);
   //const book_id = { _id: id };
@@ -164,7 +170,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
       // return;
       imgURLSel !== null && form.set("imgURL", imgURLSel);
       //console.log(data);
-      // console.log([...form.entries()]);
+      console.log([...form.entries()]);
       //return;
       const pendingResp = updateBookAction(form);
       //promise is the behavior of pending
@@ -199,16 +205,33 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
     }
   };
   const handleDeleleImgs = async () => {
-    const data = { _id: book._id, path: imgDelPat, imageList: book.imageList };
-    const { status, message } = await bookImgDeleteAction(data);
-    if (status === "success") {
-      toast.success(message);
-      // handleEdit();
-      handelGetAllBook();
-    } else {
-      toast.error(message);
+    const conf = confirm("Are you sure want to delete this image?");
+    if (conf) {
+      const data = {
+        _id: book._id,
+        path: imgDelPat,
+        imageList: book.imageList,
+      };
+      const { status, message } = await bookImgDeleteAction(data);
+      if (status === "success") {
+        toast.success(message);
+        // handleEdit();
+        setImgSel(null);
+        setImgDel(false);
+        setImgURLSel(null);
+        setImgDelPat(null);
+        dispatch(setBookEmpty());
+        //dispatch(getAllBooksAction());
+        handelGetAllBook();
+        // handleEdit();
+        setShow(true);
+        setEdit(true);
+      } else {
+        toast.error(message);
+      }
     }
   };
+
   return (
     <>
       {!edit ? (
