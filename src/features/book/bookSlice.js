@@ -17,6 +17,7 @@ const bookSlice = createSlice({
     updateBookInCollection: (state, action) => {
       const { _id, changes } = action.payload;
       const index = state.bookCollection.findIndex((b) => b._id === _id);
+
       if (index !== -1) {
         state.bookCollection[index] = {
           ...state.bookCollection[index],

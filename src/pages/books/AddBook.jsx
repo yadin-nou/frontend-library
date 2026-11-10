@@ -37,7 +37,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
   const [imgURLSel, setImgURLSel] = useState(null);
   const [imgDelPat, setImgDelPat] = useState(null);
   const [imgDel, setImgDel] = useState(false);
-  const [reopenEdit, setReopenEdit] = useState(false);
+  const [isDel, setIsDel] = useState(false);
   const imgPath = import.meta.env.VITE_SERVER_URL;
   const dispatch = useDispatch();
   const book = useSelector((state) =>
@@ -163,6 +163,12 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
         return;
       }
       const { image, ...data } = formData;
+      data.imageList = data.imageList.filter((m) => {
+        return isDel ? m !== imgDelPat : m;
+      }); //remove path delete from imageList
+      setIsDel(false);
+      setImgDelPat(null);
+      //setImgDelPat(null);
       const form = new FormData();
       for (const key in data) {
         form.append(key, data[key]);
@@ -174,8 +180,9 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
       // console.log([...form.entries()]);
       // return;
       imgURLSel !== null && form.set("imgURL", imgURLSel);
+
       //console.log(data);
-      console.log([...form.entries()]);
+      // console.log([...form.entries()]);
       //return;
       const pendingResp = updateBookAction(form);
       //promise is the behavior of pending
@@ -224,28 +231,15 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
         setImgDel(false);
         setImgURLSel(null);
 
-        dispatch(setBookEmpty());
-        // const newList = book.imageList.filter((p) => p !== imgDelPat);
-        // dispatch(
-        //   updateBookInCollection({
-        //     _id: book._id,
-        //     changes: { imageList: newList },
-        //   }),
-        // );
         dispatch(getAllBooksAction());
-        setReopenEdit(true);
-        setImgDelPat(null);
+        setFormData(book);
+        setIsDel(true);
       } else {
         toast.error(message);
       }
     }
   };
-  useEffect(() => {
-    if (reopenEdit) {
-      handleEdit();
-    }
-    setReopenEdit(false);
-  }, []);
+
   return (
     <>
       {!edit ? (
