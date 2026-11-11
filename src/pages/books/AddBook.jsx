@@ -165,7 +165,7 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
       const { image, ...data } = formData;
       data.imageList = data.imageList.filter((m) => {
         return isDel ? m !== imgDelPat : m;
-      }); //remove path delete from imageList
+      }); //remove path delete from imageList before update to database
       setIsDel(false);
       setImgDelPat(null);
       //setImgDelPat(null);

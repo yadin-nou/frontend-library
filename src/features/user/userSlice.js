@@ -3,6 +3,7 @@ import { create } from "axios";
 
 const initialState = {
   user: {},
+  allUsers: [],
 };
 const userSlice = createSlice({
   name: "user",
@@ -11,8 +12,11 @@ const userSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    setAllUsers: (state, action) => {
+      state.allUsers = action.payload;
+    },
   },
 });
 const { reducer, actions } = userSlice;
-export const { setUser } = actions;
+export const { setUser, setAllUsers } = actions;
 export default reducer;
