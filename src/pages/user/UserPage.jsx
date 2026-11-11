@@ -16,13 +16,21 @@ const UserPage = () => {
   const handleDeleteUser = async (_id) => {
     // call your delete API, then refresh or update the list
   };
-
+  const handleEdit = () => {
+    alert("This function not working yet?");
+  };
   return (
     <div>
       <div className="d-flex  flex-column gap-2">
         <div className="d-flex justify-content-between">
           <h4>All Users</h4>
-          <Button style={{ width: "150px" }}>+ Add users</Button>
+          <Button
+            variant="success"
+            style={{ width: "150px" }}
+            onClick={handleEdit}
+          >
+            + Add users
+          </Button>
         </div>
 
         <UsersTable users={allUsers} onDelete={handleDeleteUser} />

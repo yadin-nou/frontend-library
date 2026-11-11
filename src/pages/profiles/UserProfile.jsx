@@ -1,4 +1,4 @@
-import { Card, Row, Col, Image } from "react-bootstrap";
+import { Card, Row, Col, Image, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const formatDate = (date) =>
@@ -11,10 +11,11 @@ const formatDate = (date) =>
     : "-";
 
 const Field = ({ label, children }) => (
-  <div className="d-flex flex-column flex-sm-row py-2 border-bottom">
-    <div className="text-muted fw-semibold" style={{ minWidth: 140 }}>
+  <div className="d-flex flex-column flex-sm-row py-2 border-bottom pb-4">
+    <div className="text-muted fw-semibold" style={{ minWidth: 440 }}>
       {label}
     </div>
+
     <div className="flex-grow-1 text-break">{children}</div>
   </div>
 );
@@ -23,11 +24,13 @@ const UserProfile = ({ user, changePasswordPath = "/forget-password" }) => {
   if (!user) return null;
 
   const initials = `${user.fName?.[0] || ""}${user.lName?.[0] || ""}`;
-
+  const handleEdit = () => {
+    alert("This function not working yet?");
+  };
   return (
     <Card className="mx-auto" style={{ maxWidth: 800 }}>
       <Card.Body>
-        <div className="d-flex align-items-center gap-3 mb-3">
+        <div className="d-flex  align-items-center gap-3 mb-3">
           <img
             class="avatar"
             src="https://via.placeholder.com/90"
@@ -51,6 +54,11 @@ const UserProfile = ({ user, changePasswordPath = "/forget-password" }) => {
           <Link to={changePasswordPath}>Change</Link>
         </Field>
       </Card.Body>
+      <div className="p-3">
+        <Button variant="success" onClick={handleEdit}>
+          Edit
+        </Button>
+      </div>
     </Card>
   );
 };
