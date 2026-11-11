@@ -87,6 +87,8 @@ const Reviewspage = () => {
                   />
                 </td>
                 <td className="text-start">
+                  User: {rew.userId.fName} ({rew.userId.role})
+                  <br />
                   Status:{" "}
                   {rew.isApproved ? (
                     <span style={{ color: "green" }}>Approved</span>
