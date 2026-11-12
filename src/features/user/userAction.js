@@ -7,7 +7,7 @@ import {
 } from "../../localStorage/storage.js";
 import { getNewAccessJWTAPI } from "../../service/authAPI.js";
 import { getAllUserApi, getUserApi } from "./userAPI.js";
-import { setAllUsers, setUser } from "./userSlice.js";
+import { setUser } from "./userSlice.js";
 
 export const getUserAction = () => async (dis) => {
   const user = await getUserApi();
@@ -24,7 +24,6 @@ export const getAllUserAction = () => async (dis) => {
   const user = await getAllUserApi();
   user?.status === "success" && dis(setAllUsers(user.payload));
   if (user?.status === "error" && user.message.includes("jwt expired")) {
-    //  console.log(user, "jwt eeex");
     removeSessionStorage("accessJWT");
     dis(autoLoginUser());
   }

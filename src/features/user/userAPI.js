@@ -3,7 +3,7 @@ import { getSessionStorage } from "../../localStorage/storage.js";
 
 const userRouteLink = "/api/v1/users";
 const urlUser = import.meta.env.VITE_SERVER_URL + userRouteLink;
-const accessJWT = getSessionStorage("accessJWT");
+//const accessJWT = getSessionStorage("accessJWT");
 
 export const getUserApi = async () => {
   const user = {
@@ -12,7 +12,7 @@ export const getUserApi = async () => {
     data: {},
     headers: {
       "Content-Type": "application/json",
-      authorization: accessJWT,
+      authorization: getSessionStorage("accessJWT"),
     },
   };
   const result = await processAPI(user);
@@ -26,7 +26,7 @@ export const getAllUserApi = async () => {
     data: {},
     headers: {
       "Content-Type": "application/json",
-      authorization: accessJWT,
+      authorization: getSessionStorage("accessJWT"),
     },
   };
   const result = await processAPI(user);
