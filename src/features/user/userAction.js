@@ -7,7 +7,7 @@ import {
 } from "../../localStorage/storage.js";
 import { getNewAccessJWTAPI } from "../../service/authAPI.js";
 import { getAllUserApi, getUserApi } from "./userAPI.js";
-import { setUser } from "./userSlice.js";
+import { setAllUsers, setUser } from "./userSlice.js";
 
 export const getUserAction = () => async (dis) => {
   const user = await getUserApi();
