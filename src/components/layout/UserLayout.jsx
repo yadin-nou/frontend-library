@@ -25,7 +25,7 @@ export const UserLayout = () => {
             </aside>
           </Col>
 
-          <Col
+          {/* <Col
             className="d-flex justify-content-center pt-1"
             style={{ minWidth: 0 }}
           >
@@ -34,6 +34,19 @@ export const UserLayout = () => {
               style={{ overflow: "auto", minWidth: 0 }}
             >
               <Outlet />
+            </main>
+          </Col> */}
+          <Col className="pt-1" style={{ minWidth: 0 }}>
+            <main
+              className="main ps-2 ps-md-5 w-100 d-flex"
+              style={{ overflowX: "auto", minWidth: 0 }}
+            >
+              <div
+                className="mx-auto"
+                style={{ minWidth: 0, maxWidth: "100%" }}
+              >
+                <Outlet />
+              </div>
             </main>
           </Col>
         </Row>

@@ -18,13 +18,13 @@ const UsersTable = ({ users = [], onDelete }) => {
   };
 
   return (
-    <div>
+    <div className="border rounded-3 overflow-hidden">
       <Table
         striped
         bordered
         hover
         responsive
-        className="mb-0 align-middle text-center table-spaced"
+        className="mb-0 align-middle fs-6 text-center"
         style={{ minWidth: "450px" }}
       >
         <thead>
@@ -34,7 +34,7 @@ const UsersTable = ({ users = [], onDelete }) => {
             <th>Email</th>
             <th>Role</th>
             <th>Status</th>
-            <th>Date joined</th>
+            <th>Joined</th>
             <th className="text-center">Action</th>
           </tr>
         </thead>

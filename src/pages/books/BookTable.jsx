@@ -30,8 +30,8 @@ const BookTable = ({
           <tr>
             <th className="d-none d-md-table-cell">#</th>
             <th>Title</th>
-            <th className="d-none d-md-table-cell">Author</th>
-            <th className="d-none d-lg-table-cell">Img</th>
+            <th>Author</th>
+            <th>Img</th>
             <th className="d-none d-lg-table-cell">ISBN</th>
             <th className="d-none d-md-table-cell">Genre</th>
             <th>Status</th>
@@ -44,21 +44,18 @@ const BookTable = ({
             <tr key={book._id}>
               <td className="d-none d-md-table-cell">{key + 1}</td>
               <td
-                className="text-secondary cursor-pointer"
+                className="cursor-pointer"
                 onClick={() => handleBookLandingPage(book._id)}
               >
                 {book.title}
               </td>
               <td
-                className="d-none d-md-table-cell text-secondary cursor-pointer"
+                className=" cursor-pointer"
                 onClick={() => handleBookLandingPage(book._id)}
               >
                 {book.author}
               </td>
-              <td
-                className="d-none d-lg-table-cell text-secondary cursor-pointer"
-                onClick={() => handleBookLandingPage(book._id)}
-              >
+              <td onClick={() => handleBookLandingPage(book._id)}>
                 <img
                   src={imgPath + "/images/" + book.imgURL.split("/")[2]}
                   width={50}
