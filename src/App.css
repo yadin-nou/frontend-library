@@ -1,16 +1,21 @@
 .sidebar-link {
-  color: #333 !important;
+  height: 56px;
+  width: 80px;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 500;
   padding: 0.6rem 1rem;
+  color: #333 !important;
+  border-right: 1px solid #dee2e6;
   transition:
     background-color 0.15s ease,
     color 0.15s ease;
 }
 
 .sidebar-link:hover {
-  background-color: #e9ecef;
-  color: green !important;
+  background-color: rgba(13, 110, 253, 0.1);
 }
 
 .sidebar-link.active {

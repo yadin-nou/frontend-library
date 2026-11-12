@@ -15,19 +15,22 @@ export const UserLayout = () => {
           </Col>
         </Row>
 
-        <Row style={{ height: "auto" }} className="border rounded-4 shadow">
-          <Col sm={1}>
-            <aside>
+        <Row
+          style={{ height: "auto" }}
+          className="border rounded-4 shadow flex-nowrap"
+        >
+          <Col xs="auto" className="px-0" style={{ width: 64 }}>
+            <aside className="sidebar-narrow">
               <PageNav />
             </aside>
           </Col>
+
           <Col
-            sm={11}
             className="d-flex justify-content-center pt-1"
             style={{ minWidth: 0 }}
           >
             <main
-              className="main ps-5 w-100 d-flex justify-content-center "
+              className="main ps-2 ps-md-5 w-100 d-flex justify-content-center"
               style={{ overflow: "auto", minWidth: 0 }}
             >
               <Outlet />

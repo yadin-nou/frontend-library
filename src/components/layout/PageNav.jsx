@@ -12,18 +12,22 @@ import {
 } from "react-bootstrap-icons";
 import { TbBookUpload } from "react-icons/tb";
 import { useSelector } from "react-redux";
+import LeftNavBar from "./LeftNavBar";
 const PageNav = () => {
   const { user } = useSelector((state) => state.userInfo);
   return (
     <>
-      <Nav className="flex-column p-3" variant="pills">
+      {/* {["start"].map((placement, idx) => (
+        <LeftNavBar key={idx} placement={placement} name={placement} />
+      ))} */}
+      <Nav className="flex-column" variant="pills">
         <Nav.Link
           as={NavLink}
           to=""
           end
           className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
         >
-          <Speedometer2 className="me-2" size={25} />
+          <Speedometer2 className="me-2" size={40} />
         </Nav.Link>
 
         {user?.role === "admin" && (
