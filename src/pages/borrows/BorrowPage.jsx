@@ -18,13 +18,15 @@ function BorrowPage() {
   const path = location.pathname.split("/").at(-1);
   const { allBorrows, myBorrows } = useSelector((state) => state.borrowInfo);
   const borrows =
-    user.role === "admin" && path === "allborrows" ? allBorrows : myBorrows;
+    user?.role === "admin" && path === "allborrows" ? allBorrows : myBorrows;
   const role =
-    user.role === "admin" && path === "allborrows" ? "admin" : "user";
+    user?.role === "admin" && path === "allborrows" ? "admin" : "user";
   const isAdmin = role === "admin";
   // console.log(role);
   useEffect(() => {
     dispatch(getAllBorrowsAction(role));
+    // console.log(allBorrows, " all Borrow ");
+    //console.log(borrows, " borrows");
   }, [dispatch, role]);
 
   const navi = useNavigate();
@@ -57,6 +59,7 @@ function BorrowPage() {
           <tr>
             <th className="d-none d-md-table-cell">#</th>
             <th>Thumbnail</th>
+            {isAdmin && <th>Users</th>}
             <th>Book Title</th>
             {isAdmin && <th>Status</th>}
 
@@ -66,7 +69,7 @@ function BorrowPage() {
           </tr>
         </thead>
         <tbody>
-          {borrows.length > 0 ? (
+          {borrows?.length > 0 ? (
             borrows.map((book, k) => (
               <tr key={k + 1}>
                 <td className="d-none d-md-table-cell">{k + 1}</td>
@@ -77,6 +80,11 @@ function BorrowPage() {
                     style={{ width: 50 }}
                   />
                 </td>
+                {isAdmin && (
+                  <td>
+                    {book.userId.fName} {book.userId.lName}
+                  </td>
+                )}
                 <td
                   onClick={() => handleBookLandingPage(book.bookId)}
                   style={{ cursor: "pointer" }}

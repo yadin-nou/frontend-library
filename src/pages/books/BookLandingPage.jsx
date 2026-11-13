@@ -57,10 +57,13 @@ const BookLandingPage = () => {
     // getBookDetails();
     setPreLocate(from);
   }, [id]);
-
-  if (!bookDetail)
-    return <p className="d-flex justify-content-center">Loading...</p>;
-
+  if (!bookDetail) {
+    return (
+      <p className="d-flex justify-content-center text-danger">
+        Book Not Found!
+      </p>
+    );
+  }
   const {
     title,
     author,
