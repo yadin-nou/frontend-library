@@ -132,7 +132,7 @@ const Dashboard = ({
               {borrows?.length === 0 ? (
                 <tr>
                   <td colSpan={4} className="text-center text-muted py-3">
-                    No borrows yet
+                    No borrows Yet
                   </td>
                 </tr>
               ) : (
