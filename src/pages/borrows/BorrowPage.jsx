@@ -15,6 +15,7 @@ function BorrowPage() {
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
   const location = useLocation();
+  const imgPath = import.meta.env.VITE_SERVER_URL;
   const path = location.pathname.split("/").at(-1);
   const { allBorrows, myBorrows } = useSelector((state) => state.borrowInfo);
   const borrows =
@@ -75,7 +76,7 @@ function BorrowPage() {
                 <td className="d-none d-md-table-cell">{k + 1}</td>
                 <td>
                   <img
-                    src={book.thumbnail}
+                    src={imgPath + "/images/" + book.thumbnail.split("/")[2]}
                     alt={book.bookTitle}
                     style={{ width: 50 }}
                   />

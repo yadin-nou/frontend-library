@@ -40,24 +40,37 @@ const Dashboard = ({
   monthly = [],
   reviews = [],
   borrows = [],
+  isAdmin = "admin",
 }) => {
   const max = Math.max(1, ...monthly.map((m) => m.count));
-  //console.log(stats);
+  const reviewNotApproved = reviews.filter((rev) => rev.isApproved === false);
+
   return (
     <div className="w-100">
       <Row className="g-3 mb-3">
         <Col xs={6} md={3}>
           <StatCard label="Total books" value={stats.length} />
         </Col>
+
+        {isAdmin !== "user" && (
+          <Col xs={6} md={3}>
+            <StatCard label="Members" value={members.length} />
+          </Col>
+        )}
         <Col xs={6} md={3}>
-          <StatCard label="Members" value={members.length} />
+          <StatCard
+            label="Active borrows"
+            value={borrows.filter((bo) => bo.isReturned === false).length}
+          />
         </Col>
-        <Col xs={6} md={3}>
-          <StatCard label="Active borrows" value={stats.activeBorrows} />
-        </Col>
-        <Col xs={6} md={3}>
-          <StatCard label="Pending reviews" value={stats.pendingReviews} />
-        </Col>
+        {isAdmin !== "user" && (
+          <Col xs={6} md={3}>
+            <StatCard
+              label="Pending reviews"
+              value={reviewNotApproved.length}
+            />
+          </Col>
+        )}
       </Row>
 
       <Row className="g-3 mb-3">
@@ -95,16 +108,18 @@ const Dashboard = ({
         <Col xs={12} lg={4}>
           <Card className="h-100">
             <Card.Body>
-              <Card.Title className="fs-6">Pending reviews</Card.Title>
-              {reviews.length === 0 ? (
+              <Card.Title className="fs-6">Reviews</Card.Title>
+              {reviews.length === 0 && reviewNotApproved.length === 0 ? (
                 <div className="text-muted small">Nothing to review</div>
               ) : (
-                reviews.slice(0, 5).map((r) => (
+                reviewNotApproved.slice(0, 5).map((r) => (
                   <div
                     key={r._id}
                     className="d-flex justify-content-between gap-2 py-1 small"
                   >
-                    <span className="text-truncate">{r.bookTitle}</span>
+                    <span className="text-truncate">
+                      {r.title.slice(0, 9)}..
+                    </span>
                     <span className="text-muted text-nowrap">
                       {r.rating} stars
                     </span>
