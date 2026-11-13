@@ -52,25 +52,20 @@ const Dashboard = ({
           <StatCard label="Total books" value={stats.length} />
         </Col>
 
-        {isAdmin !== "user" && (
-          <Col xs={6} md={3}>
-            <StatCard label="Members" value={members.length} />
-          </Col>
-        )}
+        <Col xs={6} md={3}>
+          <StatCard label="Members" value={members.length} />
+        </Col>
+
         <Col xs={6} md={3}>
           <StatCard
             label="Active borrows"
             value={borrows.filter((bo) => bo.isReturned === false).length}
           />
         </Col>
-        {isAdmin !== "user" && (
-          <Col xs={6} md={3}>
-            <StatCard
-              label="Pending reviews"
-              value={reviewNotApproved.length}
-            />
-          </Col>
-        )}
+
+        <Col xs={6} md={3}>
+          <StatCard label="Pending reviews" value={reviewNotApproved.length} />
+        </Col>
       </Row>
 
       <Row className="g-3 mb-3">
@@ -109,7 +104,7 @@ const Dashboard = ({
           <Card className="h-100">
             <Card.Body>
               <Card.Title className="fs-6">Reviews</Card.Title>
-              {reviews.length === 0 && reviewNotApproved.length === 0 ? (
+              {reviewNotApproved.length === 0 ? (
                 <div className="text-muted small">Nothing to review</div>
               ) : (
                 reviewNotApproved.slice(0, 5).map((r) => (
