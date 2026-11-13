@@ -44,7 +44,7 @@ const Dashboard = ({
 }) => {
   const max = Math.max(1, ...monthly.map((m) => m.count));
   const reviewNotApproved = reviews.filter((rev) => rev.isApproved === false);
-  console.log(borrows);
+  console.log(isAdmin);
   return (
     <div className="w-100">
       <Row className="g-3 mb-3">
