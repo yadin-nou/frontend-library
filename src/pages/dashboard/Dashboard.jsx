@@ -44,7 +44,7 @@ const Dashboard = ({
 }) => {
   const max = Math.max(1, ...monthly.map((m) => m.count));
   const reviewNotApproved = reviews.filter((rev) => rev.isApproved === false);
-
+  //console.log(members.length);
   return (
     <div className="w-100">
       <Row className="g-3 mb-3">
@@ -53,7 +53,14 @@ const Dashboard = ({
         </Col>
 
         <Col xs={6} md={3}>
-          <StatCard label="Members" value={members.length} />
+          <StatCard
+            label="Members"
+            value={
+              members.length === 1
+                ? formatDate(members[0].createdAt)
+                : members.length
+            }
+          />
         </Col>
 
         <Col xs={6} md={3}>

@@ -25,7 +25,7 @@ const DashboardPage = () => {
   const isAdmin = user?.role === "admin";
   useEffect(() => {
     dispatch(getAllBooksAction());
-    dispatch(getAllUserAction());
+    isAdmin && dispatch(getAllUserAction());
   }, []);
   useEffect(() => {
     dispatch(getAllBorrowsAction(role));
@@ -34,12 +34,13 @@ const DashboardPage = () => {
     dispatch(getAllReviewAction(isAdmin));
   }, [dispatch, isAdmin]);
 
-  console.log(borrows, "-----", role);
+  // console.log(borrows, "-----", role);
+
   return (
     <div>
       <Dashboard
         stats={book}
-        members={members}
+        members={isAdmin ? members : [user]}
         borrows={borrows}
         isAdmin={role}
         reviews={review}
