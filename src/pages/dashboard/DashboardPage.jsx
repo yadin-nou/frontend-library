@@ -33,6 +33,8 @@ const DashboardPage = () => {
   useEffect(() => {
     dispatch(getAllReviewAction(isAdmin));
   }, [dispatch, isAdmin]);
+
+  console.log(borrows);
   return (
     <div>
       <Dashboard
