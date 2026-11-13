@@ -34,7 +34,7 @@ const DashboardPage = () => {
     dispatch(getAllReviewAction(isAdmin));
   }, [dispatch, isAdmin]);
 
-  console.log(borrows);
+  console.log(borrows, "-----", role);
   return (
     <div>
       <Dashboard
