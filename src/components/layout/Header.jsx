@@ -20,28 +20,36 @@ import { setAllUsers, setUser } from "../../features/user/userSlice";
 import { logoutUserAPI } from "../../service/authAPI";
 import { autoLoginUser } from "../../features/user/userAction";
 import { setAllBorrow, setMyBorrow } from "../../features/borrow/borrowSlice";
+import { toast } from "react-toastify";
 const Header = () => {
   const carts = useSelector((state) => state.cartInfo.cart);
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
   const navi = useNavigate();
+  const frontPath = import.meta.env.VITE_FRONT_END_URL;
   const handelLogoutUser = async (e) => {
     e.preventDefault();
     try {
       //call api
+
       await logoutUserAPI(getSessionStorage("accessJWT"));
     } catch (error) {
       console.log("Logout API failed", error);
     } finally {
-      //remove session & local session
-      removeLocalStorage("refreshJWT");
-      removeSessionStorage("accessJWT");
-      //remove user from redux
-      dispatch(setUser(null));
-      dispatch(setAllUsers(null));
-      dispatch(setAllBorrow(null));
-      dispatch(setMyBorrow(null));
+      //setTimeout to clear first before direct to homepage
+      setTimeout(() => {
+        //remove session & local session
+        removeLocalStorage("refreshJWT");
+        removeSessionStorage("accessJWT");
+        //remove user from redux
+        dispatch(setUser(null));
+        dispatch(setAllUsers([]));
+        dispatch(setAllBorrow([]));
+        dispatch(setMyBorrow([]));
+      }, 1000);
+      toast.success("You have logged out successfully!");
       //redirect to home page
+      navi("/", { replace: true });
     }
   };
   useEffect(() => {
