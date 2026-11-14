@@ -50,7 +50,9 @@ const Dashboard = ({
       return members[0].email === rev.userId?.email && rev.isApproved === true;
     }
   });
-  //console.log(isAdmin, reviews);
+  console.log(isAdmin);
+  console.log("Review", reviews);
+  console.log("borrows", borrows);
   return (
     <div className="w-100">
       <Row className="g-3 mb-3">
