@@ -12,7 +12,7 @@ const CartPage = () => {
   const carts = useSelector((state) => state.cartInfo.cart);
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
-
+  const imgPath = import.meta.env.VITE_SERVER_URL;
   const dueDate = new Date();
   dueDate.setDate(dueDate.getDate() + 15);
 
@@ -76,7 +76,11 @@ const CartPage = () => {
                   <td className="d-none d-md-table-cell">{key + 1}</td>
 
                   <td className="d-none d-lg-table-cell text-secondary">
-                    <img src={book.imgURL} width={50} height={55} />
+                    <img
+                      src={imgPath + "/images/" + book.imgURL.split("/")[2]}
+                      width={50}
+                      height={55}
+                    />
                   </td>
 
                   <td className="text-secondary">{book.title}</td>

@@ -15,6 +15,7 @@ const Reviewspage = () => {
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
   const location = useLocation();
+  const imgPath = import.meta.env.VITE_SERVER_URL;
   const path = location.pathname.split("/").at(-1);
   const navi = useNavigate();
   const isAdmin = user?.role === "admin";
@@ -81,7 +82,7 @@ const Reviewspage = () => {
                   {rew.bookId.title}
                   <br />
                   <img
-                    src={rew.bookId.imgURL}
+                    src={imgPath + "/images/" + rew.bookId.imgURL.split("/")[2]}
                     alt={rew.bookId.title}
                     style={{ width: 50 }}
                   />

@@ -16,7 +16,7 @@ import {
   removeLocalStorage,
   removeSessionStorage,
 } from "../../localStorage/storage";
-import { setUser } from "../../features/user/userSlice";
+import { setAllUsers, setUser } from "../../features/user/userSlice";
 import { logoutUserAPI } from "../../service/authAPI";
 import { autoLoginUser } from "../../features/user/userAction";
 import { setAllBorrow, setMyBorrow } from "../../features/borrow/borrowSlice";
@@ -38,6 +38,7 @@ const Header = () => {
       removeSessionStorage("accessJWT");
       //remove user from redux
       dispatch(setUser(null));
+      dispatch(setAllUsers(null));
       dispatch(setAllBorrow(null));
       dispatch(setMyBorrow(null));
       //redirect to home page

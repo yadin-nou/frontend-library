@@ -6,6 +6,7 @@ import { renderStars } from "../../utils/starRating";
 import { useNavigate } from "react-router-dom";
 const DispalyBook = ({ bookCollection }) => {
   const navi = useNavigate();
+  const imgPath = import.meta.env.VITE_SERVER_URL;
   const handleBookDetails = (id) => {
     navi("/books/details/" + id);
   };
@@ -21,7 +22,7 @@ const DispalyBook = ({ bookCollection }) => {
             >
               <Card.Img
                 variant="top"
-                src={book.imgURL}
+                src={imgPath + "/images/" + book.imgURL.split("/")[2]}
                 className="object-fit-cover"
                 style={{
                   aspectRatio: "1 / 3",

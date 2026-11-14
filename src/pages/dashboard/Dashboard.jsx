@@ -43,8 +43,14 @@ const Dashboard = ({
   isAdmin = "admin",
 }) => {
   const max = Math.max(1, ...monthly.map((m) => m.count));
-  const reviewNotApproved = reviews.filter((rev) => rev.isApproved === false);
-  console.log(isAdmin);
+  const reviewNotApproved = reviews.filter((rev) => {
+    if (isAdmin === "admin") {
+      return rev.isApproved === false;
+    } else {
+      return members[0].email === rev.userId?.email && rev.isApproved === true;
+    }
+  });
+  //console.log(isAdmin, reviews);
   return (
     <div className="w-100">
       <Row className="g-3 mb-3">

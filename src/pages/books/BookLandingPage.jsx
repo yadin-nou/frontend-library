@@ -25,6 +25,7 @@ const BookLandingPage = () => {
   const navi = useNavigate();
   const [preLocate, setPreLocate] = useState("");
   const location = useLocation();
+  const imgPath = import.meta.env.VITE_SERVER_URL;
   const bookDetail = useSelector((state) =>
     state.bookInfo.bookCollection.find((bid) => bid._id === id),
   );
@@ -106,7 +107,7 @@ const BookLandingPage = () => {
           <Col xs={12} md={10} xl={8}>
             <Card className="d-flex flex-column flex-lg-row h-auto">
               <Card.Img
-                src={imgURL}
+                src={imgPath + "/images/" + imgURL.split("/")[2]}
                 style={{
                   width: "auto",
                   height: "100%",
@@ -189,7 +190,7 @@ const BookLandingPage = () => {
                       >
                         <Card.Img
                           variant="top"
-                          src={book.imgURL}
+                          src={imgPath + "/images/" + book.imgURL.split("/")[2]}
                           className="object-fit-cover"
                           style={{
                             aspectRatio: "1/2",
