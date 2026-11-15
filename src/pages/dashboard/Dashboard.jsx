@@ -53,8 +53,8 @@ const Dashboard = ({
     }
   });
   console.log(isAdmin);
-  console.log("Members", reviewNotApproved);
-  console.log("Review", reviews);
+  console.log("Review", reviewNotApproved);
+  console.log("Members", members);
   console.log("borrows", borrows);
   return (
     <div className="w-100">
