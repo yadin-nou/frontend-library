@@ -20,7 +20,9 @@ const DashboardPage = () => {
   const borrows =
     user?.role === "admin"
       ? allBorrows
-      : myBorrows?.filter((bo) => bo.userId.email === user?.email);
+      : myBorrows?.filter((bo) => {
+          return bo.userId.email === user?.email;
+        });
   const role = user?.role === "admin" ? "admin" : "user";
   const isAdmin = user?.role === "admin";
   console.log("All Borrows", user?.email, allBorrows);
