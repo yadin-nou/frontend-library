@@ -17,12 +17,20 @@ const DashboardPage = () => {
   // const location = useLocation();
   // const path = location.pathname.split("/").at(-1);
   const { allBorrows, myBorrows } = useSelector((state) => state.borrowInfo);
+  // const borrows =
+  //   user?.role === "admin"
+  //     ? allBorrows
+  //     : myBorrows?.filter((bo) => {
+  //         return bo.userId?.email === user?.email;
+  //       });
   const borrows =
     user?.role === "admin"
-      ? allBorrows
-      : myBorrows?.filter((bo) => {
-          return bo.userId.email === user?.email;
-        });
+      ? Array.isArray(allBorrows)
+        ? allBorrows
+        : []
+      : (Array.isArray(myBorrows) ? myBorrows : []).filter(
+          (bo) => bo.userId?._id === user?._id,
+        );
   const role = user?.role === "admin" ? "admin" : "user";
   const isAdmin = user?.role === "admin";
   console.log("All Borrows", user?.email, allBorrows);
