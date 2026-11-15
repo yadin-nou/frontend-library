@@ -131,11 +131,12 @@ const Dashboard = ({
                 reviewNotApproved.slice(0, 5).map((r) => (
                   <div
                     key={r._id}
-                    className="d-flex justify-content-between gap-2 py-1 small"
+                    className="d-flex justify-content-between gap-2 py-1 small "
                   >
-                    <span className="text-truncate">
+                    <span className="text-truncate ">
                       {r.title.slice(0, 9)}..
                     </span>
+
                     <span className="text-muted text-nowrap">
                       {r.rating} stars
                     </span>
