@@ -49,13 +49,17 @@ const Dashboard = ({
     if (isAdmin === "admin") {
       return rev.isApproved === false;
     } else {
-      return members[0].email === rev.userId?.email && rev.isApproved === true;
+      return members[0]._id === rev.userId?._id && rev.isApproved === true;
     }
   });
-  console.log(isAdmin);
-  console.log("Review", reviewNotApproved);
-  console.log("Members", members);
-  console.log("borrows", borrows);
+  console.log("members:", members.length, members[0]);
+  console.log("reviews:", reviews.length, reviews[0]?.userId);
+  console.log("role:", isAdmin);
+
+  // console.log(isAdmin);
+  // console.log("Review", reviewNotApproved);
+  // console.log("Members", members);
+  // console.log("borrows", borrows);
   return (
     <div className="w-100">
       <Row className="g-3 mb-3">
@@ -67,7 +71,7 @@ const Dashboard = ({
           <StatCard
             label="Members"
             value={
-              members.length === 1
+              isAdmin !== "admin"
                 ? formatDate(members[0].createdAt)
                 : members.length
             }
