@@ -33,7 +33,7 @@ const BookLandingPage = () => {
   const relatedBook = useSelector((state) =>
     state.bookInfo.bookCollection.slice(5, 10),
   );
-  const showReview = review.filter((rev) => rev.bookId._id === id);
+  const showReview = review.filter((rev) => rev.bookId?._id === id);
   const carts = useSelector((state) => state.cartInfo.cart);
 
   //  console.log(showReview.length, "Book Id");
@@ -81,7 +81,7 @@ const BookLandingPage = () => {
     //console.log(carts);
     let isInclude = false;
     carts.map((book) => {
-      if (book._id.includes(id)) {
+      if (book._id?.includes(id)) {
         toast.warning("This book has already in your Carts!");
         isInclude = true;
         return;
