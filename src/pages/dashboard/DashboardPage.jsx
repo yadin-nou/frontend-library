@@ -35,6 +35,31 @@ const DashboardPage = () => {
   const isAdmin = user?.role === "admin";
   // console.log("All Borrows", user?.email, allBorrows);
   // console.log("My borrow", user?.email, myBorrows);
+  const getMonthly = (borrows = [], months = 6) => {
+    const now = new Date();
+    const buckets = [];
+
+    for (let i = months - 1; i >= 0; i--) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      buckets.push({
+        key: `${d.getFullYear()}-${d.getMonth()}`,
+        label: d.toLocaleString("en-AU", { month: "short" }),
+        count: 0,
+      });
+    }
+
+    borrows.forEach((b) => {
+      const d = new Date(b.createdAt); // or your borrow date field
+      if (isNaN(d)) return;
+      const bucket = buckets.find(
+        (x) => x.key === `${d.getFullYear()}-${d.getMonth()}`,
+      );
+      if (bucket) bucket.count += 1;
+    });
+
+    return buckets;
+  };
+  // console.log(getMonthly(borrows));
   useEffect(() => {
     dispatch(getAllBooksAction());
     isAdmin && dispatch(getAllUserAction());
@@ -56,6 +81,7 @@ const DashboardPage = () => {
         borrows={borrows}
         isAdmin={role}
         reviews={review}
+        monthly={getMonthly(borrows)}
       />
     </div>
   );

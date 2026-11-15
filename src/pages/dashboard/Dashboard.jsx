@@ -117,8 +117,9 @@ const Dashboard = ({
                         height: `${(m.count / max) * 100}%`,
                         background: "#378ADD",
                         borderRadius: "4px 4px 0 0",
+                        color: "white",
                       }}
-                    />
+                    ></div>
                     <small className="text-muted mt-1">{m.label}</small>
                   </div>
                 ))}
