@@ -43,7 +43,9 @@ const Dashboard = ({
   isAdmin = "admin",
 }) => {
   const max = Math.max(1, ...monthly.map((m) => m.count));
-  const reviewNotApproved = reviews.filter((rev) => {
+  const reviewList = Array.isArray(reviews) ? reviews : [];
+  //console.log("Members", members);
+  const reviewNotApproved = reviewList.filter((rev) => {
     if (isAdmin === "admin") {
       return rev.isApproved === false;
     } else {
@@ -51,6 +53,7 @@ const Dashboard = ({
     }
   });
   console.log(isAdmin);
+  console.log("Members", reviewNotApproved);
   console.log("Review", reviews);
   console.log("borrows", borrows);
   return (
@@ -79,7 +82,10 @@ const Dashboard = ({
         </Col>
 
         <Col xs={6} md={3}>
-          <StatCard label="Pending reviews" value={reviewNotApproved.length} />
+          <StatCard
+            label={isAdmin === "admin" ? "Pending reviews" : "All reviews"}
+            value={reviewNotApproved.length}
+          />
         </Col>
       </Row>
 
