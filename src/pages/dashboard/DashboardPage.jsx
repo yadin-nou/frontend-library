@@ -33,8 +33,8 @@ const DashboardPage = () => {
         );
   const role = user?.role === "admin" ? "admin" : "user";
   const isAdmin = user?.role === "admin";
-  console.log("All Borrows", user?.email, allBorrows);
-  console.log("My borrow", user?.email, myBorrows);
+  // console.log("All Borrows", user?.email, allBorrows);
+  // console.log("My borrow", user?.email, myBorrows);
   useEffect(() => {
     dispatch(getAllBooksAction());
     isAdmin && dispatch(getAllUserAction());

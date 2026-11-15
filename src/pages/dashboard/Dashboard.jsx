@@ -54,9 +54,9 @@ const Dashboard = ({
       }
     }
   });
-  console.log("members:", members.length, members[0]);
-  console.log("reviews:", reviews.length, reviews[0]?.userId);
-  console.log("role:", isAdmin);
+  // console.log("members:", members.length, members[0]);
+  // console.log("reviews:", reviews.length, reviews[0]?.userId);
+  // console.log("role:", isAdmin);
 
   // console.log(isAdmin);
   // console.log("Review", reviewNotApproved);

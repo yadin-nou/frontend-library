@@ -76,19 +76,21 @@ const Reviewspage = () => {
               <tr key={k + 1}>
                 <td className="d-none d-md-table-cell">{k + 1}</td>
                 <td
-                  onClick={() => handleBookLandingPage(rew.bookId._id)}
+                  onClick={() => handleBookLandingPage(rew.bookId?._id)}
                   style={{ cursor: "pointer" }}
                 >
-                  {rew.bookId.title}
+                  {rew.bookId?.title}
                   <br />
                   <img
-                    src={imgPath + "/images/" + rew.bookId.imgURL.split("/")[2]}
-                    alt={rew.bookId.title}
+                    src={
+                      imgPath + "/images/" + rew.bookId?.imgURL.split("/")[2]
+                    }
+                    alt={rew.bookId?.title}
                     style={{ width: 50 }}
                   />
                 </td>
                 <td className="text-start">
-                  User: {rew.userId.fName} ({rew.userId.role})
+                  User: {rew.userId?.fName} ({rew.userId?.role})
                   <br />
                   Status:{" "}
                   {rew.isApproved ? (
