@@ -16,7 +16,7 @@ const Reviewspage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const imgPath = import.meta.env.VITE_SERVER_URL;
-  const path = location.pathname.split("/").at(-1);
+  // const path = location.pathname.split("/").at(-1);
   const navi = useNavigate();
   const isAdmin = user?.role === "admin";
 
@@ -36,16 +36,23 @@ const Reviewspage = () => {
     //<Navigate to={linkDetaail} state={{ from: "/user/books" }} replace />;
   };
   const handleUpdateApprove = async (_id, isApproved) => {
-    const { status, message } = await updateApproveReviewAction({
+    const result = await updateApproveReviewAction({
       _id,
       isApproved,
     });
-    console.log(status, "--", message);
-    if (status === "success") {
-      isApproved ? toast.success(message) : toast.warning(message);
-      dispatch(getAllReviewAction(isAdmin));
+    console.log(result);
+    //return;
+    if (result?.status === "success") {
+      if (result?.payload?._id) {
+        isApproved
+          ? toast.success(result?.message)
+          : toast.warning(result?.message);
+        dispatch(getAllReviewAction(isAdmin));
+      } else {
+        toast.error("Unalbe to approved!");
+      }
     } else {
-      toast.error(message);
+      toast.error(result?.message);
     }
   };
 
