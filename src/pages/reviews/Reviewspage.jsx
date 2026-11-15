@@ -40,9 +40,10 @@ const Reviewspage = () => {
       _id,
       isApproved,
     });
+    console.log(status, "--", message);
     if (status === "success") {
-      dispatch(getAllReviewAction(isAdmin));
       isApproved ? toast.success(message) : toast.warning(message);
+      dispatch(getAllReviewAction(isAdmin));
     } else {
       toast.error(message);
     }
