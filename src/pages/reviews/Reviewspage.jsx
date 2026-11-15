@@ -40,7 +40,7 @@ const Reviewspage = () => {
       _id,
       isApproved,
     });
-    console.log(result);
+    console.log("Testing ", result);
     //return;
     if (result?.status === "success") {
       if (result?.payload?._id) {

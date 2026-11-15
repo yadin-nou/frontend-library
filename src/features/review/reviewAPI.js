@@ -50,7 +50,7 @@ export const deleteReviewAPI = async (data) => {
   return result;
 };
 export const updateApprovedReviewAPI = async (data) => {
-  console.log(data);
+  // console.log(data);
   const obj = {
     method: "patch",
     url: urlReview + "/admin",
