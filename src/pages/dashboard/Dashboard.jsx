@@ -49,7 +49,9 @@ const Dashboard = ({
     if (isAdmin === "admin") {
       return rev.isApproved === false;
     } else {
-      return members[0]._id === rev.userId?._id && rev.isApproved === true;
+      if (members[0]._id === (rev.userId?._id || rev.userId)) {
+        return rev.isApproved === true;
+      }
     }
   });
   console.log("members:", members.length, members[0]);
