@@ -10,6 +10,7 @@ import { FaBimobject } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import AddReview from "../reviews/AddReview";
+//import noImg from "../../../public/images/no_image.jpg";
 
 function BorrowPage() {
   const { user } = useSelector((state) => state.userInfo);
@@ -76,8 +77,10 @@ function BorrowPage() {
                 <td className="d-none d-md-table-cell">{k + 1}</td>
                 <td>
                   <img
-                    src={imgPath + "/images/" + book.thumbnail.split("/")[2]}
-                    alt={book.bookTitle}
+                    src={
+                      imgPath + "/images/" + book.bookId?.imgURL.split("/")[2]
+                    }
+                    alt={book.bookId ? book.bookId.title : "N/A"}
                     style={{ width: 50 }}
                   />
                 </td>
@@ -87,10 +90,10 @@ function BorrowPage() {
                   </td>
                 )}
                 <td
-                  onClick={() => handleBookLandingPage(book.bookId)}
+                  onClick={() => handleBookLandingPage(book.bookId?._id)}
                   style={{ cursor: "pointer" }}
                 >
-                  {book.bookTitle}
+                  {book.bookId ? book.bookId?.title : "N/A"}
                 </td>
                 {isAdmin && (
                   <td>
@@ -119,7 +122,7 @@ function BorrowPage() {
                     )}
                     {book.isReturned && !book.reviewId && (
                       <AddReview
-                        bookId={book.bookId}
+                        bookId={book.bookId?._id}
                         borrowId={book._id}
                         role={role}
                       />
