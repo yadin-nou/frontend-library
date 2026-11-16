@@ -243,3 +243,13 @@ button {
   pointer-events: "none";
   opacity: 0.5;
 }
+
+/* carousel style */
+.carousel {
+  height: 50vh;
+}
+.carousel img {
+  height: 50vh;
+  width: 100%;
+  object-fit: cover;
+}

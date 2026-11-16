@@ -1,10 +1,18 @@
 import React, { useEffect } from "react";
 //import { useEffect, useState } from "react";
 // import { getAllBooks } from "../../axiosHelp/axiosConnected.js";
-import { DisplayBook, SearchBookBlobal } from "../index.js";
+import {
+  BestRead,
+  CustomCarousel,
+  DisplayBook,
+  NewArrival,
+  Recommended,
+  SearchBookBlobal,
+} from "../index.js";
 //import { getAllBooksAction } from "../../features/book/bookAction.js";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBooksAction } from "../../features/book/bookAction.js";
+import { Col, Container, Row } from "react-bootstrap";
 
 const HomePage = () => {
   //const [bookCollection, setBookCollection] = useState([]);
@@ -27,7 +35,24 @@ const HomePage = () => {
   return (
     <>
       <SearchBookBlobal />
-      <DisplayBook bookCollection={bookCollection} />
+      <Container>
+        <Row>
+          <Col>
+            <CustomCarousel />
+            <NewArrival />
+            <BestRead />
+            <Recommended />
+          </Col>
+        </Row>
+        <Row>
+          <Col></Col>
+        </Row>
+      </Container>
+
+      {/* New Arrival
+      Best Read Section
+      Recommand Section */}
+      {/* <DisplayBook bookCollection={bookCollection} /> */}
     </>
   );
 };

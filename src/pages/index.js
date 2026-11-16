@@ -16,3 +16,7 @@ export { default as SearchBookBlobal } from "./home/SearchBookGlobal";
 export { default as DisplayBook } from "./home/DispalyBook";
 export { default as CartPage } from "./cart/CartPage";
 export { default as ThankPage } from "./cart/ThankPage";
+export { default as CustomCarousel } from "./home/CustomCarousel";
+export { default as BestRead } from "../components/homepageSection/BestRead";
+export { default as NewArrival } from "../components/homepageSection/NewArrival";
+export { default as Recommended } from "../components/homepageSection/Recommended";
