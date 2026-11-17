@@ -5,19 +5,21 @@ import { getSessionStorage } from "../../localStorage/storage.js";
 const bookRoute = "/api/v1/book";
 const urlBook = import.meta.env.VITE_SERVER_URL + bookRoute;
 
-const accessJWT = getSessionStorage("accessJWT");
+//const accessJWT = getSessionStorage("accessJWT");
+// called on every request, so it always gets the current token
+const authHeaders = (arg = {}) => ({
+  authorization: getSessionStorage("accessJWT"),
+  ...arg,
+});
 //adming API
 export const addBook = async (data) => {
   const book = {
     method: "post",
     url: urlBook + "/addbook",
     data,
-    headers: {
-      // "Content-Type": "application/json",
-      authorization: accessJWT,
-    },
+    headers: authHeaders(),
   };
-  console.log(accessJWT, "fron");
+  //console.log(accessJWT, "fron");
   const result = await processAPI(book);
   return result;
 };
@@ -27,10 +29,7 @@ export const getAllBooks = async (filter = {}) => {
   const book = {
     method: "get",
     url: urlBook + "/book",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: accessJWT,
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
     params: filter,
   };
   return processAPI(book);
@@ -40,10 +39,7 @@ export const deleteBook = async (data) => {
     method: "delete",
     url: urlBook + "/",
     data,
-    headers: {
-      "Content-Type": "application/json",
-      authorization: accessJWT,
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
   };
   const result = await processAPI(book);
   return result;
@@ -54,10 +50,7 @@ export const bookImgDeleteAPI = async (data) => {
     method: "patch",
     url: urlBook + "/delImgs",
     data,
-    headers: {
-      "Content-Type": "application/json",
-      authorization: accessJWT,
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
   };
   const result = await processAPI(book);
   return result;
@@ -68,10 +61,7 @@ export const updateBook = async (data) => {
     method: "patch",
     url: urlBook + "/",
     data,
-    headers: {
-      //"Content-Type": "application/json",
-      authorization: accessJWT,
-    },
+    headers: authHeaders(),
   };
   const result = await processAPI(book);
   return result;

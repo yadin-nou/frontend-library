@@ -4,10 +4,13 @@ import { useSelector } from "react-redux";
 import CustomCard from "../../pages/home/CustomCard";
 
 const NewArrival = () => {
-  const bookCollection = useSelector((state) => state.bookInfo.bookCollection);
+  const bookCollection = useSelector(
+    (state) => state.bookInfo.bookCollection,
+  ).filter((book, key) => key <= 3 && book);
+
   return (
     <div>
-      <SectionTitles title="New Arrival" />
+      <SectionTitles title="New Arrivals" />
       <CustomCard bookCollection={bookCollection} />
     </div>
   );

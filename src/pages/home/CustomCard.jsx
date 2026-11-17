@@ -27,7 +27,7 @@ const CustomCard = ({ bookCollection }) => {
                 style={{
                   aspectRatio: "1 / 3",
                   objectFit: "contain",
-                  maxHeight: "450px",
+                  maxHeight: "250px",
                   width: "100%",
                 }}
               />
