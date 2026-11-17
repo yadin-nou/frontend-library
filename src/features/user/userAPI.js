@@ -1,5 +1,5 @@
 import processAPI from "../../axiosHelp/axiosConnected.js";
-import { getSessionStorage } from "../../localStorage/storage.js";
+import { authHeaders } from "../authHeader/authHeader.js";
 
 const userRouteLink = "/api/v1/users";
 const urlUser = import.meta.env.VITE_SERVER_URL + userRouteLink;
@@ -10,10 +10,7 @@ export const getUserApi = async () => {
     method: "get",
     url: urlUser + "/profile",
     data: {},
-    headers: {
-      "Content-Type": "application/json",
-      authorization: getSessionStorage("accessJWT"),
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
   };
   const result = await processAPI(user);
   return result;
@@ -24,10 +21,7 @@ export const getAllUserApi = async () => {
     method: "get",
     url: urlUser + "/all",
     data: {},
-    headers: {
-      "Content-Type": "application/json",
-      authorization: getSessionStorage("accessJWT"),
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
   };
   const result = await processAPI(user);
   return result;

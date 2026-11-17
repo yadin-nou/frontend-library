@@ -1,5 +1,5 @@
 import processAPI from "../../axiosHelp/axiosConnected.js";
-import { getSessionStorage } from "../../localStorage/storage.js";
+import { authHeaders } from "../authHeader/authHeader.js";
 
 const borrowRoute = "/api/v1/borrows";
 const urlServer = import.meta.env.VITE_SERVER_URL + borrowRoute;
@@ -11,10 +11,7 @@ export const addBorrowBookAPI = async (data) => {
     method: "post",
     url: urlServer + "/borrows",
     data,
-    headers: {
-      "Content-Type": "application/json",
-      authorization: getSessionStorage("accessJWT"),
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
   };
   const result = await processAPI(book);
   return result;

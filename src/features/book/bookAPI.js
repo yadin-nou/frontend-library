@@ -1,16 +1,12 @@
 import processAPI from "../../axiosHelp/axiosConnected.js";
-import { getSessionStorage } from "../../localStorage/storage.js";
+import { authHeaders } from "../authHeader/authHeader.js";
 
 // const adminRoute = "/api/v1/admin";
 const bookRoute = "/api/v1/book";
 const urlBook = import.meta.env.VITE_SERVER_URL + bookRoute;
 
 //const accessJWT = getSessionStorage("accessJWT");
-// called on every request, so it always gets the current token
-const authHeaders = (arg = {}) => ({
-  authorization: getSessionStorage("accessJWT"),
-  ...arg,
-});
+
 //adming API
 export const addBook = async (data) => {
   const book = {

@@ -1,5 +1,5 @@
 import processAPI from "../../axiosHelp/axiosConnected.js";
-import { getSessionStorage } from "../../localStorage/storage.js";
+import { authHeaders } from "../authHeader/authHeader.js";
 
 const borrowRouteLink = "/api/v1/borrows";
 const urlBorrow = import.meta.env.VITE_SERVER_URL + borrowRouteLink;
@@ -9,10 +9,7 @@ export const getAllBorrowsApi = async (role) => {
     method: "get",
     url: urlBorrow + "/" + role,
     data: {},
-    headers: {
-      "Content-Type": "application/json",
-      authorization: getSessionStorage("accessJWT"),
-    },
+    headers: authHeaders(),
   };
   const result = await processAPI(obj);
   return result;
@@ -23,10 +20,7 @@ export const returnBookAPI = async (data) => {
     method: "patch",
     url: urlBorrow + "/",
     data,
-    headers: {
-      "Content-Type": "application/json",
-      authorization: getSessionStorage("accessJWT"),
-    },
+    headers: authHeaders({ "Content-Type": "application/json" }),
   };
   const result = await processAPI(obj);
   return result;
