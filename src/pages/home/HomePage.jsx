@@ -40,7 +40,7 @@ const HomePage = () => {
             <CustomCarousel />
             <NewArrival />
             <BestRead />
-            <Recommended />
+            {/* <Recommended /> */}
           </Col>
         </Row>
         <Row>

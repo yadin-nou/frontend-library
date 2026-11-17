@@ -1,4 +1,3 @@
-import React from "react";
 import SectionTitles from "../sectionTitle/SectionTitles";
 import { useSelector } from "react-redux";
 import CustomCard from "../../pages/home/CustomCard";
