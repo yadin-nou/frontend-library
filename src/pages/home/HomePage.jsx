@@ -16,7 +16,6 @@ import { Col, Container, Row } from "react-bootstrap";
 
 const HomePage = () => {
   //const [bookCollection, setBookCollection] = useState([]);
-  const bookCollection = useSelector((state) => state.bookInfo.bookCollection);
   const dispatch = useDispatch();
   //const stars = [1, 2, 3, 4, 5];
   //const handelGetAllBook = () => {

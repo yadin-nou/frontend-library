@@ -15,7 +15,11 @@ const CustomCarousel = () => {
     <div>
       <Carousel activeIndex={index} onSelect={handleSelect} className="mt-5">
         <Carousel.Item>
-          <img src={home_b1} alit="First slide" className="d-block w-100" />
+          <img
+            src={home_b1}
+            alit="First slide"
+            className="d-block w-100 rounded"
+          />
           <Carousel.Caption>
             <h3>Find your next read</h3>
             <p>Search thousands of books and reserve them online in seconds.</p>
