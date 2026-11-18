@@ -16,22 +16,31 @@ import { useDispatch } from "react-redux";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const [isSearch, setIsSearch] = useState(false);
+  const [found, setFound] = useState(true);
   useEffect(() => {
     dispatch(getAllBooksAction());
   }, [dispatch]);
 
   return (
     <>
-      <SearchBookBlobal />
+      <SearchBookBlobal setIsSearch={setIsSearch} setFound={setFound} />
+
       <Container>
         <Row>
-          <Col>
-            <CustomCarousel />
-            <NewArrival />
-            <BestRead />
-            {/* <Recommended /> */}
-          </Col>
+          <div className="pt-3 d-flex justify-content-center text-danger">
+            {!found && <h4>Book Not Found!</h4>}
+          </div>
+          {!isSearch && (
+            <Col>
+              <CustomCarousel />
+              <NewArrival />
+              <BestRead />
+              {/* <Recommended /> */}
+            </Col>
+          )}
         </Row>
+
         <Row>
           <Col></Col>
         </Row>

@@ -4,23 +4,32 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import CustomCard from "./CustomCard";
 
-const SearchBookGlobal = () => {
+const SearchBookGlobal = ({ setIsSearch, setFound }) => {
   const [searchBook, setSearchBook] = useState([]);
   const bookCollection = useSelector((state) => state.bookInfo.bookCollection);
 
   const BookSearchList = (search) => {
     if (search === "") {
       setSearchBook([]);
+      setIsSearch(false);
       return;
     }
+
+    setIsSearch(true);
     const filteredBooks = bookCollection.filter((book) => {
       const matchesSearch =
         book.title.toLowerCase().includes(search.toLowerCase()) ||
         book.author.toLowerCase().includes(search.toLowerCase()) ||
         book.isbn.toLowerCase().includes(search.toLowerCase());
+      setFound(true);
       return matchesSearch;
     });
-
+    if (filteredBooks.length === 0 && search !== "") {
+      setSearchBook([]);
+      setIsSearch(false);
+      setFound(false);
+      return;
+    }
     setSearchBook(filteredBooks);
   };
   // useEffect(() => {
