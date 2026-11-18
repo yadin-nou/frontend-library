@@ -20,6 +20,7 @@ const CustomCard = ({ bookCollection }) => {
               className="book-card h-100 fs-5"
               onClick={(e) => handleBookDetails(book._id)}
             >
+              {" "}
               <Card.Img
                 variant="top"
                 src={imgPath + "/images/" + book.imgURL.split("/")[2]}
