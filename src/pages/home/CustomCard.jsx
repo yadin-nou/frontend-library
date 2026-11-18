@@ -3,14 +3,20 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Badge, Button, Form, InputGroup } from "react-bootstrap";
 import { renderStars } from "../../utils/starRating";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
-const CustomCard = ({ bookCollection }) => {
+const CustomCard = ({ bookCollection, search = false }) => {
   const navi = useNavigate();
   const imgPath = import.meta.env.VITE_SERVER_URL;
   const handleBookDetails = (id) => {
-    navi("/books/details/" + id);
+    const s = search ? "?search=true" : "";
+    navi("/books/details/" + id + s);
   };
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const sear = searchParams.get("search");
+  console.log(useParams());
+  console.log(id, "---", sear);
   return (
     <div>
       <Row xs={1} sm={2} md={3} lg={4} className="g-3 pt-1">

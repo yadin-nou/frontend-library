@@ -54,7 +54,7 @@ const SearchBookGlobal = ({ setIsSearch, setFound }) => {
           <Button variant="success">Search</Button>
         </Col>
       </Row>
-      <CustomCard bookCollection={searchBook} />
+      <CustomCard bookCollection={searchBook} search={true} />
     </>
   );
 };

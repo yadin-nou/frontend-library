@@ -19,7 +19,7 @@ const BestRead = () => {
     [books],
   );
   return (
-    <div>
+    <div className="pb-3">
       <SectionTitles title="Best Read" />
       <CustomCard bookCollection={topBooks} />
     </div>

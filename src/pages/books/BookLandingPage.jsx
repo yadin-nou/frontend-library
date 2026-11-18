@@ -11,7 +11,13 @@ import {
 } from "react-bootstrap";
 import { MdFavoriteBorder } from "react-icons/md";
 import { Alert } from "react-bootstrap";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 // import { getAllBooks } from "../../axiosHelp/axiosConnected";
 import { toast } from "react-toastify";
 import { renderStars } from "../../utils/starRating";
@@ -21,6 +27,10 @@ import { setCart } from "../../features/cart/cartSlice";
 
 const BookLandingPage = () => {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get("search");
+  console.log(useParams());
+  console.log(id, "---", search);
   const dispatch = useDispatch();
   const navi = useNavigate();
   const [preLocate, setPreLocate] = useState("");
@@ -45,6 +55,7 @@ const BookLandingPage = () => {
   //   setBookDetail(books.book[0]);
   // };
   const from = location.state?.from || "/books";
+
   useEffect(() => {
     window.scrollTo(0, 0);
     // bookDetail not exist or refresh page
