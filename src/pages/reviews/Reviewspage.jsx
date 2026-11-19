@@ -43,15 +43,15 @@ const Reviewspage = () => {
     console.log("Testing ", result);
     //return;
     if (result?.status === "success") {
-      if (result?.payload?._id) {
-        isApproved
-          ? toast.success(result?.message)
-          : toast.warning(result?.message);
-        dispatch(getAllReviewAction(isAdmin));
-      } else {
-        toast.error("Unable to approved!");
-        dispatch(getAllReviewAction(isAdmin));
-      }
+      // if (result?.payload?._id) {
+      isApproved
+        ? toast.success(result?.message)
+        : toast.warning(result?.message);
+      dispatch(getAllReviewAction(isAdmin));
+      //  } else {
+      //   toast.error("Unable to approved!");
+      //  dispatch(getAllReviewAction(isAdmin));
+      // }
     } else {
       toast.error(result?.message);
     }
