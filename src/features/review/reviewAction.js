@@ -16,11 +16,26 @@ export const insertReviewAction = (data, role) => async (dis) => {
 };
 
 export const getAllReviewAction = (isAdmin) => async (dis) => {
-  //console.log(isAdmin, "action");
-  const pending = getAllReviewAPI(isAdmin);
-  toast.promise(pending, { pending: "Please wait..." });
-  const { status, payload } = await pending;
-  status === "success" && dis(setAllReview(payload));
+  try {
+    const pending = getAllReviewAPI(isAdmin);
+
+    toast.promise(pending, {
+      pending: "Please wait...",
+    });
+
+    const result = await pending;
+
+    // console.log("Get all reviews API:", result);
+
+    if (result?.status === "success") {
+      dis(setAllReview(result.payload));
+    }
+
+    return result;
+  } catch (error) {
+    console.error("Get reviews error:", error);
+    throw error;
+  }
 };
 
 export const deleteReviewAction = async (data) => {
