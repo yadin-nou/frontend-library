@@ -28,6 +28,7 @@ export const getAllReviewAPI = async (isAdmin) => {
   };
   const result = await processAPI(obj);
   console.log(result, "ProcessAPI");
+  console.log(obj, "Ojb");
   return result;
 };
 
