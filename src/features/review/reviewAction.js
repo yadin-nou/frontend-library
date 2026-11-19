@@ -31,8 +31,8 @@ export const deleteReviewAction = async (data) => {
 };
 
 export const updateApproveReviewAction = async (data) => {
-  const pending = updateApprovedReviewAPI(data);
-  toast.promise(pending, { pending: "Please wait..." });
-  const result = await pending;
+  const result = updateApprovedReviewAPI(data);
+  // toast.promise(pending, { pending: "Please wait..." });
+  //const result = await pending;
   return result;
 };
