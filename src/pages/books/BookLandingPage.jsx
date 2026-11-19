@@ -29,8 +29,10 @@ const BookLandingPage = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const search = searchParams.get("search");
-  console.log(useParams());
-  console.log(id, "---", search);
+  const dt = searchParams.get("dt");
+  // console.log(useParams());
+  // console.log(id, "---", search);
+  const isSearch = search === "true" ? `&search=true&dt=${dt}` : "";
   const dispatch = useDispatch();
   const navi = useNavigate();
   const [preLocate, setPreLocate] = useState("");
@@ -54,7 +56,7 @@ const BookLandingPage = () => {
   //   const books = await pendingResp;
   //   setBookDetail(books.book[0]);
   // };
-  const from = location.state?.from || "/books";
+  const from = location.state?.from || "/?books" + isSearch;
 
   useEffect(() => {
     window.scrollTo(0, 0);
