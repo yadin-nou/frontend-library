@@ -10,6 +10,7 @@ const processAPI = async ({ method, url, data, headers, params }) => {
       params,
       headers,
     });
+    console.log(response.data, "response");
     return response.data;
   } catch (error) {
     //console.log(error);
