@@ -49,7 +49,8 @@ const Reviewspage = () => {
           : toast.warning(result?.message);
         dispatch(getAllReviewAction(isAdmin));
       } else {
-        toast.error("Unalbe to approved!");
+        toast.error("Unable to approved!");
+        dispatch(getAllReviewAction(isAdmin));
       }
     } else {
       toast.error(result?.message);
