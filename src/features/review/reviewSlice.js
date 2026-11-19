@@ -8,7 +8,7 @@ const reviewSlice = createSlice({
   initialState,
   reducers: {
     setAllReview: (state, action) => {
-      state.reviews = action.payload;
+      state.reviews = Array.isArray(action.payload) ? action.payload : [];
     },
   },
 });
