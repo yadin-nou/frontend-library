@@ -35,25 +35,30 @@ const Reviewspage = () => {
     navi(linkDetaail, { state: { from: location.pathname } });
     //<Navigate to={linkDetaail} state={{ from: "/user/books" }} replace />;
   };
+
   const handleUpdateApprove = async (_id, isApproved) => {
-    const result = await updateApproveReviewAction({
-      _id,
-      isApproved,
-    });
-    console.log("Testing ", result);
-    //return;
-    if (result?.status === "success") {
-      // if (result?.payload?._id) {
-      isApproved
-        ? toast.success(result?.message)
-        : toast.warning(result?.message);
-      dispatch(getAllReviewAction(isAdmin));
-      //  } else {
-      //   toast.error("Unable to approved!");
-      //  dispatch(getAllReviewAction(isAdmin));
-      // }
-    } else {
-      toast.error(result?.message);
+    try {
+      const result = await updateApproveReviewAction({
+        _id,
+        isApproved,
+      });
+
+      console.log("Approval result:", result);
+
+      if (result?.status !== "success") {
+        toast.error(result?.message || "Unable to update review!");
+        return;
+      }
+
+      toast.success(result.message);
+
+      // Fetch updated reviews
+      const refreshResult = await dispatch(getAllReviewAction(isAdmin));
+
+      console.log("Refreshed reviews:", refreshResult);
+    } catch (error) {
+      console.error("Approval error:", error);
+      toast.error("Something went wrong!");
     }
   };
 
