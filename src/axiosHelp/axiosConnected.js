@@ -2,7 +2,6 @@ import axios from "axios";
 
 const processAPI = async ({ method, url, data, headers, params }) => {
   try {
-    // console.log(data, "axios");
     const response = await axios({
       method,
       url,
@@ -10,16 +9,43 @@ const processAPI = async ({ method, url, data, headers, params }) => {
       params,
       headers,
     });
+
+    console.log("Axios success:", response.data);
+
     return response.data;
   } catch (error) {
-    //console.log(error);
-    const msg = error.response?.data || error.message;
-    return msg;
-    //check in the error respone, if error has response,
-    // response has data ,data has error, otherwise error.message
-    // message: error?.response?.data?.error || error.message,
+    console.error("Axios error:", error.response?.data || error.message);
+
+    return {
+      status: "error",
+      message:
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        error.message,
+    };
   }
 };
+
+// const processAPI = async ({ method, url, data, headers, params }) => {
+//   try {
+//     // console.log(data, "axios");
+//     const response = await axios({
+//       method,
+//       url,
+//       data,
+//       params,
+//       headers,
+//     });
+//     return response.data;
+//   } catch (error) {
+//     //console.log(error);
+//     const msg = error.response?.data || error.message;
+//     return msg;
+//     //check in the error respone, if error has response,
+//     // response has data ,data has error, otherwise error.message
+//     // message: error?.response?.data?.error || error.message,
+//   }
+// };
 
 // //adming API
 // export const addBook = async (data) => {
