@@ -127,14 +127,18 @@ const Reviewspage = () => {
                   {rew.isApproved ? (
                     <Button
                       variant="success"
-                      onClick={() => handleUpdateApprove(rew._id, false)}
+                      onClick={() =>
+                        handleUpdateApprove(rew._id, !rew.isApproved)
+                      }
                     >
                       Approved
                     </Button>
                   ) : (
                     <Button
                       variant="warning"
-                      onClick={() => handleUpdateApprove(rew._id, true)}
+                      onClick={() =>
+                        handleUpdateApprove(rew._id, !rew.isApproved)
+                      }
                     >
                       Not Approved
                     </Button>
