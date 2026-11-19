@@ -16,7 +16,7 @@ export const getAllBooksAction =
   async (dis) => {
     const result = await getAllBooks(filter);
     result?.status === "success" && dis(setBookCollection(result?.book));
-    return result.book;
+    return result?.book;
   };
 
 export const deleteBookAction = async (data) => {
