@@ -27,6 +27,7 @@ export const getAllReviewAPI = async (isAdmin) => {
     headers: authHeaders({ "Content-Type": "application/json" }),
   };
   const result = await processAPI(obj);
+  console.log(result, "ProcessAPI");
   return result;
 };
 
