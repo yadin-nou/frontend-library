@@ -52,6 +52,9 @@ const Header = () => {
       navi("/", { replace: true });
     }
   };
+  const returnHome = () => {
+    navi("/", { replace: true });
+  };
   useEffect(() => {
     if (getSessionStorage("accessJWT") || getLocalStorage("refreshJWT")) {
       dispatch(autoLoginUser());
@@ -66,7 +69,8 @@ const Header = () => {
               src={lmsLogo}
               width={80}
               height={80}
-              style={{ mixBlendMode: "multiply" }}
+              style={{ mixBlendMode: "multiply", cursor: "pointer" }}
+              onClick={returnHome}
             />
             {user?._id && (
               <div className="p-1">
