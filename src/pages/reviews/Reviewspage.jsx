@@ -43,19 +43,17 @@ const Reviewspage = () => {
         isApproved,
       });
 
-      console.log("Approval result:", result);
+      console.log("PATCH RESPONSE:", result);
 
-      if (result?.status !== "success") {
-        toast.error(result?.message || "Unable to update review!");
-        return;
+      if (result?.status === "success") {
+        toast.success(result.message);
+
+        console.log("Dispatching GET reviews...");
+
+        dispatch(getAllReviewAction(isAdmin));
+      } else {
+        console.error("PATCH failed:", result);
       }
-
-      toast.success(result.message);
-
-      // Fetch updated reviews
-      const refreshResult = await dispatch(getAllReviewAction(isAdmin));
-
-      console.log("Refreshed reviews:", refreshResult);
     } catch (error) {
       console.error("Approval error:", error);
       toast.error("Something went wrong!");
