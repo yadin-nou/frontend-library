@@ -25,7 +25,7 @@ export const getAllReviewAction = (isAdmin) => async (dis) => {
 
     const result = await pending;
 
-    // console.log("Get all reviews API:", result);
+    //console.log("Get all reviews API:", result);
 
     if (result?.status === "success") {
       dis(setAllReview(result.payload));

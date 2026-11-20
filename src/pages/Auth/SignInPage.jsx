@@ -114,8 +114,14 @@ const SignInPage = () => {
                 </Button>
               </div>
             </Form>
-            <p className="pt-3">
+
+            <p className="pt-1">
               Forget Password? <Link to="/forget-password">Reset Now</Link>
+              <p>
+                Demo Login:
+                <br /> Admin-User:nouyadin007@gmail.com <br />
+                pass:123!Aa
+              </p>
             </p>
           </Container>
         </div>

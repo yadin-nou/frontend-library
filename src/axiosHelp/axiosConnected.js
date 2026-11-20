@@ -10,47 +10,21 @@ const processAPI = async ({ method, url, data, headers, params }) => {
       headers,
     });
 
-    console.log("HTTP STATUS:", response.status);
-    console.log("HTTP DATA:", response.data);
-    console.log("HTTP HEADERS:", response.headers);
+    //console.log("Axios success:", response.data);
 
     return response.data;
   } catch (error) {
-    console.error("HTTP ERROR:", error);
-    console.error("ERROR RESPONSE:", error.response?.data);
+    console.error("Axios error:", error.response?.data || error.message);
 
     return {
       status: "error",
-      message: error.response?.data?.message || error.message,
+      message:
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        error.message,
     };
   }
 };
-
-// const processAPI = async ({ method, url, data, headers, params }) => {
-//   try {
-//     const response = await axios({
-//       method,
-//       url,
-//       data,
-//       params,
-//       headers,
-//     });
-
-//     console.log("Axios success:", response.data);
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("Axios error:", error.response?.data || error.message);
-
-//     return {
-//       status: "error",
-//       message:
-//         error.response?.data?.message ||
-//         error.response?.data?.error ||
-//         error.message,
-//     };
-//   }
-// };
 
 // const processAPI = async ({ method, url, data, headers, params }) => {
 //   try {
