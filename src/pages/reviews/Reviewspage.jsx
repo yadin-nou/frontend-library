@@ -47,7 +47,7 @@ const Reviewspage = () => {
       toast.promise(pendingResponse, { pending: "Please wait...." });
       const result = await pendingResponse;
       console.log("PATCH RESPONSE:", result);
-      // dispatch(getAllReviewAction(isAdmin));
+
       if (result?.status === "success") {
         toast.success(result.message);
         //console.log("Dispatching GET reviews...");
@@ -55,7 +55,7 @@ const Reviewspage = () => {
       } else {
         toast.warning(result.message);
         console.error("PATCH failed:", result);
-        //dispatch(getAllReviewAction(isAdmin));
+        dispatch(getAllReviewAction(isAdmin));
       }
     } catch (error) {
       console.error("Approval error:", error);
