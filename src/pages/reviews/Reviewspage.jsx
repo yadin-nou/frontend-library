@@ -53,6 +53,7 @@ const Reviewspage = () => {
         //console.log("Dispatching GET reviews...");
         //dispatch(getAllReviewAction(isAdmin));
       } else {
+        toast.warning(result.message);
         console.error("PATCH failed:", result);
         //dispatch(getAllReviewAction(isAdmin));
       }
