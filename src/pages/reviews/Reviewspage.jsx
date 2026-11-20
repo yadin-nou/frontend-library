@@ -38,6 +38,7 @@ const Reviewspage = () => {
 
   const handleUpdateApprove = async (_id, isApproved) => {
     try {
+      console.log(_id, isApproved);
       const result = await updateApproveReviewAction({
         _id,
         isApproved,
@@ -48,7 +49,7 @@ const Reviewspage = () => {
       if (result?.status === "success") {
         toast.success(result.message);
 
-        console.log("Dispatching GET reviews...");
+        //console.log("Dispatching GET reviews...");
 
         dispatch(getAllReviewAction(isAdmin));
       } else {
