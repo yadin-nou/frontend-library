@@ -39,18 +39,16 @@ const Reviewspage = () => {
   const handleUpdateApprove = async (_id, isApproved) => {
     try {
       console.log(_id, isApproved);
-      const result = await updateApproveReviewAction({
+      const pendingResponse = updateApproveReviewAction({
         _id,
         isApproved,
       });
-
-      console.log("PATCH RESPONSE:", result);
-
+      //console.log("PATCH RESPONSE:", result);
+      toast.promise(pendingResponse, { pending: "Please wait...." });
+      const result = await pendingResponse;
       if (result?.status === "success") {
         toast.success(result.message);
-
         //console.log("Dispatching GET reviews...");
-
         dispatch(getAllReviewAction(isAdmin));
       } else {
         console.error("PATCH failed:", result);
