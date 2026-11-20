@@ -47,7 +47,7 @@ const Reviewspage = () => {
       toast.promise(pendingResponse, { pending: "Please wait...." });
       const result = await pendingResponse;
       console.log("PATCH RESPONSE:", result);
-      dispatch(getAllReviewAction(isAdmin));
+      // dispatch(getAllReviewAction(isAdmin));
       if (result?.status === "success") {
         toast.success(result.message);
         //console.log("Dispatching GET reviews...");
