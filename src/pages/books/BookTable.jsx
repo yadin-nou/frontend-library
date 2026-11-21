@@ -4,6 +4,7 @@ import { PencilFill, TrashFill } from "react-bootstrap-icons";
 import AddBook from "./AddBook";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import usePagination from "../../hooks/usePagination";
 
 const BookTable = ({
   searchBook,
@@ -11,18 +12,16 @@ const BookTable = ({
   handleDeleteBook,
   handelGetAllBook,
 }) => {
-  // page pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 10;
-  const totalPages = Math.ceil(searchBook.length / booksPerPage);
-
-  // Calculate the indexes of the books to display
-  const indexOfLastBook = currentPage * booksPerPage;
-  const indexOfFirstBook = indexOfLastBook - booksPerPage;
-
-  // Get books for the current page
-  const currentBooks = searchBook.slice(indexOfFirstBook, indexOfLastBook);
-
+  const {
+    currentData,
+    currentPage,
+    numberPerPage,
+    totalPages,
+    indexOfFirstData,
+    indexOfLastData,
+    handlePagination,
+  } = usePagination(searchBook, 6);
+  //const [numPage, setNumPage] = useState(numberPerPage);
   const navi = useNavigate();
   const imgPath = import.meta.env.VITE_SERVER_URL;
   const handleBookLandingPage = (bookId) => {
@@ -30,13 +29,16 @@ const BookTable = ({
     navi(linkDetaail, { state: { from: "/user/books" } });
     //<Navigate to={linkDetaail} state={{ from: "/user/books" }} replace />;
   };
-
-  const handlePagination = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchBook]);
+  // const PaginationNum = (pg) => {
+  //   handlePagination(pg);
+  //   if (pg === 1) {
+  //     setNumPage(indexOfFirstData);
+  //   } else {
+  //     //numPage = indexOfFirstData;
+  //     setNumPage(indexOfFirstData + numPage);
+  //   }
+  // };
+  // console.log(numPage);
   return (
     <div className="border rounded-3 overflow-hidden">
       <Table
@@ -60,11 +62,11 @@ const BookTable = ({
           </tr>
         </thead>
         <tbody>
-          {currentBooks.map((book, key) => (
+          {currentData.map((book, key) => (
             <tr key={book._id}>
               <td className="d-none d-md-table-cell">
                 {" "}
-                {indexOfFirstBook + key + 1}
+                {indexOfFirstData + key + 1}
               </td>
               <td
                 className="cursor-pointer"
@@ -117,12 +119,12 @@ const BookTable = ({
       </Table>
       <div className="d-flex justify-content-between align-items-center mt-3">
         <small className="text-secondary">
-          Showing {currentBooks.length} of {bookCollection.length} books
+          Showing {indexOfLastData} of {bookCollection.length} books
         </small>
         <div className="d-flex justify-content-between align-items-center mt-3 p-2">
-          <small className="text-secondary">
-            Showing {currentBooks.length} of {searchBook.length} books
-          </small>
+          {/* <small className="text-secondary">
+            Showing {currentData.length} of {searchBook.length} books
+          </small> */}
 
           <Pagination size="sm" className="mb-0">
             <Pagination.Prev

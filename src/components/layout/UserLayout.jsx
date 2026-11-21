@@ -27,12 +27,12 @@ export const UserLayout = () => {
 
           <Col className="pt-1" style={{ minWidth: 0 }}>
             <main
-              className="main ps-2 ps-md-5 w-100 d-flex"
+              className="main ps-2 ps-md-5 w-100 d-flex "
               style={{ overflowX: "auto", minWidth: 0 }}
             >
               <div
                 className="mx-auto"
-                style={{ minWidth: 0, maxWidth: "100%" }}
+                style={{ minWidth: 0, maxWidth: "100%", minHeight: "75vh" }}
               >
                 <Outlet />
               </div>
