@@ -111,11 +111,26 @@ const BookLandingPage = () => {
   return (
     <>
       <Container>
-        <Row className="g-3 pt-5">
-          <Col xs={2} md={2}>
-            <Link to={from} style={{ textDecoration: "none", color: "white" }}>
+        <Row>
+          <Col xs={2} md={2}></Col>
+          <Col xs={10} md={10}>
+            <Link
+              to={from}
+              style={{
+                textDecoration: "none",
+                color: "black",
+              }}
+              className="hover-text"
+            >
               &lt;&lt; Back
             </Link>
+          </Col>
+        </Row>
+        <Row className="g-3 pt-2">
+          <Col xs={2} md={2}>
+            {/* <Link to={from} style={{ textDecoration: "none", color: "white" }}>
+              &lt;&lt; Back
+            </Link> */}
           </Col>
           <Col xs={12} md={10} xl={8}>
             <Card className="d-flex flex-column flex-lg-row h-auto">

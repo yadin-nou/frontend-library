@@ -253,3 +253,6 @@ button {
   width: 100%;
   object-fit: cover;
 }
+.hover-text:hover {
+  color: blue !important; /* uses Bootstrap's theme color */
+}
