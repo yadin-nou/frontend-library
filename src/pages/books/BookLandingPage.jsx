@@ -111,16 +111,15 @@ const BookLandingPage = () => {
   return (
     <>
       <Container>
+        {/* xs={12}: on phones the link uses the full width and sits at the left edge.
+          md={{ span: 10, offset: 2 }}: 
+            from tablets up it keeps your original layout, with the link in the right 10 columns. */}
         <Row>
-          <Col xs={2} md={2}></Col>
-          <Col xs={10} md={10}>
+          <Col xs={12} md={{ span: 10, offset: 2 }}>
             <Link
-              to={from}
-              style={{
-                textDecoration: "none",
-                color: "black",
-              }}
-              className="hover-text"
+              to={from || "/"}
+              style={{ textDecoration: "none", color: "black" }}
+              className="hover-text d-inline-block py-2"
             >
               &lt;&lt; Back
             </Link>
