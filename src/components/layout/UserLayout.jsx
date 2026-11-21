@@ -17,7 +17,7 @@ export const UserLayout = () => {
 
         <Row
           style={{ height: "auto" }}
-          className="border rounded-4 shadow flex-nowrap"
+          className="border rounded-4 shadow flex-nowrap pb-2"
         >
           <Col xs="auto" className="px-0" style={{ width: 64 }}>
             <aside className="sidebar-narrow">
@@ -25,17 +25,6 @@ export const UserLayout = () => {
             </aside>
           </Col>
 
-          {/* <Col
-            className="d-flex justify-content-center pt-1"
-            style={{ minWidth: 0 }}
-          >
-            <main
-              className="main ps-2 ps-md-5 w-100 d-flex justify-content-center"
-              style={{ overflow: "auto", minWidth: 0 }}
-            >
-              <Outlet />
-            </main>
-          </Col> */}
           <Col className="pt-1" style={{ minWidth: 0 }}>
             <main
               className="main ps-2 ps-md-5 w-100 d-flex"

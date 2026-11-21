@@ -15,12 +15,12 @@ export const DefaultLayout = () => {
           <Header />
         </Col>
       </Row>
-      <Row
-        style={{ height: "auto" }}
-        className="container-m border rounded-4 shadow  d-flex justify-content-center align-items-center mt-2"
-      >
-        <Col sm={11} className="d-flex justify-content-center">
-          <main className="main" style={{ width: "100vw" }}>
+      <Row className="border rounded-4 shadow justify-content-center mt-2 mx-0">
+        <Col xs={12} sm={11} className="d-flex justify-content-center">
+          <main
+            className="main w-100 d-flex flex-column justify-content-center"
+            style={{ minHeight: "75vh" }}
+          >
             <Outlet />
           </main>
         </Col>
