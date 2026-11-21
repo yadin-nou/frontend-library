@@ -48,7 +48,7 @@ function BorrowPage() {
 
   return (
     <div>
-      <h3>All Borrows</h3>
+      <h3>{isAdmin ? "All Borrows" : "My Borrows"}</h3>
       <Table
         striped
         bordered
