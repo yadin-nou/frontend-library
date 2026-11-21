@@ -58,7 +58,7 @@ const SearchBookGlobal = ({ setIsSearch, setFound }) => {
   return (
     <>
       <Row className="align-items-center g-2 flex-wrap pt-2 wi">
-        <Col className="ps-md-5" xs={10}>
+        <Col xs={12}>
           <InputGroup>
             <InputGroup.Text className="bg-white">
               <Search />
@@ -70,7 +70,9 @@ const SearchBookGlobal = ({ setIsSearch, setFound }) => {
             />
           </InputGroup>
         </Col>
-        <Col>{/* <Button variant="success">Search</Button> */}</Col>
+        {/* <Col>
+          <Button variant="success">Search</Button>{" "}
+        </Col> */}
       </Row>
       <CustomCard
         bookCollection={searchBook}

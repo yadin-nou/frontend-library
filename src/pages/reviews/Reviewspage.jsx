@@ -53,7 +53,9 @@ const Reviewspage = () => {
         //console.log("Dispatching GET reviews...");
         dispatch(getAllReviewAction(isAdmin));
       } else {
-        toast.warning(result.message);
+        //toast.warning(result.message);
+        //Request failed with status code 304
+
         console.error("PATCH failed:", result);
         dispatch(getAllReviewAction(isAdmin));
       }

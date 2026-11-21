@@ -24,11 +24,15 @@ const HomePage = () => {
 
   return (
     <>
-      <SearchBookBlobal setIsSearch={setIsSearch} setFound={setFound} />
-
       <Container>
         <Row>
-          <div className="pt-3 d-flex justify-content-center text-danger">
+          <Col>
+            <SearchBookBlobal setIsSearch={setIsSearch} setFound={setFound} />
+          </Col>
+        </Row>
+
+        <Row>
+          <div className="d-flex justify-content-center text-danger">
             {!found && <h4>Book Not Found!</h4>}
           </div>
           {!isSearch && (
