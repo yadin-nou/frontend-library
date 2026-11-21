@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import CustomCard from "./CustomCard";
 import { useSearchParams } from "react-router-dom";
-
+import { MdClear } from "react-icons/md";
 const SearchBookGlobal = ({ setIsSearch, setFound }) => {
   const [searchBook, setSearchBook] = useState([]);
   const bookCollection = useSelector((state) => state.bookInfo.bookCollection);
@@ -54,7 +54,12 @@ const SearchBookGlobal = ({ setIsSearch, setFound }) => {
     [searchPar],
     dt,
   );
-
+  const clearSearch = () => {
+    setSearchData("");
+    setSearchBook([]);
+    setIsSearch(false);
+    setFound(true);
+  };
   return (
     <>
       <Row className="align-items-center g-2 flex-wrap pt-2 wi">
@@ -68,6 +73,9 @@ const SearchBookGlobal = ({ setIsSearch, setFound }) => {
               value={searchData}
               onChange={(e) => BookSearchList(e.target.value)}
             />
+            <InputGroup.Text className="bg-white">
+              <MdClear className="fs-2 cursor-pointer" onClick={clearSearch} />
+            </InputGroup.Text>
           </InputGroup>
         </Col>
         {/* <Col>
