@@ -13,6 +13,7 @@ import {
 import { TbBookUpload } from "react-icons/tb";
 import { useSelector } from "react-redux";
 import LeftNavBar from "./LeftNavBar";
+import ToolTips from "../Tooltips/ToolTips";
 const PageNav = () => {
   const { user } = useSelector((state) => state.userInfo);
   return (
@@ -27,7 +28,9 @@ const PageNav = () => {
           end
           className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
         >
-          <Speedometer2 className="me-2" size={40} />
+          <ToolTips text="Dashboard">
+            <Speedometer2 className="me-2" size={40} />
+          </ToolTips>
         </Nav.Link>
 
         {user?.role === "admin" && (
@@ -37,7 +40,10 @@ const PageNav = () => {
               to="books"
               className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
             >
-              <BookFill className="me-2" size={40} />
+              <ToolTips text="Display Books">
+                {" "}
+                <BookFill className="me-2" size={40} />
+              </ToolTips>
             </Nav.Link>
 
             <Nav.Link
@@ -45,7 +51,9 @@ const PageNav = () => {
               to="userpage"
               className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
             >
-              <PeopleFill className="me-2" size={40} />
+              <ToolTips text="Display Users">
+                <PeopleFill className="me-2" size={40} />
+              </ToolTips>
             </Nav.Link>
             {/* <Nav.Link
               as={NavLink}
@@ -60,14 +68,19 @@ const PageNav = () => {
               to="allborrows"
               className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
             >
-              <ArrowLeftRight className="me-2" size={40} />
+              <ToolTips text="All Borrows">
+                <ArrowLeftRight className="me-2" size={40} />
+              </ToolTips>
             </Nav.Link>
             <Nav.Link
               as={NavLink}
               to="reviews"
               className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
             >
-              <StarFill className="me-2" size={40} />
+              <ToolTips text="Reviews">
+                {" "}
+                <StarFill className="me-2" size={40} />
+              </ToolTips>
             </Nav.Link>
           </>
         )}
@@ -76,14 +89,18 @@ const PageNav = () => {
           to="my-borrow"
           className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
         >
-          <TbBookUpload className="me-2" size={40} />
+          <ToolTips text="My Borrows">
+            <TbBookUpload className="me-2" size={40} />
+          </ToolTips>
         </Nav.Link>
         <Nav.Link
           as={NavLink}
           to="profile"
           className="sidebar-link mb-1 d-flex justify-content-left align-items-center"
         >
-          <PersonCircle className="me-2" size={40} />
+          <ToolTips text="My Profile">
+            <PersonCircle className="me-2" size={40} />
+          </ToolTips>
         </Nav.Link>
       </Nav>
     </>
