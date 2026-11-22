@@ -29,16 +29,7 @@ const BookTable = ({
     navi(linkDetaail, { state: { from: "/user/books" } });
     //<Navigate to={linkDetaail} state={{ from: "/user/books" }} replace />;
   };
-  // const PaginationNum = (pg) => {
-  //   handlePagination(pg);
-  //   if (pg === 1) {
-  //     setNumPage(indexOfFirstData);
-  //   } else {
-  //     //numPage = indexOfFirstData;
-  //     setNumPage(indexOfFirstData + numPage);
-  //   }
-  // };
-  console.log(currentPage, currentData.length, "total:", totalPages);
+
   return (
     <div className="border rounded-3 overflow-hidden">
       <Table

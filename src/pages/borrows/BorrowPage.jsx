@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { Alert, Badge, Button, Table } from "react-bootstrap";
+import { Alert, Badge, Button, Pagination, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllBorrowsAction,
@@ -10,6 +10,7 @@ import { FaBimobject } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import AddReview from "../reviews/AddReview";
+import usePagination from "../../hooks/usePagination";
 //import noImg from "../../../public/images/no_image.jpg";
 
 function BorrowPage() {
@@ -24,7 +25,17 @@ function BorrowPage() {
   const role =
     user?.role === "admin" && path === "allborrows" ? "admin" : "user";
   const isAdmin = role === "admin";
-  // console.log(role);
+
+  const {
+    currentData,
+    currentPage,
+    numberPerPage,
+    totalPages,
+    indexOfFirstData,
+    indexOfLastData,
+    handlePagination,
+  } = usePagination(borrows, 6);
+
   useEffect(() => {
     dispatch(getAllBorrowsAction(role));
     // console.log(allBorrows, " all Borrow ");
@@ -71,8 +82,8 @@ function BorrowPage() {
           </tr>
         </thead>
         <tbody>
-          {borrows?.length > 0 ? (
-            borrows.map((book, k) => (
+          {currentData?.length > 0 ? (
+            currentData.map((book, k) => (
               <tr key={k + 1}>
                 <td className="d-none d-md-table-cell">{k + 1}</td>
                 <td>
@@ -141,6 +152,29 @@ function BorrowPage() {
           )}
         </tbody>
       </Table>
+      <div className="d-flex justify-content-md-evenly">
+        <Pagination size="sm" className="mb-0">
+          <Pagination.Prev
+            disabled={currentPage === 1}
+            onClick={() => handlePagination(currentPage - 1)}
+          />
+
+          {Array.from({ length: totalPages }, (_, index) => (
+            <Pagination.Item
+              key={index + 1}
+              active={currentPage === index + 1}
+              onClick={() => handlePagination(index + 1)}
+            >
+              {index + 1}
+            </Pagination.Item>
+          ))}
+
+          <Pagination.Next
+            disabled={currentPage === totalPages || totalPages === 0}
+            onClick={() => handlePagination(currentPage + 1)}
+          />
+        </Pagination>
+      </div>
     </div>
   );
 }
