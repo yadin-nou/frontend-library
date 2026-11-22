@@ -38,7 +38,7 @@ const BookTable = ({
   //     setNumPage(indexOfFirstData + numPage);
   //   }
   // };
-  // console.log(numPage);
+  console.log(currentPage, currentData.length, "total:", totalPages);
   return (
     <div className="border rounded-3 overflow-hidden">
       <Table
@@ -119,7 +119,11 @@ const BookTable = ({
       </Table>
       <div className="d-flex justify-content-between align-items-center mt-3">
         <small className="text-secondary">
-          Showing {indexOfLastData} of {bookCollection.length} books
+          Showing{" "}
+          {totalPages === currentPage
+            ? currentData.length + indexOfFirstData
+            : indexOfLastData}{" "}
+          of {bookCollection.length} books
         </small>
         <div className="d-flex justify-content-between align-items-center mt-3 p-2">
           {/* <small className="text-secondary">
