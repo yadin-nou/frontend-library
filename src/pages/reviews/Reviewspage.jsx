@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Alert, Button, Table } from "react-bootstrap";
+import { Alert, Button, Pagination, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { renderStars } from "../../utils/starRating";
 import {
@@ -9,6 +9,7 @@ import {
 } from "../../features/review/reviewAction";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
+import usePagination from "../../hooks/usePagination";
 
 const Reviewspage = () => {
   const review = useSelector((state) => state.reviewInfo.reviews);
@@ -19,6 +20,9 @@ const Reviewspage = () => {
   // const path = location.pathname.split("/").at(-1);
   const navi = useNavigate();
   const isAdmin = user?.role === "admin";
+
+  const { currentData, currentPage, totalPages, handlePagination } =
+    usePagination(review, 5);
 
   const handleDeleteReview = async (_id) => {
     const conf = confirm("Are you sure want to delete this Review?");
@@ -88,8 +92,8 @@ const Reviewspage = () => {
           </tr>
         </thead>
         <tbody>
-          {review.length > 0 ? (
-            review.map((rew, k) => (
+          {currentData.length > 0 ? (
+            currentData.map((rew, k) => (
               <tr key={k + 1}>
                 <td className="d-none d-md-table-cell">{k + 1}</td>
                 <td
@@ -163,6 +167,29 @@ const Reviewspage = () => {
           )}
         </tbody>
       </Table>
+      <div className="d-flex justify-content-md-evenly pt-2">
+        <Pagination size="sm" className="mb-0">
+          <Pagination.Prev
+            disabled={currentPage === 1}
+            onClick={() => handlePagination(currentPage - 1)}
+          />
+
+          {Array.from({ length: totalPages }, (_, index) => (
+            <Pagination.Item
+              key={index + 1}
+              active={currentPage === index + 1}
+              onClick={() => handlePagination(index + 1)}
+            >
+              {index + 1}
+            </Pagination.Item>
+          ))}
+
+          <Pagination.Next
+            disabled={currentPage === totalPages || totalPages === 0}
+            onClick={() => handlePagination(currentPage + 1)}
+          />
+        </Pagination>
+      </div>
     </div>
   );
 };

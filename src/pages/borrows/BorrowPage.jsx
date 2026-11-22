@@ -26,15 +26,8 @@ function BorrowPage() {
     user?.role === "admin" && path === "allborrows" ? "admin" : "user";
   const isAdmin = role === "admin";
 
-  const {
-    currentData,
-    currentPage,
-    numberPerPage,
-    totalPages,
-    indexOfFirstData,
-    indexOfLastData,
-    handlePagination,
-  } = usePagination(borrows, 6);
+  const { currentData, currentPage, totalPages, handlePagination } =
+    usePagination(borrows, 6);
 
   useEffect(() => {
     dispatch(getAllBorrowsAction(role));
@@ -152,7 +145,7 @@ function BorrowPage() {
           )}
         </tbody>
       </Table>
-      <div className="d-flex justify-content-md-evenly">
+      <div className="d-flex justify-content-md-evenly pt-2">
         <Pagination size="sm" className="mb-0">
           <Pagination.Prev
             disabled={currentPage === 1}
