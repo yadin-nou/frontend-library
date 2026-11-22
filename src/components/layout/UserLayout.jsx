@@ -14,10 +14,9 @@ export const UserLayout = () => {
             <Header />
           </Col>
         </Row>
-
         <Row
           style={{ height: "auto" }}
-          className="border rounded-4 shadow flex-nowrap pb-2"
+          className="mx-0 rounded-4 flex-nowrap pb-2"
         >
           <Col xs="auto" className="px-0" style={{ width: 64 }}>
             <aside className="sidebar-narrow">
@@ -25,15 +24,12 @@ export const UserLayout = () => {
             </aside>
           </Col>
 
-          <Col className="pt-1" style={{ minWidth: 0 }}>
+          <Col className="pt-1 ps-4 pe-0" style={{ minWidth: 0 }}>
             <main
-              className="main ps-2 ps-md-5 w-100 d-flex "
+              className="main w-100 d-flex"
               style={{ overflowX: "auto", minWidth: 0 }}
             >
-              <div
-                className="mx-auto"
-                style={{ minWidth: 0, maxWidth: "100%", minHeight: "75vh" }}
-              >
+              <div style={{ minWidth: 0, width: "100%", minHeight: "75vh" }}>
                 <Outlet />
               </div>
             </main>

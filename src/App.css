@@ -27,9 +27,6 @@
   color: #adb5bd !important;
   cursor: not-allowed;
 }
-/* body {
-  background: "#e1e1e1de" !important ;
-} */
 
 .book-card {
   transition:
@@ -255,4 +252,10 @@ button {
 }
 .hover-text:hover {
   color: blue !important; /* uses Bootstrap's theme color */
+}
+/* .bg-color {
+  background: black !important;
+} */
+html body {
+  background-color: #e1e1e1de !important;
 }

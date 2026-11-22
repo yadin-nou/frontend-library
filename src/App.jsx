@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import "./index.css";
 import { Button } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import AppRoutes from "./routes/AppRoutes";
@@ -18,12 +19,12 @@ const App = () => {
   return (
     <>
       <div
-        className="container-m p-3"
+        className="container p-3"
         style={{
           background: "#e1e1e1de",
-          minHeight: "220vh",
           margin: "0 auto",
           position: "relative",
+          width: "100%",
         }}
       >
         <AppRoutes />
