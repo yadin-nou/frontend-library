@@ -17,6 +17,7 @@ import {
   getUserAction,
 } from "../../features/user/userAction.js";
 import useSpinner from "../../hooks/useSpinner.js";
+import CopyButton from "../../components/CopyPaste/CopyButton.jsx";
 
 const SignInPage = () => {
   const { formData, setFormData, handleOnChange } = useFormHook({});
@@ -119,8 +120,11 @@ const SignInPage = () => {
               Forget Password? <Link to="/forget-password">Reset Now</Link>
               <br />
               Demo Login:
-              <br /> Admin-User:nouyadin007@gmail.com <br />
+              <br /> Admin-user:nouyadin007@gmail.com
+              <CopyButton text="nouyadin007@gmail.com" />
+              <br />
               pass:123!Aa
+              <CopyButton text="123!Aa" />
             </p>
           </Container>
         </div>
