@@ -27,9 +27,9 @@ export const getAllReviewAction = (isAdmin) => async (dis) => {
 
     //console.log("Get all reviews API:", result);
 
-    if (result?.status === "success") {
-      dis(setAllReview(result.payload));
-    }
+    //if (result?.status === "success") {
+    dis(setAllReview(result.payload));
+    //}
 
     return result;
   } catch (error) {
