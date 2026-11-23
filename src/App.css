@@ -69,12 +69,36 @@
   .book-card img {
     max-height: none; /* let it fill the side-by-side column height on tablet+ */
   }
+  .textShow {
+    min-width: 220px;
+  }
+}
+@media (min-width: 400px) and (max-width: 576px) {
+  .textShow {
+    min-width: 200px;
+  }
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+/* Mobile */
+@media (max-width: 600px) {
+  /* body {
+    padding: 12px;
+  } */
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .books-list {
+    grid-template-columns: 1fr;
+  }
+  .textShow {
+    min-width: 200px;
+  }
 }
 
 /* body {
@@ -215,20 +239,6 @@ button {
   color: #fff;
 }
 
-/* Mobile */
-@media (max-width: 600px) {
-  /* body {
-    padding: 12px;
-  } */
-  .profile-header {
-    flex-direction: column;
-    text-align: center;
-  }
-  .books-list {
-    grid-template-columns: 1fr;
-  }
-}
-
 .cursor-pointer {
   cursor: pointer;
 }
@@ -258,4 +268,7 @@ button {
 } */
 html body {
   background-color: #e1e1e1de !important;
+}
+.textShow {
+  min-width: 440px;
 }

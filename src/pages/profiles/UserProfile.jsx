@@ -12,9 +12,7 @@ const formatDate = (date) =>
 
 const Field = ({ label, children }) => (
   <div className="d-flex flex-column flex-sm-row py-2 border-bottom pb-4">
-    <div className="text-muted fw-semibold" style={{ minWidth: 440 }}>
-      {label}
-    </div>
+    <div className="text-muted fw-semibold textShow">{label}</div>
 
     <div className="flex-grow-1 text-break">{children}</div>
   </div>
@@ -30,7 +28,7 @@ const UserProfile = ({ user, changePasswordPath = "/forget-password" }) => {
   return (
     <Card className="mx-auto" style={{ maxWidth: 800 }}>
       <Card.Body>
-        <div className="d-flex  align-items-center gap-3 mb-3">
+        <div className="d-flex  align-items-center gap-3 mb-2">
           <img
             class="avatar"
             src="https://via.placeholder.com/90"
