@@ -6,7 +6,8 @@ import { renderStars } from "../../utils/starRating";
 import { useNavigate } from "react-router-dom";
 const DispalyBook = ({ bookCollection }) => {
   const navi = useNavigate();
-  const imgPath = import.meta.env.VITE_SERVER_URL;
+  const imgPath =
+    import.meta.env.VITE_SERVER_URL || "https://dxarrq58gv8t9.cloudfront.net";
   const handleBookDetails = (id) => {
     navi("/books/details/" + id);
   };

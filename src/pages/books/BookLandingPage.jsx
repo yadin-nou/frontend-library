@@ -37,7 +37,8 @@ const BookLandingPage = () => {
   const navi = useNavigate();
   const [preLocate, setPreLocate] = useState("");
   const location = useLocation();
-  const imgPath = import.meta.env.VITE_SERVER_URL;
+  const imgPath =
+    import.meta.env.VITE_SERVER_URL || "https://dxarrq58gv8t9.cloudfront.net";
   const bookDetail = useSelector((state) =>
     state.bookInfo.bookCollection.find((bid) => bid._id === id),
   );

@@ -23,7 +23,8 @@ const BookTable = ({
   } = usePagination(searchBook, 6);
   //const [numPage, setNumPage] = useState(numberPerPage);
   const navi = useNavigate();
-  const imgPath = import.meta.env.VITE_SERVER_URL;
+  const imgPath =
+    import.meta.env.VITE_SERVER_URL || "https://dxarrq58gv8t9.cloudfront.net";
   const handleBookLandingPage = (bookId) => {
     const linkDetaail = "/books/details/" + bookId;
     navi(linkDetaail, { state: { from: "/user/books" } });

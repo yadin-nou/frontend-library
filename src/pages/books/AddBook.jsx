@@ -38,7 +38,8 @@ const AddBook = ({ handelGetAllBook, bookEdit = false, id }) => {
   const [imgDelPat, setImgDelPat] = useState(null);
   const [imgDel, setImgDel] = useState(false);
   const [isDel, setIsDel] = useState(false);
-  const imgPath = import.meta.env.VITE_SERVER_URL;
+  const imgPath =
+    import.meta.env.VITE_SERVER_URL || "https://dxarrq58gv8t9.cloudfront.net";
   const dispatch = useDispatch();
   const book = useSelector((state) =>
     state.bookInfo.bookCollection.find((b) => b._id === id),

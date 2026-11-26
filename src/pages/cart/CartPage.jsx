@@ -12,7 +12,8 @@ const CartPage = () => {
   const carts = useSelector((state) => state.cartInfo.cart);
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
-  const imgPath = import.meta.env.VITE_SERVER_URL;
+  const imgPath =
+    import.meta.env.VITE_SERVER_URL || "https://dxarrq58gv8t9.cloudfront.net";
   const dueDate = new Date();
   dueDate.setDate(dueDate.getDate() + 15);
 

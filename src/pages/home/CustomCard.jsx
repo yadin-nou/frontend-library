@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const CustomCard = ({ bookCollection, search = false, searchData }) => {
   const navi = useNavigate();
-  const imgPath = import.meta.env.VITE_SERVER_URL;
+  const imgPath =
+    import.meta.env.VITE_SERVER_URL || "https://dxarrq58gv8t9.cloudfront.net";
   const handleBookDetails = (id) => {
     const s = search ? `?search=true&dt=${searchData}` : "";
     navi("/books/details/" + id + s);

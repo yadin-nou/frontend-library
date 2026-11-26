@@ -17,7 +17,8 @@ function BorrowPage() {
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
   const location = useLocation();
-  const imgPath = import.meta.env.VITE_SERVER_URL;
+  const imgPath =
+    import.meta.env.VITE_SERVER_URL || "https://dxarrq58gv8t9.cloudfront.net";
   const path = location.pathname.split("/").at(-1);
   const { allBorrows, myBorrows } = useSelector((state) => state.borrowInfo);
   const borrows =
