@@ -2,10 +2,12 @@ import processAPI from "../../axiosHelp/axiosConnected.js";
 import { authHeaders } from "../authHeader/authHeader.js";
 
 const reviewRouteLink = "/api/v1/reviews";
-const urlReview =
-  import.meta.env.VITE_SERVER_URL ||
-  "https://dxarrq58gv8t9.cloudfront.net" + reviewRouteLink;
-
+// const urlReview =
+//   import.meta.env.VITE_SERVER_URL ||
+//   "https://dxarrq58gv8t9.cloudfront.net" + reviewRouteLink;
+const baseURL =
+  import.meta.env.VITE_SERVER_URL || "https://dxarrq58gv8t9.cloudfront.net";
+const urlReview = `${baseURL}${reviewRouteLink}`;
 export const insertReviewAPI = async (data) => {
   //console.log(data);
   const obj = {

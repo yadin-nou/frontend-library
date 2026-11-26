@@ -3,10 +3,12 @@ import { authHeaders } from "../authHeader/authHeader.js";
 
 // const adminRoute = "/api/v1/admin";
 const bookRoute = "/api/v1/book";
-const urlBook =
-  import.meta.env.VITE_SERVER_URL ||
-  "https://dxarrq58gv8t9.cloudfront.net" + bookRoute;
-
+// const urlBook =
+//   import.meta.env.VITE_SERVER_URL ||
+//   "https://dxarrq58gv8t9.cloudfront.net" + bookRoute;
+const baseURL =
+  import.meta.env.VITE_SERVER_URL || "https://dxarrq58gv8t9.cloudfront.net";
+const urlBook = `${baseURL}${bookRoute}`;
 //const accessJWT = getSessionStorage("accessJWT");
 
 //adming API

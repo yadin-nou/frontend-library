@@ -2,9 +2,9 @@
 
 import processAPI from "../axiosHelp/axiosConnected";
 const authRoute = "/api/v1/auth";
-const urlRoute =
-  import.meta.env.VITE_SERVER_URL ||
-  "https://dxarrq58gv8t9.cloudfront.net" + authRoute;
+const baseURL =
+  import.meta.env.VITE_SERVER_URL || "https://dxarrq58gv8t9.cloudfront.net";
+const urlRoute = `${baseURL}${authRoute}`;
 
 export const signupNewUserAPI = async (data) => {
   data.cpassword = undefined; // make cpassword to empty
