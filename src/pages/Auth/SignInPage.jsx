@@ -45,7 +45,7 @@ const SignInPage = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-
+    //setSpinner(true);
     const { email, password } = formData;
     if (email && password) {
       const pendingResp = loginUserAPI({ email, password });
@@ -55,6 +55,7 @@ const SignInPage = () => {
       if (result?.status === "success") {
         toast.success("Login successfully");
         // console.log(result.payload.refreshJWT);
+        // setSpinner(false);
         setLocalStorage(result.payload.refreshJWT);
         setSessionStorage(result.payload.accessJWT);
         await dispatch(getUserAction());
@@ -94,7 +95,7 @@ const SignInPage = () => {
           style={{
             width: "100%",
             maxWidth: "380px",
-            height: "400px",
+            height: "450px",
             margin: "0 auto",
             background: "#ffffffb5",
           }}
@@ -118,13 +119,12 @@ const SignInPage = () => {
 
             <p className="pt-1">
               Forget Password? <Link to="/forget-password">Reset Now</Link>
-              <br />
+              <hr />
               Demo Login:
               <br /> Admin-user:nouyadin007@gmail.com
               <CopyButton text="nouyadin007@gmail.com" />
               <br />
-              pass:123!Aa
-              <CopyButton text="123!Aa" />
+              pass:123!Aa <CopyButton text="123!Aa" />
             </p>
           </Container>
         </div>
