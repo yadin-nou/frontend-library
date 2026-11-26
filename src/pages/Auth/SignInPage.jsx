@@ -122,9 +122,10 @@ const SignInPage = () => {
               <hr />
               Demo Login:
               <br /> Admin-user:nouyadin007@gmail.com
-              <CopyButton text="nouyadin007@gmail.com" />
+              {/* <CopyButton text="nouyadin007@gmail.com" /> */}
               <br />
-              pass:123!Aa <CopyButton text="123!Aa" />
+              pass:123!Aa
+              {/* <CopyButton text="123!Aa" /> */}
             </p>
           </Container>
         </div>
