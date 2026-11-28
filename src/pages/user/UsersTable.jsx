@@ -4,6 +4,7 @@ import {
   getAllUserAction,
   setUserStatusAction,
 } from "../../features/user/userAction";
+import { toast } from "react-toastify";
 
 const formatDate = (date) =>
   date
@@ -26,6 +27,10 @@ const UsersTable = ({ users = [], onDelete }) => {
   const handleStatus = async (data, _id) => {
     await dispatch(setUserStatusAction({ status: data, _id }));
     dispatch(getAllUserAction());
+  };
+  const handleSuperAdmin = () => {
+    //alert("You can't change Super Admin status");
+    // toast.warning("Unable to change Super Admin status");
   };
   return (
     <div className="border rounded-3 overflow-hidden">
@@ -71,15 +76,27 @@ const UsersTable = ({ users = [], onDelete }) => {
                 <td>
                   <Badge
                     bg={user.status === "active" ? "success" : "danger"}
-                    className="cursor-pointer"
-                    onClick={(e) =>
-                      handleStatus(
-                        user.status === "active" ? "inactive" : "active",
-                        user._id,
-                      )
+                    className={
+                      user.email === "nouyadin007@gmail.com" ||
+                      user.email === logInUser?.email
+                        ? ""
+                        : "cursor-pointer"
+                    }
+                    onClick={
+                      user.email === "nouyadin007@gmail.com" ||
+                      user.email === logInUser?.email
+                        ? handleSuperAdmin
+                        : (e) =>
+                            handleStatus(
+                              user.status === "active" ? "inactive" : "active",
+                              user._id,
+                            )
                     }
                   >
-                    {user.status}
+                    {user.email === "nouyadin007@gmail.com" ||
+                    user.email === logInUser?.email
+                      ? "-"
+                      : user.status}
                   </Badge>
                 </td>
                 <td>{formatDate(user.createdAt)}</td>
