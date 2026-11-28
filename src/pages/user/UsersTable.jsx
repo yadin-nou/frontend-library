@@ -1,4 +1,9 @@
 import { Table, Badge, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllUserAction,
+  setUserStatusAction,
+} from "../../features/user/userAction";
 
 const formatDate = (date) =>
   date
@@ -10,13 +15,18 @@ const formatDate = (date) =>
     : "-";
 
 const UsersTable = ({ users = [], onDelete }) => {
+  const logInUser = useSelector((state) => state.userInfo.user);
+  const dispatch = useDispatch();
   const handleDelete = (user) => {
     const ok = window.confirm(
       `Are you sure you want to delete ${user.fName} ${user.lName}?`,
     );
     if (ok) onDelete(user._id);
   };
-
+  const handleStatus = async (data, _id) => {
+    await dispatch(setUserStatusAction({ status: data, _id }));
+    dispatch(getAllUserAction());
+  };
   return (
     <div className="border rounded-3 overflow-hidden">
       <Table
@@ -59,13 +69,23 @@ const UsersTable = ({ users = [], onDelete }) => {
                   </Badge>
                 </td>
                 <td>
-                  <Badge bg={user.status === "active" ? "success" : "danger"}>
+                  <Badge
+                    bg={user.status === "active" ? "success" : "danger"}
+                    className="cursor-pointer"
+                    onClick={(e) =>
+                      handleStatus(
+                        user.status === "active" ? "inactive" : "active",
+                        user._id,
+                      )
+                    }
+                  >
                     {user.status}
                   </Badge>
                 </td>
                 <td>{formatDate(user.createdAt)}</td>
                 <td className="text-center">
-                  {user.email === "nouyadin007@gmail.com" ? (
+                  {user.email === "nouyadin007@gmail.com" ||
+                  user.email === logInUser?.email ? (
                     "-"
                   ) : (
                     <Button

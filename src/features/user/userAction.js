@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import {
   getLocalStorage,
   getSessionStorage,
@@ -6,7 +7,7 @@ import {
   setSessionStorage,
 } from "../../localStorage/storage.js";
 import { getNewAccessJWTAPI } from "../../service/authAPI.js";
-import { getAllUserApi, getUserApi } from "./userAPI.js";
+import { getAllUserApi, getUserApi, setUserStatusAPI } from "./userAPI.js";
 import { setAllUsers, setUser } from "./userSlice.js";
 
 export const getUserAction = () => async (dis) => {
@@ -27,6 +28,17 @@ export const getAllUserAction = () => async (dis) => {
     removeSessionStorage("accessJWT");
     dis(autoLoginUser());
   }
+  return user;
+};
+export const setUserStatusAction = (data) => async (dis) => {
+  const user = await setUserStatusAPI(data);
+  if (user?.status === "error" && user.message.includes("jwt expired")) {
+    removeSessionStorage("accessJWT");
+    dis(autoLoginUser());
+    return;
+  }
+  toast.success(user.message);
+
   return user;
 };
 

@@ -31,3 +31,14 @@ export const getAllUserApi = async () => {
   const result = await processAPI(user);
   return result;
 };
+
+export const setUserStatusAPI = async (data) => {
+  const user = {
+    method: "PATCH",
+    url: urlUser + "/status",
+    data,
+    headers: authHeaders({ "Content-Type": "application/json" }),
+  };
+  const result = await processAPI(user);
+  return result;
+};
