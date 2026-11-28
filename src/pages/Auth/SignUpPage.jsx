@@ -5,10 +5,14 @@ import { signupNewUserAPI } from "../../service/authAPI";
 import { toast } from "react-toastify";
 import useSpinner from "../../hooks/useSpinner";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import PageNotFound from "../not_found/PageNotFound";
 
 const SignUpPage = () => {
   const { formData, setFormData, handleOnChange, pwdErrors, setPwdErrors } =
     useFormHook({});
+  const { user } = useSelector((state) => state.userInfo);
   const { spinner, setSpinner } = useSpinner(false);
   const errorForm = {
     fName: "",
@@ -112,6 +116,7 @@ const SignUpPage = () => {
     }
   };
   // console.log(pwdErrors.length);
+
   return (
     <div
       className="rounded-4 shadow mt-2 mb-2"
@@ -122,36 +127,46 @@ const SignUpPage = () => {
         background: "#ffffffb5",
       }}
     >
-      <h3 className="d-flex justify-content-center">
-        Please complete all information:
-      </h3>
-      <Container className="pb-3">
-        <Form onSubmit={handleOnSubmit}>
-          {formSignup.map((frm) => (
-            <FormTemplate
-              key={frm.name}
-              {...frm}
-              onChange={handleOnChange}
-              error={frmError[frm.name]}
-            />
-          ))}
+      {user?._id ? (
+        <PageNotFound />
+      ) : (
+        <>
+          <h3 className="d-flex justify-content-center">
+            Please complete all information:
+          </h3>
+          <Container className="pb-3">
+            <Form onSubmit={handleOnSubmit}>
+              {formSignup.map((frm) => (
+                <FormTemplate
+                  key={frm.name}
+                  {...frm}
+                  onChange={handleOnChange}
+                  error={frmError[frm.name]}
+                />
+              ))}
 
-          <div className="text-danger">
-            <ul>
-              {pwdErrors.length > 0 &&
-                pwdErrors.map((pwd) => <li key={pwd}>{pwd}</li>)}
-            </ul>
-          </div>
+              <div className="text-danger">
+                <ul>
+                  {pwdErrors.length > 0 &&
+                    pwdErrors.map((pwd) => <li key={pwd}>{pwd}</li>)}
+                </ul>
+              </div>
 
-          {!spinner ? (
-            <Button type="submit" variant="success" disabled={pwdErrors.length}>
-              Submit
-            </Button>
-          ) : (
-            <Spinner animation="border" variant="success" />
-          )}
-        </Form>
-      </Container>
+              {!spinner ? (
+                <Button
+                  type="submit"
+                  variant="success"
+                  disabled={pwdErrors.length}
+                >
+                  Submit
+                </Button>
+              ) : (
+                <Spinner animation="border" variant="success" />
+              )}
+            </Form>
+          </Container>
+        </>
+      )}
     </div>
   );
 };
